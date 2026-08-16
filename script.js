@@ -673,4 +673,13 @@ function saveSettings() {
         settings.darkMode = darkMode.checked;
     }
 
-    save(ST
+      save("halal_rista_settings", settings);
+
+  if (settings.darkMode) {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+
+  notify("Settings saved successfully.", "success");
+}
