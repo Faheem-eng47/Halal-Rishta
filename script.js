@@ -211,66 +211,101 @@ function goHome() {
 }
 
 /* =========================================================
-   ACCOUNT CREATION
+   ACCOUNT CREATION + LOGIN
    ========================================================= */
 
 function createAccount() {
 
-    const section = getElement("create-account");
+    const section =
+        getElement("register") ||
+        getElement("create-account");
 
-    let inputs;
+    if (!section) {
+        notify("Create Account page could not be found.", "error");
+        return;
+    }
 
-    if (section) {
-        inputs = section.querySelectorAll("input");
-    } else {
-        inputs = document.querySelectorAll(
-            "#createAccount input, #register input"
-        );
+    const inputs = section.querySelectorAll("input");
+
+    if (inputs.length < 3) {
+        notify("Account form is incomplete. Please check the form.", "error");
+        return;
     }
 
     const name = valueFromInput(inputs[0]);
-    const email = valueFromInput(inputs[1]);
+    const email = valueFromInput(inputs[1]).toLowerCase();
     const password = valueFromInput(inputs[2]);
 
+    /* ---------- VALIDATION ---------- */
+
     if (!name || !email || !password) {
-        notify("Please complete all required fields.");
+        notify("Please complete all required fields.", "error");
         return;
     }
 
     if (name.length < 2) {
-        notify("Please enter your full name.");
+        notify("Please enter your full name.", "error");
         return;
     }
 
-    if (!email.includes("@")) {
-        notify("Please enter a valid email address.");
+    if (!email.includes("@") || !email.includes(".")) {
+        notify("Please enter a valid email address.", "error");
         return;
     }
 
     if (password.length < 6) {
-        notify("Password must contain at least 6 characters.");
+        notify("Password must contain at least 6 characters.", "error");
         return;
     }
+
+    /* ---------- CHECK EXISTING ACCOUNT ---------- */
+
+    const existingUser = load(STORAGE.USER, null);
+
+    if (existingUser && existingUser.email === email) {
+        notify("An account with this email already exists. Please login.", "error");
+        showPage("login");
+        return;
+    }
+
+    /* ---------- CREATE USER ---------- */
 
     user = {
         id: generateId("user"),
         name: name,
-        email: email.toLowerCase(),
+        email: email,
         password: password,
         createdAt: new Date().toISOString()
     };
 
-    profile.fullName = name;
+    /* ---------- CREATE PROFILE ---------- */
 
-    save(STORAGE.USER, user);
-    save(STORAGE.PROFILE, profile);
+    profile = {
+        ...DEFAULT_PROFILE,
+        fullName: name
+    };
 
-    notify("Account created successfully!");
+    /* ---------- SAVE DATA ---------- */
+
+    const userSaved = save(STORAGE.USER, user);
+    const profileSaved = save(STORAGE.PROFILE, profile);
+
+    if (!userSaved || !profileSaved) {
+        notify("Unable to save your account on this device.", "error");
+        return;
+    }
+
+    /* ---------- SUCCESS ---------- */
+
+    notify("Account created successfully!", "success");
 
     clearForm(section);
 
-    showPage("login");
+    setTimeout(() => {
+        showPage("login");
+    }, 500);
 }
+
 
 /* =========================================================
    LOGIN
@@ -281,46 +316,72 @@ function login() {
     const section = getElement("login");
 
     if (!section) {
-        notify("Login page could not be found.");
+        notify("Login page could not be found.", "error");
         return;
     }
 
     const inputs = section.querySelectorAll("input");
 
+    if (inputs.length < 2) {
+        notify("Login form is incomplete. Please check the form.", "error");
+        return;
+    }
+
     const email = valueFromInput(inputs[0]).toLowerCase();
     const password = valueFromInput(inputs[1]);
 
+    /* ---------- VALIDATION ---------- */
+
     if (!email || !password) {
-        notify("Please enter your email and password.");
+        notify("Please enter your email and password.", "error");
         return;
     }
+
+    if (!email.includes("@")) {
+        notify("Please enter a valid email address.", "error");
+        return;
+    }
+
+    /* ---------- LOAD ACCOUNT ---------- */
 
     const savedUser = load(STORAGE.USER, null);
 
     if (!savedUser) {
-        notify("Account not found. Please create an account first.");
+        notify("No account found. Please create an account first.", "error");
+        showPage("register");
         return;
     }
 
-    if (savedUser.email !== email) {
-        notify("Incorrect email address.");
+    /* ---------- CHECK EMAIL ---------- */
+
+    if (
+        !savedUser.email ||
+        savedUser.email.toLowerCase() !== email
+    ) {
+        notify("Incorrect email address.", "error");
         return;
     }
+
+    /* ---------- CHECK PASSWORD ---------- */
 
     if (savedUser.password !== password) {
-        notify("Incorrect password.");
+        notify("Incorrect password.", "error");
         return;
     }
+
+    /* ---------- LOGIN SUCCESS ---------- */
 
     user = savedUser;
 
     save(STORAGE.USER, user);
 
-    notify("Login successful!");
+    notify("Login successful!", "success");
 
     clearForm(section);
 
-    openDashboard();
+    setTimeout(() => {
+        openDashboard();
+    }, 500);
 }
 
 /* =========================================================
