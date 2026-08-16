@@ -3,102 +3,379 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#176b45">
   <title>Halal Rishta</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f7f3;
-      color: #222;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .container {
-      width: 92%;
-      max-width: 430px;
-      text-align: center;
-      background: white;
-      padding: 45px 25px;
-      border-radius: 24px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.08);
-    }
-
-    .logo {
-      font-size: 58px;
-      margin-bottom: 15px;
-    }
-
-    h1 {
-      font-size: 34px;
-      margin-bottom: 12px;
-    }
-
-    .tagline {
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      margin: 12px 0;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .primary {
-      background: #176b45;
-      color: white;
-    }
-
-    .secondary {
-      background: #eef3ef;
-      color: #176b45;
-    }
-
-    .note {
-      margin-top: 25px;
-      font-size: 13px;
-      color: #888;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="logo">💚</div>
 
-    <h1>Halal Rishta</h1>
+  <header class="topbar">
+    <div class="brand">💚 Halal Rishta</div>
 
-    <p class="tagline">
-      A trusted place to find a compatible marriage partner
-      with privacy, respect and serious intentions.
-    </p>
+    <select id="languageSelect" aria-label="Language">
+      <option value="en">English</option>
+      <option value="ur">اردو</option>
+      <option value="ar">العربية</option>
+    </select>
+  </header>
 
-    <button class="btn primary" onclick="alert('Registration coming soon')">
-      Create Account
-    </button>
+  <main>
 
-    <button class="btn secondary" onclick="alert('Login coming soon')">
-      Login
-    </button>
+    <!-- HOME -->
+    <section id="home" class="page active">
+      <div class="hero-card">
+        <div class="heart">💚</div>
 
-    <p class="note">
-      Built with privacy and serious marriage intentions in mind.
-    </p>
-  </div>
+        <h1 id="welcomeTitle">Halal Rishta</h1>
+
+        <p id="welcomeText">
+          A trusted place to find a compatible marriage partner
+          with privacy, respect and serious intentions.
+        </p>
+
+        <button class="primary" onclick="showPage('register')">
+          Create Account
+        </button>
+
+        <button class="secondary" onclick="showPage('login')">
+          Login
+        </button>
+
+        <p class="small">
+          Built with privacy and serious marriage intentions in mind.
+        </p>
+      </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section id="register" class="page">
+      <div class="card">
+        <h2>Create Account</h2>
+
+        <input type="text" placeholder="Full Name">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+
+        <button class="primary" onclick="createAccount()">
+          Create Account
+        </button>
+
+        <button class="link-btn" onclick="showPage('home')">
+          Back
+        </button>
+      </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section id="login" class="page">
+      <div class="card">
+        <h2>Login</h2>
+
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+
+        <button class="primary" onclick="loginUser()">
+          Login
+        </button>
+
+        <button class="link-btn" onclick="showPage('home')">
+          Back
+        </button>
+      </div>
+    </section>
+
+    <!-- APP -->
+    <section id="app" class="page">
+
+      <div class="app-header">
+        <h2>My Account</h2>
+        <span class="status">Free</span>
+      </div>
+
+      <div class="menu-grid">
+
+        <button onclick="showPage('profile')">
+          👤
+          <span>Profile</span>
+        </button>
+
+        <button onclick="showPage('photos')">
+          📸
+          <span>Photos</span>
+        </button>
+
+        <button onclick="showPage('settings')">
+          ⚙️
+          <span>Settings</span>
+        </button>
+
+        <button onclick="showPage('privacy')">
+          🔒
+          <span>Privacy</span>
+        </button>
+
+        <button onclick="showPage('appSettings')">
+          📱
+          <span>App Settings</span>
+        </button>
+
+        <button onclick="showPage('purchases')">
+          💳
+          <span>Manage Purchases</span>
+        </button>
+
+        <button onclick="showPage('package')">
+          ⭐
+          <span>Activate Package</span>
+        </button>
+
+        <button onclick="showPage('customIcon')">
+          🎨
+          <span>Custom Icon</span>
+        </button>
+
+      </div>
+
+      <button class="logout" onclick="logoutUser()">
+        Logout
+      </button>
+
+    </section>
+
+    <!-- PROFILE -->
+    <section id="profile" class="page">
+      <div class="card">
+        <h2>👤 Profile</h2>
+
+        <input type="text" placeholder="Full Name">
+        <input type="number" placeholder="Age">
+        <input type="text" placeholder="Country">
+        <input type="text" placeholder="City">
+        <input type="text" placeholder="Education">
+        <input type="text" placeholder="Profession">
+
+        <textarea placeholder="About me"></textarea>
+
+        <button class="primary" onclick="saveData()">
+          Save Profile
+        </button>
+
+        <button class="link-btn" onclick="showPage('app')">
+          Back
+        </button>
+      </div>
+    </section>
+
+    <!-- PHOTOS -->
+    <section id="photos" class="page">
+      <div class="card">
+        <h2>📸 Photos</h2>
+
+        <div class="photo-box">
+          Add your profile photos
+        </div>
+
+        <input type="file" accept="image/*" multiple>
+
+        <button class="primary">
+          Save Photos
+        </button>
+
+        <button class="link-btn" onclick="showPage('app')">
+          Back
+        </button>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" class="page">
+      <div class="card">
+        <h2>⚙️ Settings</h2>
+
+        <label>
+          <input type="checkbox" checked>
+          Notifications
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Email notifications
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Show online status
+        </label>
+
+        <button class="primary" onclick="saveData()">
+          Save Settings
+        </button>
+
+        <button class="link-btn" onclick="showPage('app')">
+          Back
+        </button>
+      </div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section id="privacy" class="page">
+      <div class="card">
+        <h2>🔒 Privacy</h2>
+
+        <label>
+          <input type="checkbox" checked>
+          Keep profile private
+        </label>
+
+        <label>
+          <input type="checkbox" checked>
+          Protect photos
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Allow profile discovery
+        </label>
+
+        <button class="primary" onclick="saveData()">
+          Save Privacy
+        </button>
+
+        <button class="link-btn" onclick="showPage('app')">
+          Back
+        </button>
+      </div>
+    </section>
+
+    <!-- APP SETTINGS -->
+    <section id="appSettings" class="page">
+      <div class="card">
+        <h2>📱 App Settings</h2>
+
+        <label>Language</label>
+        <select id="appLanguage">
+          <option>English</option>
+          <option>Urdu</option>
+          <option>Arabic</option>
+        </select>
+
+        <label>Appearance</label>
+        <select>
+          <option>System Default</option>
+          <option>Light</option>
+          <option>Dark</option>
+        </select>
+
+        <button class="primary" onclick="saveData()">
+          Save
+        </button>
+
+        <button class="link-btn" onclick="showPage('app')">
+          Back
+        </button>
+      </div>
+    </section>
+
+    <!-- PURCHASES -->
+    <section id="purchases" class="page">
+      <div class="card">
+        <h2>💳 Manage Purchases</h2>
+
+        <div class="purchase-item">
+          <strong>Halal Rishta Premium</strong>
+          <span>$2 / month</span>
+        </div>
+
+        <p>Your active subscriptions and payment history will appear here.</p>
+
+        <button class="primary" onclick="showPage('package')">
+          Manage Package
+        </button>
+
+        <button class="link-btn" onclick="showPage('app')">
+          Back
+        </button>
+      </div>
+    </section>
+
+    <!-- PACKAGE -->
+    <section id="package" class="page">
+      <div class="card">
+
+        <div class="premium-icon">⭐</div>
+
+        <h2>Premium Package</h2>
+
+        <div class="price">
+          $2 <small>/ month</small>
+        </div>
+
+        <ul class="features">
+          <li>✓ Advanced profile features</li>
+          <li>✓ More profile visibility</li>
+          <li>✓ Additional photo features</li>
+          <li>✓ Premium matching features</li>
+          <li>✓ Priority support</li>
+        </ul>
+
+        <button class="primary" onclick="startPayment()">
+          Activate Package
+        </button>
+
+        <p class="small">
+          Payment methods and currency will be shown according to
+          your country and supported payment provider.
+        </p>
+
+        <button class="link-btn" onclick="showPage('app')">
+          Back
+        </button>
+
+      </div>
+    </section>
+
+    <!-- CUSTOM ICON -->
+    <section id="customIcon" class="page">
+      <div class="card">
+        <h2>🎨 Custom Icon</h2>
+
+        <p>
+          Customize your Halal Rishta app appearance.
+        </p>
+
+        <div class="icon-options">
+          <button onclick="selectIcon('💚')">💚</button>
+          <button onclick="selectIcon('❤️')">❤️</button>
+          <button onclick="selectIcon('💙')">💙</button>
+          <button onclick="selectIcon('💜')">💜</button>
+          <button onclick="selectIcon('⭐')">⭐</button>
+        </div>
+
+        <div id="selectedIcon" class="selected-icon">
+          💚
+        </div>
+
+        <button class="primary" onclick="saveData()">
+          Save Icon
+        </button>
+
+        <button class="link-btn" onclick="showPage('app')">
+          Back
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button onclick="showPage('home')">🏠<span>Home</span></button>
+    <button onclick="showPage('profile')">👤<span>Profile</span></button>
+    <button onclick="showPage('app')">☰<span>Menu</span></button>
+  </nav>
+
+  <script src="languages.js"></script>
+  <script src="script.js"></script>
+
 </body>
-</html>
+        </html>
