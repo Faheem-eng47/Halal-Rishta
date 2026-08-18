@@ -1,27 +1,22 @@
 /* =========================================================
-   HALAL RISHTA
-   Professional Main Application Script
-   Version 2.0
+   HALAL RISHTA - MAIN JAVASCRIPT
+   Complete replacement script.js
    ========================================================= */
 
-"use strict";
 
 /* =========================================================
-   APP CONFIG
+   STORAGE
    ========================================================= */
 
-const APP_NAME = "Halal Rishta";
-const APP_VERSION = "2.0";
-
 const STORAGE = {
-    USER: "halal_rista_user",
-    PROFILE: "halal_rista_profile",
-    PHOTOS: "halal_rista_photos",
-    SETTINGS: "halal_rista_settings",
-    PRIVACY: "halal_rista_privacy",
-    PURCHASE: "halal_rista_purchase",
-    LANGUAGE: "halal_rista_language"
+    USER: "halal_rishta_user",
+    PROFILE: "halal_rishta_profile",
+    PHOTOS: "halal_rishta_photos",
+    SETTINGS: "halal_rishta_settings",
+    PRIVACY: "halal_rishta_privacy",
+    PURCHASE: "halal_rishta_purchase"
 };
+
 
 /* =========================================================
    DEFAULT DATA
@@ -63,6 +58,7 @@ const DEFAULT_PURCHASE = {
     expiresAt: null
 };
 
+
 /* =========================================================
    SAFE STORAGE
    ========================================================= */
@@ -72,7 +68,8 @@ function save(key, value) {
         localStorage.setItem(key, JSON.stringify(value));
         return true;
     } catch (error) {
-        console.error("Storage error:", error);
+        console.error("Storage save error:", error);
+        notify("Unable to save data on this device.", "error");
         return false;
     }
 }
@@ -88,7 +85,7 @@ function load(key, fallback = null) {
         return JSON.parse(value);
 
     } catch (error) {
-        console.error("Load error:", error);
+        console.error("Storage load error:", error);
         return fallback;
     }
 }
@@ -97,9 +94,10 @@ function remove(key) {
     try {
         localStorage.removeItem(key);
     } catch (error) {
-        console.error("Remove error:", error);
+        console.error("Storage remove error:", error);
     }
 }
+
 
 /* =========================================================
    APPLICATION STATE
@@ -109,28 +107,33 @@ let user = load(STORAGE.USER, null);
 
 let profile = {
     ...DEFAULT_PROFILE,
-    ...load(STORAGE.PROFILE, {})
+    ...(load(STORAGE.PROFILE, {}) || {})
 };
 
 let photos = load(STORAGE.PHOTOS, []);
 
+if (!Array.isArray(photos)) {
+    photos = [];
+}
+
 let settings = {
     ...DEFAULT_SETTINGS,
-    ...load(STORAGE.SETTINGS, {})
+    ...(load(STORAGE.SETTINGS, {}) || {})
 };
 
 let privacy = {
     ...DEFAULT_PRIVACY,
-    ...load(STORAGE.PRIVACY, {})
+    ...(load(STORAGE.PRIVACY, {}) || {})
 };
 
 let purchase = {
     ...DEFAULT_PURCHASE,
-    ...load(STORAGE.PURCHASE, {})
+    ...(load(STORAGE.PURCHASE, {}) || {})
 };
 
+
 /* =========================================================
-   UTILITY FUNCTIONS
+   UTILITY
    ========================================================= */
 
 function getElement(id) {
@@ -144,7 +147,6 @@ function valueFromInput(input) {
 
 function notify(message, type = "info") {
 
-    // Use existing alert system if app does not have toast
     if (typeof window.showToast === "function") {
         window.showToast(message, type);
         return;
@@ -163,9 +165,32 @@ function generateId(prefix = "id") {
         "_" +
         Date.now() +
         "_" +
-        Math.random().toString(36).substring(2, 8)
+        Math.random().toString(36).substring(2, 9)
     );
 }
+
+function clearForm(section) {
+
+    if (!section) return;
+
+    const inputs = section.querySelectorAll(
+        "input, textarea, select"
+    );
+
+    inputs.forEach(input => {
+
+        if (input.type === "checkbox" ||
+            input.type === "radio") {
+
+            input.checked = false;
+
+        } else if (input.type !== "file") {
+
+            input.value = "";
+        }
+    });
+}
+
 
 /* =========================================================
    PAGE NAVIGATION
@@ -174,10 +199,11 @@ function generateId(prefix = "id") {
 function showPage(pageId) {
 
     const pages = document.querySelectorAll(
-        ".page, section[id], main > div[id]"
+        ".page, section[id]"
     );
 
     pages.forEach(page => {
+        page.classList.remove("active");
         page.style.display = "none";
     });
 
@@ -188,6 +214,7 @@ function showPage(pageId) {
         return false;
     }
 
+    page.classList.add("active");
     page.style.display = "block";
 
     window.scrollTo({
@@ -198,10 +225,6 @@ function showPage(pageId) {
     return true;
 }
 
-/* =========================================================
-   HOME
-   ========================================================= */
-
 function openHome() {
     showPage("home");
 }
@@ -210,8 +233,9 @@ function goHome() {
     showPage("home");
 }
 
+
 /* =========================================================
-   ACCOUNT CREATION + LOGIN
+   CREATE ACCOUNT
    ========================================================= */
 
 function createAccount() {
@@ -228,15 +252,13 @@ function createAccount() {
     const inputs = section.querySelectorAll("input");
 
     if (inputs.length < 3) {
-        notify("Account form is incomplete. Please check the form.", "error");
+        notify("Account form is incomplete.", "error");
         return;
     }
 
     const name = valueFromInput(inputs[0]);
     const email = valueFromInput(inputs[1]).toLowerCase();
     const password = valueFromInput(inputs[2]);
-
-    /* ---------- VALIDATION ---------- */
 
     if (!name || !email || !password) {
         notify("Please complete all required fields.", "error");
@@ -254,21 +276,28 @@ function createAccount() {
     }
 
     if (password.length < 6) {
-        notify("Password must contain at least 6 characters.", "error");
+        notify(
+            "Password must contain at least 6 characters.",
+            "error"
+        );
         return;
     }
-
-    /* ---------- CHECK EXISTING ACCOUNT ---------- */
 
     const existingUser = load(STORAGE.USER, null);
 
-    if (existingUser && existingUser.email === email) {
-        notify("An account with this email already exists. Please login.", "error");
+    if (
+        existingUser &&
+        existingUser.email &&
+        existingUser.email.toLowerCase() === email
+    ) {
+        notify(
+            "An account with this email already exists. Please login.",
+            "error"
+        );
+
         showPage("login");
         return;
     }
-
-    /* ---------- CREATE USER ---------- */
 
     user = {
         id: generateId("user"),
@@ -278,26 +307,23 @@ function createAccount() {
         createdAt: new Date().toISOString()
     };
 
-    /* ---------- CREATE PROFILE ---------- */
-
     profile = {
         ...DEFAULT_PROFILE,
         fullName: name
     };
 
-    /* ---------- SAVE DATA ---------- */
-
     const userSaved = save(STORAGE.USER, user);
     const profileSaved = save(STORAGE.PROFILE, profile);
 
     if (!userSaved || !profileSaved) {
-        notify("Unable to save your account on this device.", "error");
+        user = null;
         return;
     }
 
-    /* ---------- SUCCESS ---------- */
-
-    notify("Account created successfully!", "success");
+    notify(
+        "Account created successfully! Please login.",
+        "success"
+    );
 
     clearForm(section);
 
@@ -311,7 +337,7 @@ function createAccount() {
    LOGIN
    ========================================================= */
 
-function login() {
+function loginUser() {
 
     const section = getElement("login");
 
@@ -323,36 +349,40 @@ function login() {
     const inputs = section.querySelectorAll("input");
 
     if (inputs.length < 2) {
-        notify("Login form is incomplete. Please check the form.", "error");
+        notify("Login form is incomplete.", "error");
         return;
     }
 
     const email = valueFromInput(inputs[0]).toLowerCase();
     const password = valueFromInput(inputs[1]);
 
-    /* ---------- VALIDATION ---------- */
-
     if (!email || !password) {
-        notify("Please enter your email and password.", "error");
+        notify(
+            "Please enter your email and password.",
+            "error"
+        );
         return;
     }
 
     if (!email.includes("@")) {
-        notify("Please enter a valid email address.", "error");
+        notify(
+            "Please enter a valid email address.",
+            "error"
+        );
         return;
     }
-
-    /* ---------- LOAD ACCOUNT ---------- */
 
     const savedUser = load(STORAGE.USER, null);
 
     if (!savedUser) {
-        notify("No account found. Please create an account first.", "error");
+        notify(
+            "No account found. Please create an account first.",
+            "error"
+        );
+
         showPage("register");
         return;
     }
-
-    /* ---------- CHECK EMAIL ---------- */
 
     if (
         !savedUser.email ||
@@ -362,16 +392,17 @@ function login() {
         return;
     }
 
-    /* ---------- CHECK PASSWORD ---------- */
-
     if (savedUser.password !== password) {
         notify("Incorrect password.", "error");
         return;
     }
 
-    /* ---------- LOGIN SUCCESS ---------- */
-
     user = savedUser;
+
+    profile = {
+        ...DEFAULT_PROFILE,
+        ...(load(STORAGE.PROFILE, {}) || {})
+    };
 
     save(STORAGE.USER, user);
 
@@ -384,23 +415,38 @@ function login() {
     }, 500);
 }
 
+
+/* =========================================================
+   LOGIN COMPATIBILITY
+   ========================================================= */
+
+function login() {
+    loginUser();
+}
+
+
 /* =========================================================
    LOGOUT
    ========================================================= */
 
-function logout() {
+function logoutUser() {
 
     user = null;
 
     remove(STORAGE.USER);
 
-    notify("You have been logged out.");
+    notify("You have been logged out.", "success");
 
     showPage("home");
 }
 
+function logout() {
+    logoutUser();
+}
+
+
 /* =========================================================
-   DASHBOARD
+   DASHBOARD / APP
    ========================================================= */
 
 function openDashboard() {
@@ -411,7 +457,16 @@ function openDashboard() {
         return;
     }
 
-    showPage("dashboard");
+    /*
+       Your HTML uses id="app",
+       not id="dashboard".
+    */
+
+    if (getElement("app")) {
+        showPage("app");
+    } else {
+        showPage("dashboard");
+    }
 
     updateDashboard();
 }
@@ -420,12 +475,21 @@ function updateDashboard() {
 
     if (!user) return;
 
+    const name =
+        profile.fullName ||
+        user.name ||
+        "";
+
+    const email =
+        user.email ||
+        "";
+
     const nameElements = document.querySelectorAll(
         "[data-user-name], #dashboardName, #profileName"
     );
 
     nameElements.forEach(element => {
-        element.textContent = profile.fullName || user.name;
+        element.textContent = name;
     });
 
     const emailElements = document.querySelectorAll(
@@ -433,9 +497,10 @@ function updateDashboard() {
     );
 
     emailElements.forEach(element => {
-        element.textContent = user.email;
+        element.textContent = email;
     });
 }
+
 
 /* =========================================================
    PROFILE
@@ -456,26 +521,26 @@ function openProfile() {
 
 function fillProfileForm() {
 
-    const mapping = {
-        fullName: "fullName",
-        age: "age",
-        gender: "gender",
-        country: "country",
-        city: "city",
-        about: "about",
-        education: "education",
-        profession: "profession",
-        maritalStatus: "maritalStatus",
-        religiousLevel: "religiousLevel",
-        phone: "phone"
-    };
+    const fields = [
+        "fullName",
+        "age",
+        "gender",
+        "country",
+        "city",
+        "about",
+        "education",
+        "profession",
+        "maritalStatus",
+        "religiousLevel",
+        "phone"
+    ];
 
-    Object.keys(mapping).forEach(key => {
+    fields.forEach(field => {
 
-        const input = getElement(mapping[key]);
+        const input = getElement(field);
 
         if (input) {
-            input.value = profile[key] || "";
+            input.value = profile[field] || "";
         }
     });
 }
@@ -510,18 +575,53 @@ function updateProfile() {
         }
     });
 
-    user.name = profile.fullName || user.name;
+    if (profile.fullName) {
+        user.name = profile.fullName;
+    }
 
     save(STORAGE.USER, user);
     save(STORAGE.PROFILE, profile);
 
-    notify("Profile updated successfully.");
+    notify(
+        "Profile updated successfully.",
+        "success"
+    );
 
     updateDashboard();
 }
 
+
+/*
+   Your current HTML calls saveData()
+   for Profile and Settings.
+*/
+
+function saveData() {
+
+    const currentPage =
+        document.querySelector(".page.active");
+
+    if (!currentPage) return;
+
+    if (currentPage.id === "profile") {
+        updateProfile();
+        return;
+    }
+
+    if (currentPage.id === "settings") {
+        saveSettings();
+        return;
+    }
+
+    save(STORAGE.PROFILE, profile);
+    save(STORAGE.SETTINGS, settings);
+
+    notify("Data saved successfully.", "success");
+}
+
+
 /* =========================================================
-   PHOTO MANAGEMENT
+   PHOTOS
    ========================================================= */
 
 function openPhotos() {
@@ -542,12 +642,15 @@ function addPhoto(file) {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-        notify("Please select an image file.");
+        notify("Please select an image file.", "error");
         return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-        notify("Image must be smaller than 5MB.");
+        notify(
+            "Image must be smaller than 5MB.",
+            "error"
+        );
         return;
     }
 
@@ -568,7 +671,10 @@ function addPhoto(file) {
 
         renderPhotos();
 
-        notify("Photo added successfully.");
+        notify(
+            "Photo added successfully.",
+            "success"
+        );
     };
 
     reader.readAsDataURL(file);
@@ -576,11 +682,15 @@ function addPhoto(file) {
 
 function deletePhoto(photoId) {
 
-    photos = photos.filter(photo => photo.id !== photoId);
+    photos = photos.filter(
+        photo => photo.id !== photoId
+    );
 
     save(STORAGE.PHOTOS, photos);
 
     renderPhotos();
+
+    notify("Photo deleted.", "success");
 }
 
 function renderPhotos() {
@@ -594,40 +704,51 @@ function renderPhotos() {
     container.innerHTML = "";
 
     if (photos.length === 0) {
+
         container.innerHTML =
             "<p>No photos uploaded yet.</p>";
+
         return;
     }
 
     photos.forEach(photo => {
 
-        const wrapper = document.createElement("div");
+        const wrapper =
+            document.createElement("div");
 
         wrapper.className = "photo-item";
 
-        wrapper.innerHTML = `
-            <img
-                src="${photo.data}"
-                alt="Profile photo"
-                style="
-                    width:160px;
-                    height:160px;
-                    object-fit:cover;
-                    border-radius:15px;
-                "
-            >
-            <br>
-            <button
-                type="button"
-                onclick="deletePhoto('${photo.id}')"
-            >
-                Delete
-            </button>
-        `;
+        const image =
+            document.createElement("img");
+
+        image.src = photo.data;
+        image.alt = "Profile photo";
+
+        image.style.width = "160px";
+        image.style.height = "160px";
+        image.style.objectFit = "cover";
+        image.style.borderRadius = "15px";
+
+        const deleteButton =
+            document.createElement("button");
+
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+
+        deleteButton.onclick = function() {
+            deletePhoto(photo.id);
+        };
+
+        wrapper.appendChild(image);
+        wrapper.appendChild(
+            document.createElement("br")
+        );
+        wrapper.appendChild(deleteButton);
 
         container.appendChild(wrapper);
     });
 }
+
 
 /* =========================================================
    SETTINGS
@@ -648,38 +769,491 @@ function openSettings() {
 
 function loadSettingsForm() {
 
-    const notifications = getElement("notifications");
-    const darkMode = getElement("darkMode");
+    const notifications =
+        getElement("notifications");
+
+    const darkMode =
+        getElement("darkMode");
 
     if (notifications) {
-        notifications.checked = settings.notifications;
+        notifications.checked =
+            !!settings.notifications;
     }
 
     if (darkMode) {
-        darkMode.checked = settings.darkMode;
+        darkMode.checked =
+            !!settings.darkMode;
     }
+
+    applyDarkMode();
 }
 
 function saveSettings() {
 
-    const notifications = getElement("notifications");
-    const darkMode = getElement("darkMode");
+    const notifications =
+        getElement("notifications");
+
+    const darkMode =
+        getElement("darkMode");
 
     if (notifications) {
-        settings.notifications = notifications.checked;
+        settings.notifications =
+            notifications.checked;
     }
 
     if (darkMode) {
-        settings.darkMode = darkMode.checked;
+        settings.darkMode =
+            darkMode.checked;
     }
 
-      save("halal_rista_settings", settings);
+    save(STORAGE.SETTINGS, settings);
 
-  if (settings.darkMode) {
-    document.body.classList.add("dark-mode");
-  } else {
-    document.body.classList.remove("dark-mode");
-  }
+    applyDarkMode();
 
-  notify("Settings saved successfully.", "success");
+    notify(
+        "Settings saved successfully.",
+        "success"
+    );
 }
+
+function applyDarkMode() {
+
+    if (settings.darkMode) {
+        document.body.classList.add("dark-mode");
+    } else {
+        document.body.classList.remove("dark-mode");
+    }
+}
+
+
+/* =========================================================
+   PRIVACY
+   ========================================================= */
+
+function openPrivacy() {
+
+    if (!isLoggedIn()) {
+        notify("Please login first.");
+        showPage("login");
+        return;
+    }
+
+    showPage("privacy");
+
+    loadPrivacyForm();
+}
+
+function loadPrivacyForm() {
+
+    const visibility =
+        getElement("profileVisibility");
+
+    const showOnline =
+        getElement("showOnline");
+
+    const allowMessages =
+        getElement("allowMessages");
+
+    if (visibility) {
+        visibility.value =
+            privacy.profileVisibility;
+    }
+
+    if (showOnline) {
+        showOnline.checked =
+            privacy.showOnline;
+    }
+
+    if (allowMessages) {
+        allowMessages.checked =
+            privacy.allowMessages;
+    }
+}
+
+function savePrivacy() {
+
+    const visibility =
+        getElement("profileVisibility");
+
+    const showOnline =
+        getElement("showOnline");
+
+    const allowMessages =
+        getElement("allowMessages");
+
+    if (visibility) {
+        privacy.profileVisibility =
+            visibility.value;
+    }
+
+    if (showOnline) {
+        privacy.showOnline =
+            showOnline.checked;
+    }
+
+    if (allowMessages) {
+        privacy.allowMessages =
+            allowMessages.checked;
+    }
+
+    save(STORAGE.PRIVACY, privacy);
+
+    notify(
+        "Privacy settings saved.",
+        "success"
+    );
+}
+
+
+/* =========================================================
+   PURCHASES
+   ========================================================= */
+
+function openPurchases() {
+
+    if (!isLoggedIn()) {
+        notify("Please login first.");
+        showPage("login");
+        return;
+    }
+
+    showPage("purchases");
+
+    updatePurchaseDisplay();
+}
+
+function openPackage() {
+
+    if (!isLoggedIn()) {
+        notify("Please login first.");
+        showPage("login");
+        return;
+    }
+
+    showPage("package");
+
+    updatePurchaseDisplay();
+}
+
+function activatePackage() {
+
+    if (!isLoggedIn()) {
+        notify("Please login first.");
+        showPage("login");
+        return;
+    }
+
+    /*
+       This records package activation locally.
+       Real international payment processing should
+       later be connected to a real payment provider.
+    */
+
+    const now =
+        new Date();
+
+    const expires =
+        new Date(now);
+
+    expires.setMonth(
+        expires.getMonth() + 1
+    );
+
+    purchase = {
+        active: true,
+        package: "Monthly",
+        price: 2,
+        currency: "USD",
+        paymentMethod: "pending",
+        activatedAt: now.toISOString(),
+        expiresAt: expires.toISOString()
+    };
+
+    save(
+        STORAGE.PURCHASE,
+        purchase
+    );
+
+    notify(
+        "Package selected successfully. Payment setup is required to complete activation.",
+        "success"
+    );
+
+    updatePurchaseDisplay();
+}
+
+function updatePurchaseDisplay() {
+
+    const statusElements =
+        document.querySelectorAll(
+            "[data-package-status], .status"
+        );
+
+    statusElements.forEach(element => {
+
+        if (
+            purchase.active &&
+            purchase.expiresAt &&
+            new Date(purchase.expiresAt) > new Date()
+        ) {
+            element.textContent = "Premium";
+        } else {
+            element.textContent = "Free";
+        }
+    });
+}
+
+
+/* =========================================================
+   CUSTOM ICON
+   ========================================================= */
+
+function openCustomIcon() {
+
+    if (!isLoggedIn()) {
+        notify("Please login first.");
+        showPage("login");
+        return;
+    }
+
+    showPage("customIcon");
+}
+
+function saveCustomIcon() {
+
+    const input =
+        getElement("customIconInput");
+
+    if (!input || !input.files || !input.files[0]) {
+        notify(
+            "Please select an icon first.",
+            "error"
+        );
+        return;
+    }
+
+    const file = input.files[0];
+
+    if (!file.type.startsWith("image/")) {
+        notify(
+            "Please select an image file.",
+            "error"
+        );
+        return;
+    }
+
+    const reader =
+        new FileReader();
+
+    reader.onload = function(event) {
+
+        save(
+            "halal_rishta_custom_icon",
+            event.target.result
+        );
+
+        notify(
+            "Custom icon saved successfully.",
+            "success"
+        );
+    };
+
+    reader.readAsDataURL(file);
+}
+
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+function changeLanguage(language) {
+
+    settings.language =
+        language || "en";
+
+    save(
+        STORAGE.SETTINGS,
+        settings
+    );
+
+    /*
+       Full multilingual translation can be connected
+       here without breaking authentication.
+    */
+
+    notify(
+        "Language preference saved.",
+        "success"
+    );
+}
+
+
+/* =========================================================
+   INITIALIZATION
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        /*
+           Apply settings
+        */
+
+        settings = {
+            ...DEFAULT_SETTINGS,
+            ...(load(STORAGE.SETTINGS, {}) || {})
+        };
+
+        applyDarkMode();
+
+        /*
+           Language selector
+        */
+
+        const languageSelect =
+            getElement("languageSelect");
+
+        if (languageSelect) {
+
+            languageSelect.value =
+                settings.language || "en";
+
+            languageSelect.addEventListener(
+                "change",
+                function(event) {
+                    changeLanguage(
+                        event.target.value
+                    );
+                }
+            );
+        }
+
+        /*
+           Connect photo file input
+           even if HTML does not have onchange.
+        */
+
+        const photosPage =
+            getElement("photos");
+
+        if (photosPage) {
+
+            const fileInput =
+                photosPage.querySelector(
+                    'input[type="file"]'
+                );
+
+            if (fileInput) {
+
+                fileInput.addEventListener(
+                    "change",
+                    function(event) {
+
+                        const files =
+                            Array.from(
+                                event.target.files || []
+                            );
+
+                        files.forEach(file => {
+                            addPhoto(file);
+                        });
+
+                        event.target.value = "";
+                    }
+                );
+            }
+        }
+
+        /*
+           Start at Home.
+        */
+
+        if (getElement("home")) {
+            showPage("home");
+        }
+
+        /*
+           If user is already logged in,
+           keep account data loaded.
+        */
+
+        if (user) {
+
+            profile = {
+                ...DEFAULT_PROFILE,
+                ...(load(
+                    STORAGE.PROFILE,
+                    {}
+                ) || {})
+            };
+
+            photos =
+                load(
+                    STORAGE.PHOTOS,
+                    []
+                );
+
+            if (!Array.isArray(photos)) {
+                photos = [];
+            }
+
+            purchase = {
+                ...DEFAULT_PURCHASE,
+                ...(load(
+                    STORAGE.PURCHASE,
+                    {}
+                ) || {})
+            };
+        }
+    }
+);
+
+
+/* =========================================================
+   GLOBAL COMPATIBILITY
+   ========================================================= */
+
+window.showPage = showPage;
+
+window.createAccount = createAccount;
+
+window.loginUser = loginUser;
+
+window.login = login;
+
+window.logoutUser = logoutUser;
+
+window.logout = logout;
+
+window.openDashboard = openDashboard;
+
+window.openProfile = openProfile;
+
+window.updateProfile = updateProfile;
+
+window.saveData = saveData;
+
+window.openPhotos = openPhotos;
+
+window.addPhoto = addPhoto;
+
+window.deletePhoto = deletePhoto;
+
+window.openSettings = openSettings;
+
+window.saveSettings = saveSettings;
+
+window.openPrivacy = openPrivacy;
+
+window.savePrivacy = savePrivacy;
+
+window.openPurchases = openPurchases;
+
+window.openPackage = openPackage;
+
+window.activatePackage = activatePackage;
+
+window.openCustomIcon = openCustomIcon;
+
+window.saveCustomIcon = saveCustomIcon;
