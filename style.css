@@ -1,211 +1,863 @@
+/* =========================================================
+   HALAL RISHTA
+   Main Stylesheet
+   ========================================================= */
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #f7f9f8;
-  color: #222;
-  min-height: 100vh;
+    min-height: 100vh;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f8f6;
+    color: #18352a;
+
+    line-height: 1.6;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease;
 }
 
-.container {
-  width: 92%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 25px 18px 50px;
-  text-align: center;
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+    width: 100%;
+
+    min-height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 20px;
+
+    background: #176b45;
+    color: #ffffff;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
-.logo {
-  font-size: 42px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  color: #176b45;
+.brand {
+    font-size: 20px;
+    font-weight: 700;
+
+    white-space: nowrap;
 }
 
-h1 {
-  font-size: 34px;
-  margin-bottom: 12px;
+#languageSelect {
+    min-width: 110px;
+
+    padding: 9px 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #18352a;
+
+    font-size: 14px;
+
+    outline: none;
 }
 
-h2 {
-  font-size: 28px;
-  margin: 22px 0 12px;
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+main {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 24px 16px 50px;
 }
 
-h3 {
-  font-size: 22px;
-  margin: 18px 0 10px;
+
+/* =========================================================
+   PAGE SYSTEM
+   ========================================================= */
+
+.page {
+    display: none;
+
+    width: 100%;
 }
 
-.tagline {
-  color: #555;
-  font-size: 18px;
-  line-height: 1.5;
-  margin-bottom: 22px;
+.page.active {
+    display: block;
 }
 
-.section {
-  background: white;
-  border-radius: 18px;
-  padding: 20px;
-  margin-top: 18px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-card {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 40px auto 0;
+
+    padding: 40px 25px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.08);
 }
 
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 13px;
-  margin: 6px 0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 16px;
-  background: white;
+.heart {
+    font-size: 58px;
+
+    margin-bottom: 12px;
 }
 
-textarea {
-  min-height: 100px;
-  resize: vertical;
+.hero-card h1 {
+    font-size: 38px;
+
+    color: #176b45;
+
+    margin-bottom: 14px;
 }
 
-button,
-.btn {
-  width: 100%;
-  padding: 14px;
-  margin: 7px 0;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+.hero-card p {
+    max-width: 560px;
+
+    margin: 0 auto 24px;
+
+    color: #53675e;
+
+    font-size: 16px;
 }
 
-.primary {
-  background: #176b45;
-  color: white;
-}
 
-.secondary {
-  background: #e8f3ed;
-  color: #176b45;
-}
-
-.danger {
-  background: #c62828;
-  color: white;
-}
-
-.account-menu {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 15px;
-}
-
-.account-menu button {
-  margin: 0;
-}
+/* =========================================================
+   CARDS
+   ========================================================= */
 
 .card {
-  background: white;
-  border-radius: 16px;
-  padding: 18px;
-  margin: 12px 0;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+    width: 100%;
+    max-width: 600px;
+
+    margin: 25px auto;
+
+    padding: 28px 22px;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.07);
 }
 
-.profile-photo {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  margin: 10px auto 18px;
-  border: 4px solid #176b45;
+.card h2 {
+    margin-bottom: 22px;
+
+    color: #176b45;
+
+    font-size: 26px;
+
+    text-align: center;
 }
 
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 12px;
+.card h3 {
+    margin: 10px 0;
+
+    color: #176b45;
+
+    font-size: 21px;
 }
 
-.photo-grid img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 10px;
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+input,
+textarea,
+select {
+    width: 100%;
+
+    display: block;
+
+    margin-bottom: 14px;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d3ded8;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+    color: #18352a;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.package {
-  border: 2px solid #176b45;
-  border-radius: 15px;
-  padding: 18px;
-  margin: 12px 0;
-  background: #f5fbf7;
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #176b45;
+
+    box-shadow:
+        0 0 0 3px rgba(23, 107, 69, 0.12);
 }
 
-.package-price {
-  font-size: 28px;
-  font-weight: bold;
-  color: #176b45;
-  margin: 8px 0;
+textarea {
+    resize: vertical;
+
+    min-height: 120px;
 }
 
-.note {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.5;
-  margin-top: 12px;
+input[type="checkbox"] {
+    width: auto;
+
+    display: inline-block;
+
+    margin: 0 8px 0 0;
+
+    accent-color: #176b45;
 }
 
-.status {
-  padding: 10px;
-  border-radius: 10px;
-  background: #e8f3ed;
-  color: #176b45;
-  font-weight: bold;
-  margin: 10px 0;
+input[type="file"] {
+    padding: 10px;
+
+    background: #f7faf8;
 }
 
-.hidden {
-  display: none !important;
-}
+
+/* =========================================================
+   LABELS
+   ========================================================= */
 
 label {
-  display: block;
-  text-align: left;
-  font-weight: bold;
-  margin-top: 10px;
+    display: block;
+
+    margin: 13px 0;
+
+    color: #304c3f;
+
+    font-size: 15px;
 }
 
-hr {
-  border: 0;
-  border-top: 1px solid #ddd;
-  margin: 20px 0;
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+    border: none;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
-@media (max-width: 400px) {
-  .container {
-    width: 94%;
-    padding: 20px 12px 40px;
-  }
+button:active {
+    transform: scale(0.98);
+}
 
-  h1 {
+button:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+.primary,
+.secondary,
+.logout,
+.link-btn {
+    width: 100%;
+
+    min-height: 48px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.primary {
+    background: #176b45;
+
+    color: #ffffff;
+
+    padding: 13px 18px;
+
+    margin-top: 6px;
+
+    box-shadow:
+        0 5px 15px rgba(23, 107, 69, 0.18);
+}
+
+.primary:hover {
+    opacity: 0.92;
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+   ========================================================= */
+
+.secondary {
+    background: #e8f3ed;
+
+    color: #176b45;
+
+    padding: 13px 18px;
+
+    margin-top: 10px;
+}
+
+.secondary:hover {
+    background: #dceee5;
+}
+
+
+/* =========================================================
+   LINK BUTTON
+   ========================================================= */
+
+.link-btn {
+    background: transparent;
+
+    color: #176b45;
+
+    padding: 10px 12px;
+
+    margin-top: 8px;
+}
+
+.link-btn:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.logout {
+    max-width: 250px;
+
+    display: block;
+
+    margin: 25px auto 0;
+
+    padding: 12px 20px;
+
+    background: #8a2635;
+
+    color: #ffffff;
+}
+
+.logout:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   APP HEADER
+   ========================================================= */
+
+.app-header {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin: 10px 0 20px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.app-header h2 {
+    color: #176b45;
+
+    margin-bottom: 3px;
+}
+
+.app-header .small {
+    margin: 0;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 70px;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: #e8f3ed;
+
+    color: #176b45;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MENU GRID
+   ========================================================= */
+
+.menu-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.menu-grid button {
+    min-height: 120px;
+
+    padding: 18px 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 1px solid #dce8e2;
+
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    color: #176b45;
+
     font-size: 30px;
-  }
 
-  .logo {
-    font-size: 36px;
-  }
+    box-shadow:
+        0 7px 20px rgba(0, 0, 0, 0.05);
+}
 
-  .account-menu {
-    grid-template-columns: 1fr 1fr;
-  }
+.menu-grid button span {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #304c3f;
+}
+
+.menu-grid button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   PHOTOS
+   ========================================================= */
+
+.photos-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.photo-item {
+    padding: 10px;
+
+    background: #f5f9f7;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+.photo-item img {
+    width: 100% !important;
+
+    height: 180px !important;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    display: block;
+
+    margin-bottom: 8px;
+}
+
+.photo-item button {
+    width: 100%;
+
+    min-height: 40px;
+
+    padding: 8px 12px;
+
+    border-radius: 9px;
+
+    background: #8a2635;
+
+    color: #ffffff;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PACKAGE / PURCHASE
+   ========================================================= */
+
+.card ul {
+    margin: 15px 0 20px;
+
+    padding-left: 22px;
+
+    color: #4d6359;
+}
+
+.card li {
+    margin-bottom: 8px;
+}
+
+.card strong {
+    color: #176b45;
+}
+
+
+/* =========================================================
+   SMALL TEXT
+   ========================================================= */
+
+.small {
+    margin-top: 14px;
+
+    color: #718078;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+body.dark-mode {
+    background: #101814;
+
+    color: #e8f0eb;
+}
+
+body.dark-mode .card,
+body.dark-mode .hero-card,
+body.dark-mode .app-header,
+body.dark-mode .menu-grid button {
+    background: #19241f;
+
+    color: #e8f0eb;
+
+    border-color: #2c3b34;
+}
+
+body.dark-mode .hero-card h1,
+body.dark-mode .card h2,
+body.dark-mode .card h3,
+body.dark-mode .app-header h2 {
+    color: #73c69d;
+}
+
+body.dark-mode .hero-card p,
+body.dark-mode .small,
+body.dark-mode label,
+body.dark-mode .menu-grid button span,
+body.dark-mode .card ul {
+    color: #b9c8c0;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background: #101814;
+
+    color: #e8f0eb;
+
+    border-color: #3a4b42;
+}
+
+body.dark-mode input[type="file"] {
+    background: #19241f;
+}
+
+body.dark-mode .secondary {
+    background: #263b31;
+
+    color: #8bd3ad;
+}
+
+body.dark-mode .link-btn {
+    color: #8bd3ad;
+}
+
+body.dark-mode .status {
+    background: #263b31;
+
+    color: #8bd3ad;
+}
+
+body.dark-mode .photo-item {
+    background: #223029;
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .topbar {
+        min-height: 58px;
+
+        padding: 10px 14px;
+    }
+
+    .brand {
+        font-size: 17px;
+    }
+
+    #languageSelect {
+        min-width: 92px;
+
+        padding: 8px 7px;
+
+        font-size: 13px;
+    }
+
+    main {
+        padding:
+            16px
+            12px
+            40px;
+    }
+
+    .hero-card {
+        margin-top: 18px;
+
+        padding: 30px 18px;
+
+        border-radius: 20px;
+    }
+
+    .heart {
+        font-size: 48px;
+    }
+
+    .hero-card h1 {
+        font-size: 30px;
+    }
+
+    .hero-card p {
+        font-size: 14px;
+    }
+
+    .card {
+        margin-top: 15px;
+
+        padding: 22px 16px;
+
+        border-radius: 18px;
+    }
+
+    .card h2 {
+        font-size: 23px;
+    }
+
+    .app-header {
+        padding: 16px;
+
+        border-radius: 16px;
+    }
+
+    .app-header h2 {
+        font-size: 20px;
+    }
+
+    .menu-grid {
+        gap: 10px;
+    }
+
+    .menu-grid button {
+        min-height: 105px;
+
+        font-size: 26px;
+
+        border-radius: 15px;
+    }
+
+    .menu-grid button span {
+        font-size: 12px;
+    }
+
+    .photos-list {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .photo-item img {
+        height: 145px !important;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .brand {
+        font-size: 15px;
+    }
+
+    #languageSelect {
+        min-width: 82px;
+
+        font-size: 12px;
+    }
+
+    .hero-card h1 {
+        font-size: 27px;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .photos-list {
+        grid-template-columns: 1fr;
+    }
+
+    .photo-item img {
+        height: 220px !important;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid rgba(23, 107, 69, 0.28);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
 }
