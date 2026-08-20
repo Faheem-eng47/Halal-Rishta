@@ -2,885 +2,981 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="theme-color"
-        content="#176b45"
-    >
-
-    <meta
-        name="description"
-        content="Halal Rishta - A trusted place to find a compatible marriage partner."
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#176b45">
+    <meta name="description" content="Halal Rishta - A trusted place for serious marriage intentions.">
     <title>Halal Rishta</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =====================================================
-         HEADER
-         ===================================================== -->
+<header class="topbar">
+    <div class="brand">💚 Halal Rishta</div>
 
-    <header class="topbar">
-
-        <div class="brand">
-            💚 Halal Rishta
-        </div>
-
-        <select
-            id="languageSelect"
-            aria-label="Language"
-        >
-            <option value="en">English</option>
-            <option value="ur">اردو</option>
-            <option value="ar">العربية</option>
-        </select>
-
-    </header>
-
-
-    <!-- =====================================================
-         MAIN
-         ===================================================== -->
-
-    <main>
-
-
-        <!-- =================================================
-             HOME
-             ================================================= -->
-
-        <section
-            id="home"
-            class="page active"
-        >
-
-            <div class="hero-card">
-
-                <div class="heart">
-                    💚
-                </div>
-
-                <h1 id="welcomeTitle">
-                    Halal Rishta
-                </h1>
-
-                <p id="welcomeText">
-                    A trusted place to find a compatible
-                    marriage partner with privacy,
-                    respect and serious intentions.
-                </p>
-
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="showPage('register')"
-                >
-                    Create Account
-                </button>
-
-                <button
-                    type="button"
-                    class="secondary"
-                    onclick="showPage('login')"
-                >
-                    Login
-                </button>
-
-                <p class="small">
-                    Built with privacy and serious marriage
-                    intentions in mind.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             REGISTER
-             ================================================= -->
-
-        <section
-            id="register"
-            class="page"
-        >
-
-            <div class="card">
-
-                <h2>
-                    Create Account
-                </h2>
-
-                <form
-                    onsubmit="event.preventDefault(); createAccount();"
-                >
-
-                    <input
-                        type="text"
-                        placeholder="Full Name"
-                        autocomplete="name"
-                        required
-                    >
-
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        autocomplete="email"
-                        required
-                    >
-
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        autocomplete="new-password"
-                        minlength="6"
-                        required
-                    >
-
-                    <button
-                        type="submit"
-                        class="primary"
-                    >
-                        Create Account
-                    </button>
-
-                </form>
-
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('login')"
-                >
-                    Already have an account? Login
-                </button>
-
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('home')"
-                >
-                    Back
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             LOGIN
-             ================================================= -->
-
-        <section
-            id="login"
-            class="page"
-        >
-
-            <div class="card">
-
-                <h2>
-                    Login
-                </h2>
-
-                <form
-                    onsubmit="event.preventDefault(); loginUser();"
-                >
-
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        autocomplete="email"
-                        required
-                    >
-
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        autocomplete="current-password"
-                        required
-                    >
-
-                    <button
-                        type="submit"
-                        class="primary"
-                    >
-                        Login
-                    </button>
-
-                </form>
-
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('register')"
-                >
-                    Create a new account
-                </button>
-
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('home')"
-                >
-                    Back
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             APP / DASHBOARD
-             ================================================= -->
-
-        <section
-            id="app"
-            class="page"
-        >
-
-            <div class="app-header">
-
-                <div>
-                    <h2>
-                        My Account
-                    </h2>
-
-                    <p
-                        id="dashboardEmail"
-                        class="small"
-                    ></p>
-                </div>
-
-                <span
-                    class="status"
-                    data-package-status
-                >
-                    Free
-                </span>
-
-            </div>
-
-
-            <div class="menu-grid">
-
-                <button
-                    type="button"
-                    onclick="openProfile()"
-                >
-                    👤
-                    <span>Profile</span>
-                </button>
-
-                <button
-                    type="button"
-                    onclick="openPhotos()"
-                >
-                    📸
-                    <span>Photos</span>
-                </button>
-
-                <button
-                    type="button"
-                    onclick="openSettings()"
-                >
-                    ⚙️
-                    <span>Settings</span>
-                </button>
-
-                <button
-                    type="button"
-                    onclick="openPrivacy()"
-                >
-                    🔒
-                    <span>Privacy</span>
-                </button>
-
-                <button
-                    type="button"
-                    onclick="showPage('appSettings')"
-                >
-                    📱
-                    <span>App Settings</span>
-                </button>
-
-                <button
-                    type="button"
-                    onclick="openPurchases()"
-                >
-                    💳
-                    <span>Manage Purchases</span>
-                </button>
-
-                <button
-                    type="button"
-                    onclick="openPackage()"
-                >
-                    ⭐
-                    <span>Activate Package</span>
-                </button>
-
-                <button
-                    type="button"
-                    onclick="openCustomIcon()"
-                >
-                    🎨
-                    <span>Custom Icon</span>
-                </button>
-
-            </div>
-
-
-            <button
-                type="button"
-                class="logout"
-                onclick="logoutUser()"
+    <select id="languageSelect" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ur">اردو</option>
+        <option value="ar">العربية</option>
+    </select>
+</header>
+
+<main>
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="page active">
+
+    <div class="hero-card">
+
+        <div class="heart">💚</div>
+
+        <h1>Halal Rishta</h1>
+
+        <p>
+            A trusted place to find a compatible marriage
+            partner with privacy, respect and serious intentions.
+        </p>
+
+        <button
+            type="button"
+            class="primary"
+            onclick="showPage('register')">
+            Create Account
+        </button>
+
+        <button
+            type="button"
+            class="secondary"
+            onclick="showPage('login')">
+            Login
+        </button>
+
+        <p class="small">
+            Serious marriage intentions. Privacy first.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= REGISTER ================= -->
+
+<section id="register" class="page">
+
+    <div class="card">
+
+        <h2>Create Account</h2>
+
+        <form onsubmit="event.preventDefault(); createAccount();">
+
+            <input
+                type="text"
+                placeholder="Full Name"
+                autocomplete="name"
+                required
             >
-                Logout
+
+            <input
+                type="email"
+                placeholder="Email"
+                autocomplete="email"
+                required
+            >
+
+            <input
+                type="password"
+                placeholder="Password"
+                autocomplete="new-password"
+                minlength="6"
+                required
+            >
+
+            <button type="submit" class="primary">
+                Create Account
             </button>
 
-        </section>
-
-
-        <!-- =================================================
-             PROFILE
-             ================================================= -->
-
-        <section
-            id="profile"
-            class="page"
-        >
-
-            <div class="card">
-
-                <h2>
-                    👤 Profile
-                </h2>
-
-                <input
-                    id="fullName"
-                    type="text"
-                    placeholder="Full Name"
-                    autocomplete="name"
-                >
-
-                <input
-                    id="age"
-                    type="number"
-                    min="18"
-                    placeholder="Age"
-                >
-
-                <select id="gender">
-                    <option value="">
-                        Gender
-                    </option>
-
-                    <option value="male">
-                        Male
-                    </option>
-
-                    <option value="female">
-                        Female
-                    </option>
-                </select>
-
-                <input
-                    id="country"
-                    type="text"
-                    placeholder="Country"
-                >
-
-                <input
-                    id="city"
-                    type="text"
-                    placeholder="City"
-                >
-
-                <input
-                    id="education"
-                    type="text"
-                    placeholder="Education"
-                >
-
-                <input
-                    id="profession"
-                    type="text"
-                    placeholder="Profession"
-                >
-
-                <select id="maritalStatus">
-
-                    <option value="">
-                        Marital Status
-                    </option>
-
-                    <option value="never_married">
-                        Never Married
-                    </option>
-
-                    <option value="divorced">
-                        Divorced
-                    </option>
-
-                    <option value="widowed">
-                        Widowed
-                    </option>
-
-                </select>
-
-                <select id="religiousLevel">
-
-                    <option value="">
-                        Religious Level
-                    </option>
-
-                    <option value="practicing">
-                        Practicing
-                    </option>
-
-                    <option value="moderate">
-                        Moderate
-                    </option>
-
-                    <option value="prefer_not_to_say">
-                        Prefer not to say
-                    </option>
-
-                </select>
-
-                <input
-                    id="phone"
-                    type="tel"
-                    placeholder="Phone"
-                    autocomplete="tel"
-                >
-
-                <textarea
-                    id="about"
-                    placeholder="About me"
-                    rows="5"
-                ></textarea>
-
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="updateProfile()"
-                >
-                    Save Profile
-                </button>
+        </form>
 
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('app')"
-                >
-                    Back
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             PHOTOS
-             ================================================= -->
-
-        <section
-            id="photos"
-            class="page"
-        >
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('login')">
+            Already have an account? Login
+        </button>
 
-            <div class="card">
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('home')">
+            Back
+        </button>
 
-                <h2>
-                    📸 Photos
-                </h2>
-
-                <div
-                    id="photosList"
-                    class="photos-list"
-                >
-                    <p>
-                        No photos uploaded yet.
-                    </p>
-                </div>
+    </div>
 
-                <input
-                    id="photoInput"
-                    type="file"
-                    accept="image/*"
-                    multiple
-                >
+</section>
 
-                <p class="small">
-                    Maximum 5MB per image.
-                </p>
 
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('app')"
-                >
-                    Back
-                </button>
+<!-- ================= LOGIN ================= -->
 
-            </div>
+<section id="login" class="page">
 
-        </section>
+    <div class="card">
 
+        <h2>Login</h2>
 
-        <!-- =================================================
-             SETTINGS
-             ================================================= -->
+        <form onsubmit="event.preventDefault(); loginUser();">
 
-        <section
-            id="settings"
-            class="page"
-        >
+            <input
+                type="email"
+                placeholder="Email"
+                autocomplete="email"
+                required
+            >
 
-            <div class="card">
+            <input
+                type="password"
+                placeholder="Password"
+                autocomplete="current-password"
+                required
+            >
 
-                <h2>
-                    ⚙️ Settings
-                </h2>
+            <button type="submit" class="primary">
+                Login
+            </button>
 
-                <label>
+        </form>
 
-                    <input
-                        id="notifications"
-                        type="checkbox"
-                    >
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('register')">
+            Create a new account
+        </button>
 
-                    Notifications
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('home')">
+            Back
+        </button>
 
-                </label>
+    </div>
 
-                <label>
+</section>
 
-                    <input
-                        id="darkMode"
-                        type="checkbox"
-                    >
 
-                    Dark Mode
+<!-- ================= APP ================= -->
 
-                </label>
+<section id="app" class="page">
 
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="saveSettings()"
-                >
-                    Save Settings
-                </button>
+    <div class="app-header">
 
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('app')"
-                >
-                    Back
-                </button>
+        <div>
+            <h2>My Account</h2>
 
-            </div>
+            <p
+                id="dashboardEmail"
+                class="small">
+            </p>
+        </div>
 
-        </section>
+        <span
+            class="status"
+            data-package-status>
+            Free
+        </span>
 
+    </div>
 
-        <!-- =================================================
-             PRIVACY
-             ================================================= -->
 
-        <section
-            id="privacy"
-            class="page"
-        >
+    <!-- USER PLAN -->
 
-            <div class="card">
+    <div class="plan-card">
 
-                <h2>
-                    🔒 Privacy
-                </h2>
+        <h3>Your Plan</h3>
 
-                <label>
-                    Profile Visibility
-                </label>
+        <div
+            id="planName"
+            class="plan-name">
+            Free
+        </div>
+
+        <p id="planDescription">
+            30 daily swipes
+        </p>
 
-                <select id="profileVisibility">
+        <button
+            type="button"
+            class="primary"
+            onclick="openPackage()">
+            ⭐ Upgrade to Rishta Plus
+        </button>
 
-                    <option value="members">
-                        Members Only
-                    </option>
+    </div>
 
-                    <option value="private">
-                        Private
-                    </option>
 
-                    <option value="public">
-                        Public
-                    </option>
+    <!-- SWIPE STATUS -->
 
-                </select>
+    <div class="usage-card">
 
-                <label>
+        <h3>Today's Activity</h3>
 
-                    <input
-                        id="showOnline"
-                        type="checkbox"
-                    >
+        <p>
+            Swipes:
+            <strong id="swipeCount">0 / 30</strong>
+        </p>
 
-                    Show online status
+        <p>
+            Super Likes:
+            <strong id="superLikeCount">0 / 0</strong>
+        </p>
 
-                </label>
+        <button
+            type="button"
+            class="secondary"
+            onclick="watchRewardedAd()">
+            🎬 Watch Ad → Get 3 Super Likes
+        </button>
 
-                <label>
+    </div>
 
-                    <input
-                        id="allowMessages"
-                        type="checkbox"
-                    >
 
-                    Allow messages
+    <!-- MAIN MENU -->
 
-                </label>
+    <div class="menu-grid">
 
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="savePrivacy()"
-                >
-                    Save Privacy Settings
-                </button>
+        <button type="button" onclick="openProfile()">
+            👤
+            <span>Profile</span>
+        </button>
 
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('app')"
-                >
-                    Back
-                </button>
+        <button type="button" onclick="openPhotos()">
+            📸
+            <span>Photos</span>
+        </button>
 
-            </div>
+        <button type="button" onclick="showPage('search')">
+            🔎
+            <span>Find Rishta</span>
+        </button>
 
-        </section>
+        <button type="button" onclick="showPage('likes')">
+            ❤️
+            <span>Who Liked Me</span>
+        </button>
 
+        <button type="button" onclick="showPage('matches')">
+            💚
+            <span>My Matches</span>
+        </button>
 
-        <!-- =================================================
-             APP SETTINGS
-             ================================================= -->
+        <button type="button" onclick="openSettings()">
+            ⚙️
+            <span>Settings</span>
+        </button>
 
-        <section
-            id="appSettings"
-            class="page"
-        >
+        <button type="button" onclick="openPrivacy()">
+            🔒
+            <span>Privacy</span>
+        </button>
 
-            <div class="card">
+        <button type="button" onclick="showPage('appSettings')">
+            📱
+            <span>App Settings</span>
+        </button>
+
+        <button type="button" onclick="openPurchases()">
+            💳
+            <span>Manage Purchases</span>
+        </button>
+
+        <button type="button" onclick="openPackage()">
+            ⭐
+            <span>Rishta Plus</span>
+        </button>
 
-                <h2>
-                    📱 App Settings
-                </h2>
+        <button type="button" onclick="openCustomIcon()">
+            🎨
+            <span>Custom Icon</span>
+        </button>
 
-                <p>
-                    Manage your application preferences.
-                </p>
+    </div>
 
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="showPage('settings')"
-                >
-                    Open Settings
-                </button>
 
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('app')"
-                >
-                    Back
-                </button>
+    <button
+        type="button"
+        class="logout"
+        onclick="logoutUser()">
+        Logout
+    </button>
 
-            </div>
+</section>
 
-        </section>
 
+<!-- ================= PROFILE ================= -->
 
-        <!-- =================================================
-             PURCHASES
-             ================================================= -->
+<section id="profile" class="page">
 
-        <section
-            id="purchases"
-            class="page"
-        >
+    <div class="card">
 
-            <div class="card">
+        <h2>👤 Profile</h2>
 
-                <h2>
-                    💳 Manage Purchases
-                </h2>
+        <input id="fullName" type="text" placeholder="Full Name">
 
-                <p>
-                    Current package:
-                    <strong
-                        data-package-status
-                    >
-                        Free
-                    </strong>
-                </p>
+        <input
+            id="age"
+            type="number"
+            min="18"
+            placeholder="Age">
 
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="openPackage()"
-                >
-                    View Package
-                </button>
+        <select id="gender">
+            <option value="">Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
 
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('app')"
-                >
-                    Back
-                </button>
+        <input id="country" type="text" placeholder="Country">
 
-            </div>
-
-        </section>
+        <input id="city" type="text" placeholder="City">
 
+        <input
+            id="education"
+            type="text"
+            placeholder="Education">
 
-        <!-- =================================================
-             PACKAGE
-             ================================================= -->
-
-        <section
-            id="package"
-            class="page"
-        >
-
-            <div class="card">
+        <input
+            id="profession"
+            type="text"
+            placeholder="Profession">
 
-                <h2>
-                    ⭐ Activate Package
-                </h2>
+        <select id="maritalStatus">
+            <option value="">Marital Status</option>
+            <option value="never_married">Never Married</option>
+            <option value="divorced">Divorced</option>
+            <option value="widowed">Widowed</option>
+        </select>
 
-                <h3>
-                    Monthly Package
-                </h3>
+        <select id="religiousLevel">
+            <option value="">Religious Level</option>
+            <option value="practicing">Practicing</option>
+            <option value="moderate">Moderate</option>
+            <option value="prefer_not_to_say">
+                Prefer not to say
+            </option>
+        </select>
 
-                <p>
-                    $2 / month
-                </p>
+        <input
+            id="phone"
+            type="tel"
+            placeholder="Phone">
 
-                <ul>
-                    <li>
-                        Enhanced profile visibility
-                    </li>
+        <textarea
+            id="about"
+            rows="5"
+            placeholder="About me"></textarea>
 
-                    <li>
-                        Premium account features
-                    </li>
+        <button
+            type="button"
+            class="primary"
+            onclick="updateProfile()">
+            Save Profile
+        </button>
 
-                    <li>
-                        Monthly package access
-                    </li>
-                </ul>
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
 
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="activatePackage()"
-                >
-                    Continue with $2 Package
-                </button>
+    </div>
 
-                <p class="small">
-                    Payment processing will be connected
-                    to a secure payment provider.
-                </p>
+</section>
 
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('app')"
-                >
-                    Back
-                </button>
 
-            </div>
+<!-- ================= PHOTOS ================= -->
 
-        </section>
+<section id="photos" class="page">
 
+    <div class="card">
 
-        <!-- =================================================
-             CUSTOM ICON
-             ================================================= -->
+        <h2>📸 Photos</h2>
 
-        <section
-            id="customIcon"
-            class="page"
-        >
+        <div
+            id="photosList"
+            class="photos-list">
+        </div>
 
-            <div class="card">
+        <input
+            id="photoInput"
+            type="file"
+            accept="image/*"
+            multiple>
 
-                <h2>
-                    🎨 Custom Icon
-                </h2>
+        <p class="small">
+            Maximum 5MB per image.
+        </p>
 
-                <p>
-                    Select an image for your custom
-                    application icon.
-                </p>
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
 
-                <input
-                    id="customIconInput"
-                    type="file"
-                    accept="image/*"
-                >
+    </div>
 
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="saveCustomIcon()"
-                >
-                    Save Custom Icon
-                </button>
+</section>
 
-                <button
-                    type="button"
-                    class="link-btn"
-                    onclick="showPage('app')"
-                >
-                    Back
-                </button>
 
-            </div>
+<!-- ================= SEARCH ================= -->
 
-        </section>
+<section id="search" class="page">
 
-    </main>
+    <div class="card">
 
+        <h2>🔎 Find a Rishta</h2>
 
-    <!-- =====================================================
-         JAVASCRIPT
-         ===================================================== -->
+        <p class="small">
+            Basic filters are available to Free members.
+            Premium members receive advanced filters.
+        </p>
 
-    <script src="script.js"></script>
+        <label>Age</label>
+
+        <div class="two-column">
+
+            <input
+                id="ageMin"
+                type="number"
+                min="18"
+                placeholder="Min">
+
+            <input
+                id="ageMax"
+                type="number"
+                min="18"
+                placeholder="Max">
+
+        </div>
+
+        <label>Country</label>
+
+        <input
+            id="searchCountry"
+            type="text"
+            placeholder="Country">
+
+        <label>City</label>
+
+        <input
+            id="searchCity"
+            type="text"
+            placeholder="City">
+
+        <label>Religion</label>
+
+        <select id="searchReligion">
+
+            <option value="">Any Religion</option>
+
+            <option value="islam">
+                Islam
+            </option>
+
+        </select>
+
+        <label>Sect / Maslak</label>
+
+        <select id="searchSect">
+
+            <option value="">
+                Any Sect
+            </option>
+
+            <option value="sunni">
+                Sunni
+            </option>
+
+            <option value="shia">
+                Shia
+            </option>
+
+            <option value="other">
+                Other / Prefer not to say
+            </option>
+
+        </select>
+
+        <label>
+            <input
+                id="seriousIntent"
+                type="checkbox">
+            Marriage Intent: Serious
+        </label>
+
+        <button
+            type="button"
+            class="primary"
+            onclick="searchProfiles()">
+            Search
+        </button>
+
+        <div
+            id="searchResults"
+            class="results">
+        </div>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LIKES ================= -->
+
+<section id="likes" class="page">
+
+    <div class="card">
+
+        <h2>❤️ Who Liked Me</h2>
+
+        <div id="likesList">
+
+            <p class="small">
+                Your likes will appear here.
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MATCHES ================= -->
+
+<section id="matches" class="page">
+
+    <div class="card">
+
+        <h2>💚 My Matches</h2>
+
+        <div id="matchesList">
+
+            <p class="small">
+                Your matches will appear here.
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SETTINGS ================= -->
+
+<section id="settings" class="page">
+
+    <div class="card">
+
+        <h2>⚙️ Settings</h2>
+
+        <label>
+            <input
+                id="notifications"
+                type="checkbox">
+            Notifications
+        </label>
+
+        <label>
+            <input
+                id="darkMode"
+                type="checkbox">
+            Dark Mode
+        </label>
+
+        <button
+            type="button"
+            class="primary"
+            onclick="saveSettings()">
+            Save Settings
+        </button>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRIVACY ================= -->
+
+<section id="privacy" class="page">
+
+    <div class="card">
+
+        <h2>🔒 Privacy</h2>
+
+        <label>Profile Visibility</label>
+
+        <select id="profileVisibility">
+
+            <option value="members">
+                Members Only
+            </option>
+
+            <option value="private">
+                Private
+            </option>
+
+            <option value="public">
+                Public
+            </option>
+
+        </select>
+
+        <label>
+            <input
+                id="showOnline"
+                type="checkbox">
+            Show online status
+        </label>
+
+        <label>
+            <input
+                id="allowMessages"
+                type="checkbox">
+            Allow messages
+        </label>
+
+        <label>
+            <input
+                id="photoAfterMatch"
+                type="checkbox">
+            Show photos only after matching
+        </label>
+
+        <button
+            type="button"
+            class="primary"
+            onclick="savePrivacy()">
+            Save Privacy Settings
+        </button>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= APP SETTINGS ================= -->
+
+<section id="appSettings" class="page">
+
+    <div class="card">
+
+        <h2>📱 App Settings</h2>
+
+        <p>
+            Manage your application preferences.
+        </p>
+
+        <button
+            type="button"
+            class="primary"
+            onclick="showPage('settings')">
+            Open Settings
+        </button>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PURCHASES ================= -->
+
+<section id="purchases" class="page">
+
+    <div class="card">
+
+        <h2>💳 Manage Purchases</h2>
+
+        <p>
+            Current plan:
+            <strong data-package-status>
+                Free
+            </strong>
+        </p>
+
+        <p id="purchaseStatus">
+            No active subscription.
+        </p>
+
+        <button
+            type="button"
+            class="primary"
+            onclick="openPackage()">
+            View Rishta Plus
+        </button>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PACKAGE ================= -->
+
+<section id="package" class="page">
+
+    <div class="card premium-card">
+
+        <div class="premium-icon">
+            ⭐
+        </div>
+
+        <h2>Rishta Plus</h2>
+
+        <h3>$2 / month</h3>
+
+        <p>
+            A premium experience for serious
+            marriage intentions.
+        </p>
+
+        <ul class="feature-list">
+
+            <li>♾️ Unlimited Swipes</li>
+
+            <li>🔎 Religion + Sect Filters</li>
+
+            <li>💍 Marriage Intent Badge</li>
+
+            <li>❤️ 5 Super Likes / day</li>
+
+            <li>👨‍👩‍👧 Wali / Guardian Option</li>
+
+            <li>🔐 Photo Privacy</li>
+
+            <li>❤️ See Who Liked You</li>
+
+            <li>🎙️ Voice Notes</li>
+
+            <li>💬 Halal Icebreakers</li>
+
+            <li>🚀 1 Friday Boost / month</li>
+
+            <li>🛡️ Verification Badge</li>
+
+            <li>↩️ Rewind</li>
+
+            <li>🚫 No Ads</li>
+
+        </ul>
+
+        <button
+            type="button"
+            class="primary premium-button"
+            onclick="activatePackage()">
+            Continue with Rishta Plus — $2/month
+        </button>
+
+        <p
+            id="paymentMessage"
+            class="small">
+            Secure payment will be required
+            to activate the subscription.
+        </p>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CUSTOM ICON ================= -->
+
+<section id="customIcon" class="page">
+
+    <div class="card">
+
+        <h2>🎨 Custom Icon</h2>
+
+        <p>
+            Select an image for your custom
+            application icon.
+        </p>
+
+        <input
+            id="customIconInput"
+            type="file"
+            accept="image/*">
+
+        <button
+            type="button"
+            class="primary"
+            onclick="saveCustomIcon()">
+            Save Custom Icon
+        </button>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WALI / GUARDIAN ================= -->
+
+<section id="guardian" class="page">
+
+    <div class="card">
+
+        <h2>👨‍👩‍👧 Wali / Guardian</h2>
+
+        <p class="small">
+            Share your profile with a trusted
+            family member or guardian.
+        </p>
+
+        <input
+            id="guardianName"
+            type="text"
+            placeholder="Guardian Name">
+
+        <input
+            id="guardianEmail"
+            type="email"
+            placeholder="Guardian Email">
+
+        <button
+            type="button"
+            class="primary"
+            onclick="saveGuardian()">
+            Save Guardian
+        </button>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CHAT ================= -->
+
+<section id="chat" class="page">
+
+    <div class="card">
+
+        <h2>💬 Halal Chat</h2>
+
+        <p class="small">
+            Chat becomes available after a mutual match.
+        </p>
+
+        <div id="chatMessages" class="chat-messages">
+        </div>
+
+        <textarea
+            id="chatMessage"
+            rows="3"
+            placeholder="Write a respectful message...">
+        </textarea>
+
+        <button
+            type="button"
+            class="primary"
+            onclick="sendMessage()">
+            Send Message
+        </button>
+
+        <button
+            type="button"
+            class="secondary"
+            onclick="showHalalIcebreaker()">
+            💡 Halal Icebreaker
+        </button>
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('app')">
+            Back
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<script src="script.js"></script>
 
 </body>
-  </html>
+            </html>
