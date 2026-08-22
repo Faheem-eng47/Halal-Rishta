@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
 
@@ -37,10 +37,41 @@
     <select
         id="languageSelect"
         aria-label="Language"
+        onchange="changeLanguage(this.value)"
     >
+
         <option value="en">English</option>
-        <option value="ur">اردو</option>
         <option value="ar">العربية</option>
+        <option value="es">Español</option>
+        <option value="it">Italiano</option>
+        <option value="fr">Français</option>
+        <option value="nl">Nederlands</option>
+        <option value="el">Ελληνικά</option>
+        <option value="tr">Türkçe</option>
+        <option value="fa">فارسی</option>
+        <option value="hi">हिन्दी</option>
+        <option value="pl">Polski</option>
+        <option value="ro">Română</option>
+        <option value="zh">中文</option>
+        <option value="ru">Русский</option>
+        <option value="pt">Português</option>
+        <option value="ms">Bahasa Melayu</option>
+        <option value="id">Bahasa Indonesia</option>
+        <option value="fil">Filipino</option>
+        <option value="th">ไทย</option>
+        <option value="sq">Shqip</option>
+        <option value="so">Soomaali</option>
+        <option value="sw">Kiswahili</option>
+        <option value="bn">বাংলা</option>
+        <option value="ug">Ugandan English</option>
+        <option value="ng">Nigerian English</option>
+        <option value="fi">Suomi</option>
+        <option value="cs">Čeština</option>
+        <option value="sl">Slovenščina</option>
+        <option value="sk">Slovenčina</option>
+        <option value="bg">Български</option>
+        <option value="hu">Magyar</option>
+
     </select>
 
 </header>
@@ -49,14 +80,9 @@
 <main>
 
 
-<!-- =====================================================
-     HOME
-     ===================================================== -->
+<!-- HOME -->
 
-<section
-    id="home"
-    class="page active"
->
+<section id="home" class="page active">
 
     <div class="hero-card">
 
@@ -98,14 +124,9 @@
 </section>
 
 
-<!-- =====================================================
-     REGISTER
-     ===================================================== -->
+<!-- REGISTER -->
 
-<section
-    id="register"
-    class="page"
->
+<section id="register" class="page">
 
     <div class="card">
 
@@ -169,14 +190,9 @@
 </section>
 
 
-<!-- =====================================================
-     LOGIN
-     ===================================================== -->
+<!-- LOGIN -->
 
-<section
-    id="login"
-    class="page"
->
+<section id="login" class="page">
 
     <div class="card">
 
@@ -232,14 +248,9 @@
 </section>
 
 
-<!-- =====================================================
-     APP / DASHBOARD
-     ===================================================== -->
+<!-- APP / DASHBOARD -->
 
-<section
-    id="app"
-    class="page"
->
+<section id="app" class="page">
 
     <div class="app-header">
 
@@ -265,8 +276,6 @@
 
     </div>
 
-
-    <!-- USER PLAN -->
 
     <div class="plan-card">
 
@@ -295,8 +304,6 @@
 
     </div>
 
-
-    <!-- DAILY USAGE -->
 
     <div class="usage-card">
 
@@ -329,24 +336,12 @@
     </div>
 
 
-    <!-- MAIN MENU -->
-
     <div class="menu-grid">
 
-        <button
-            type="button"
-            onclick="openProfile()"
-        >
+        <button type="button" onclick="openProfile()">
             👤
-            <span>
-                Profile
-            </span>
+            <span>Profile</span>
         </button>
-
-
-        <!-- SWIPE RISHTAS
-             Directly opens the Swipe page.
-             This avoids depending on openSwipe(). -->
 
         <button
             type="button"
@@ -358,130 +353,92 @@
             "
         >
             💚
-            <span>
-                Swipe Rishtas
-            </span>
+            <span>Swipe Rishtas</span>
         </button>
 
-
-        <button
-            type="button"
-            onclick="openPhotos()"
-        >
+        <button type="button" onclick="openPhotos()">
             📸
-            <span>
-                Photos
-            </span>
+            <span>Photos</span>
         </button>
-
 
         <button
             type="button"
             onclick="showPage('search')"
         >
             🔎
-            <span>
-                Find Rishta
-            </span>
+            <span>Find Rishta</span>
         </button>
-
 
         <button
             type="button"
             onclick="showPage('likes')"
         >
             ❤️
-            <span>
-                Who Liked Me
-            </span>
+            <span>Who Liked Me</span>
         </button>
-
 
         <button
             type="button"
             onclick="showPage('matches')"
         >
             💚
-            <span>
-                My Matches
-            </span>
+            <span>My Matches</span>
         </button>
-
 
         <button
             type="button"
             onclick="openSettings()"
         >
             ⚙️
-            <span>
-                Settings
-            </span>
+            <span>Settings</span>
         </button>
-
 
         <button
             type="button"
             onclick="openPrivacy()"
         >
             🔒
-            <span>
-                Privacy
-            </span>
+            <span>Privacy</span>
         </button>
-
 
         <button
             type="button"
             onclick="showPage('appSettings')"
         >
             📱
-            <span>
-                App Settings
-            </span>
+            <span>App Settings</span>
         </button>
-
 
         <button
             type="button"
             onclick="openPurchases()"
         >
             💳
-            <span>
-                Manage Purchases
-            </span>
+            <span>Manage Purchases</span>
         </button>
-
 
         <button
             type="button"
             onclick="openPackage()"
         >
             ⭐
-            <span>
-                Rishta Plus
-            </span>
+            <span>Rishta Plus</span>
         </button>
-
 
         <button
             type="button"
             onclick="openCustomIcon()"
         >
             🎨
-            <span>
-                Custom Icon
-            </span>
+            <span>Custom Icon</span>
         </button>
-
 
         <button
             type="button"
             onclick="showPage('guardian')"
         >
             👨‍👩‍👧
-            <span>
-                Wali / Guardian
-            </span>
+            <span>Wali / Guardian</span>
         </button>
 
     </div>
@@ -498,14 +455,9 @@
 </section>
 
 
-<!-- =====================================================
-     SWIPE / DISCOVER RISHTAS
-     ===================================================== -->
+<!-- SWIPE -->
 
-<section
-    id="swipe"
-    class="page"
->
+<section id="swipe" class="page">
 
     <div class="card">
 
@@ -516,9 +468,6 @@
         <p class="small">
             Find serious marriage profiles and make your choice.
         </p>
-
-
-        <!-- SWIPE STATUS -->
 
         <div class="usage-card">
 
@@ -539,8 +488,6 @@
         </div>
 
 
-        <!-- PROFILE CARD -->
-
         <div
             id="swipeCard"
             class="swipe-card"
@@ -552,7 +499,6 @@
             >
                 👤
             </div>
-
 
             <div class="swipe-info">
 
@@ -581,10 +527,7 @@
         </div>
 
 
-        <!-- SWIPE ACTIONS -->
-
         <div class="swipe-actions">
-
 
             <button
                 type="button"
@@ -592,11 +535,8 @@
                 onclick="swipePass()"
             >
                 ❌
-                <span>
-                    Pass
-                </span>
+                <span>Pass</span>
             </button>
-
 
             <button
                 type="button"
@@ -604,11 +544,8 @@
                 onclick="swipeSuperLike()"
             >
                 ⭐
-                <span>
-                    Super Like
-                </span>
+                <span>Super Like</span>
             </button>
-
 
             <button
                 type="button"
@@ -616,15 +553,11 @@
                 onclick="swipeLike()"
             >
                 ❤️
-                <span>
-                    Like
-                </span>
+                <span>Like</span>
             </button>
 
         </div>
 
-
-        <!-- REWARDED AD -->
 
         <button
             type="button"
@@ -633,7 +566,6 @@
         >
             🎬 Watch Ad → Get 3 Super Likes
         </button>
-
 
         <button
             type="button"
@@ -648,14 +580,9 @@
 </section>
 
 
-<!-- =====================================================
-     PROFILE
-     ===================================================== -->
+<!-- PROFILE -->
 
-<section
-    id="profile"
-    class="page"
->
+<section id="profile" class="page">
 
     <div class="card">
 
@@ -692,13 +619,11 @@
 
         </select>
 
-
         <input
             id="country"
             type="text"
             placeholder="Country"
         >
-
 
         <input
             id="city"
@@ -706,20 +631,17 @@
             placeholder="City"
         >
 
-
         <input
             id="education"
             type="text"
             placeholder="Education"
         >
 
-
         <input
             id="profession"
             type="text"
             placeholder="Profession"
         >
-
 
         <select id="maritalStatus">
 
@@ -741,7 +663,6 @@
 
         </select>
 
-
         <select id="religiousLevel">
 
             <option value="">
@@ -762,20 +683,17 @@
 
         </select>
 
-
         <input
             id="phone"
             type="tel"
             placeholder="Phone"
         >
 
-
         <textarea
             id="about"
             rows="5"
             placeholder="About me"
         ></textarea>
-
 
         <button
             type="button"
@@ -784,7 +702,6 @@
         >
             Save Profile
         </button>
-
 
         <button
             type="button"
@@ -799,14 +716,9 @@
 </section>
 
 
-<!-- =====================================================
-     PHOTOS
-     ===================================================== -->
+<!-- PHOTOS -->
 
-<section
-    id="photos"
-    class="page"
->
+<section id="photos" class="page">
 
     <div class="card">
 
@@ -819,7 +731,6 @@
             class="photos-list"
         ></div>
 
-
         <input
             id="photoInput"
             type="file"
@@ -827,11 +738,9 @@
             multiple
         >
 
-
         <p class="small">
             Maximum 5MB per image.
         </p>
-
 
         <button
             type="button"
@@ -846,14 +755,9 @@
 </section>
 
 
-<!-- =====================================================
-     SEARCH
-     ===================================================== -->
+<!-- SEARCH -->
 
-<section
-    id="search"
-    class="page"
->
+<section id="search" class="page">
 
     <div class="card">
 
@@ -866,11 +770,9 @@
             Premium members receive advanced filters.
         </p>
 
-
         <label>
             Age
         </label>
-
 
         <div class="two-column">
 
@@ -890,11 +792,9 @@
 
         </div>
 
-
         <label>
             Country
         </label>
-
 
         <input
             id="searchCountry"
@@ -902,11 +802,9 @@
             placeholder="Country"
         >
 
-
         <label>
             City
         </label>
-
 
         <input
             id="searchCity"
@@ -914,11 +812,9 @@
             placeholder="City"
         >
 
-
         <label>
             Religion
         </label>
-
 
         <select id="searchReligion">
 
@@ -932,11 +828,9 @@
 
         </select>
 
-
         <label>
             Sect / Maslak
         </label>
-
 
         <select id="searchSect">
 
@@ -958,7 +852,6 @@
 
         </select>
 
-
         <label>
 
             <input
@@ -970,7 +863,6 @@
 
         </label>
 
-
         <button
             type="button"
             class="primary"
@@ -979,12 +871,10 @@
             Search
         </button>
 
-
         <div
             id="searchResults"
             class="results"
         ></div>
-
 
         <button
             type="button"
@@ -999,14 +889,9 @@
 </section>
 
 
-<!-- =====================================================
-     LIKES
-     ===================================================== -->
+<!-- LIKES -->
 
-<section
-    id="likes"
-    class="page"
->
+<section id="likes" class="page">
 
     <div class="card">
 
@@ -1022,7 +907,6 @@
 
         </div>
 
-
         <button
             type="button"
             class="link-btn"
@@ -1036,14 +920,9 @@
 </section>
 
 
-<!-- =====================================================
-     MATCHES
-     ===================================================== -->
+<!-- MATCHES -->
 
-<section
-    id="matches"
-    class="page"
->
+<section id="matches" class="page">
 
     <div class="card">
 
@@ -1059,7 +938,6 @@
 
         </div>
 
-
         <button
             type="button"
             class="link-btn"
@@ -1073,21 +951,15 @@
 </section>
 
 
-<!-- =====================================================
-     SETTINGS
-     ===================================================== -->
+<!-- SETTINGS -->
 
-<section
-    id="settings"
-    class="page"
->
+<section id="settings" class="page">
 
     <div class="card">
 
         <h2>
             ⚙️ Settings
         </h2>
-
 
         <label>
 
@@ -1100,7 +972,6 @@
 
         </label>
 
-
         <label>
 
             <input
@@ -1112,7 +983,6 @@
 
         </label>
 
-
         <button
             type="button"
             class="primary"
@@ -1120,7 +990,6 @@
         >
             Save Settings
         </button>
-
 
         <button
             type="button"
@@ -1135,14 +1004,9 @@
 </section>
 
 
-<!-- =====================================================
-     PRIVACY
-     ===================================================== -->
+<!-- PRIVACY -->
 
-<section
-    id="privacy"
-    class="page"
->
+<section id="privacy" class="page">
 
     <div class="card">
 
@@ -1150,11 +1014,9 @@
             🔒 Privacy
         </h2>
 
-
         <label>
             Profile Visibility
         </label>
-
 
         <select id="profileVisibility">
 
@@ -1172,7 +1034,6 @@
 
         </select>
 
-
         <label>
 
             <input
@@ -1183,7 +1044,6 @@
             Show online status
 
         </label>
-
 
         <label>
 
@@ -1196,7 +1056,6 @@
 
         </label>
 
-
         <label>
 
             <input
@@ -1208,7 +1067,6 @@
 
         </label>
 
-
         <button
             type="button"
             class="primary"
@@ -1216,7 +1074,6 @@
         >
             Save Privacy Settings
         </button>
-
 
         <button
             type="button"
@@ -1231,14 +1088,9 @@
 </section>
 
 
-<!-- =====================================================
-     APP SETTINGS
-     ===================================================== -->
+<!-- APP SETTINGS -->
 
-<section
-    id="appSettings"
-    class="page"
->
+<section id="appSettings" class="page">
 
     <div class="card">
 
@@ -1250,7 +1102,6 @@
             Manage your application preferences.
         </p>
 
-
         <button
             type="button"
             class="primary"
@@ -1258,7 +1109,6 @@
         >
             Open Settings
         </button>
-
 
         <button
             type="button"
@@ -1273,21 +1123,15 @@
 </section>
 
 
-<!-- =====================================================
-     PURCHASES
-     ===================================================== -->
+<!-- PURCHASES -->
 
-<section
-    id="purchases"
-    class="page"
->
+<section id="purchases" class="page">
 
     <div class="card">
 
         <h2>
             💳 Manage Purchases
         </h2>
-
 
         <p>
             Current plan:
@@ -1296,11 +1140,9 @@
             </strong>
         </p>
 
-
         <p id="purchaseStatus">
             No active subscription.
         </p>
-
 
         <button
             type="button"
@@ -1310,7 +1152,6 @@
             View Rishta Plus
         </button>
 
-
         <button
             type="button"
             class="link-btn"
@@ -1324,14 +1165,9 @@
 </section>
 
 
-<!-- =====================================================
-     RISHTA PLUS PACKAGE
-     ===================================================== -->
+<!-- RISHTA PLUS -->
 
-<section
-    id="package"
-    class="page"
->
+<section id="package" class="page">
 
     <div class="card premium-card">
 
@@ -1339,53 +1175,36 @@
             ⭐
         </div>
 
-
         <h2>
             Rishta Plus
         </h2>
 
-
         <h3>
             $2 / month
         </h3>
-
 
         <p>
             A premium experience for serious
             marriage intentions.
         </p>
 
-
         <ul class="feature-list">
 
             <li>♾️ Unlimited Swipes</li>
-
             <li>🔎 Religion + Sect Filters</li>
-
             <li>💍 Marriage Intent Badge</li>
-
             <li>❤️ 5 Super Likes / day</li>
-
             <li>👨‍👩‍👧 Wali / Guardian Option</li>
-
             <li>🔐 Photo Privacy</li>
-
             <li>❤️ See Who Liked You</li>
-
             <li>🎙️ Voice Notes</li>
-
             <li>💬 Halal Icebreakers</li>
-
             <li>🚀 1 Friday Boost / month</li>
-
             <li>🛡️ Verification Badge</li>
-
             <li>↩️ Rewind</li>
-
             <li>🚫 No Ads</li>
 
         </ul>
-
 
         <button
             type="button"
@@ -1395,7 +1214,6 @@
             Continue with Rishta Plus — $2/month
         </button>
 
-
         <p
             id="paymentMessage"
             class="small"
@@ -1403,7 +1221,6 @@
             Secure payment will be required
             to activate the subscription.
         </p>
-
 
         <button
             type="button"
@@ -1418,14 +1235,9 @@
 </section>
 
 
-<!-- =====================================================
-     CUSTOM ICON
-     ===================================================== -->
+<!-- CUSTOM ICON -->
 
-<section
-    id="customIcon"
-    class="page"
->
+<section id="customIcon" class="page">
 
     <div class="card">
 
@@ -1433,19 +1245,16 @@
             🎨 Custom Icon
         </h2>
 
-
         <p>
             Select an image for your custom
             application icon.
         </p>
-
 
         <input
             id="customIconInput"
             type="file"
             accept="image/*"
         >
-
 
         <button
             type="button"
@@ -1455,7 +1264,6 @@
             Save Custom Icon
         </button>
 
-
         <button
             type="button"
             class="link-btn"
@@ -1469,14 +1277,9 @@
 </section>
 
 
-<!-- =====================================================
-     WALI / GUARDIAN
-     ===================================================== -->
+<!-- WALI / GUARDIAN -->
 
-<section
-    id="guardian"
-    class="page"
->
+<section id="guardian" class="page">
 
     <div class="card">
 
@@ -1484,12 +1287,10 @@
             👨‍👩‍👧 Wali / Guardian
         </h2>
 
-
         <p class="small">
             Share your profile with a trusted
             family member or guardian.
         </p>
-
 
         <input
             id="guardianName"
@@ -1497,13 +1298,11 @@
             placeholder="Guardian Name"
         >
 
-
         <input
             id="guardianEmail"
             type="email"
             placeholder="Guardian Email"
         >
-
 
         <button
             type="button"
@@ -1513,7 +1312,6 @@
             Save Guardian
         </button>
 
-
         <button
             type="button"
             class="link-btn"
@@ -1527,14 +1325,9 @@
 </section>
 
 
-<!-- =====================================================
-     CHAT
-     ===================================================== -->
+<!-- CHAT -->
 
-<section
-    id="chat"
-    class="page"
->
+<section id="chat" class="page">
 
     <div class="card">
 
@@ -1542,24 +1335,20 @@
             💬 Halal Chat
         </h2>
 
-
         <p class="small">
             Chat becomes available after a mutual match.
         </p>
-
 
         <div
             id="chatMessages"
             class="chat-messages"
         ></div>
 
-
         <textarea
             id="chatMessage"
             rows="3"
             placeholder="Write a respectful message..."
         ></textarea>
-
 
         <button
             type="button"
@@ -1569,7 +1358,6 @@
             Send Message
         </button>
 
-
         <button
             type="button"
             class="secondary"
@@ -1577,7 +1365,6 @@
         >
             💡 Halal Icebreaker
         </button>
-
 
         <button
             type="button"
@@ -1595,11 +1382,135 @@
 </main>
 
 
+<script src="script.js"></script>
+
+
 <!-- =====================================================
-     JAVASCRIPT
+     LANGUAGE SELECTION
      ===================================================== -->
 
-<script src="script.js"></script>
+<script>
+
+const HALAL_RISHTA_LANGUAGES = [
+    "en",
+    "ar",
+    "es",
+    "it",
+    "fr",
+    "nl",
+    "el",
+    "tr",
+    "fa",
+    "hi",
+    "pl",
+    "ro",
+    "zh",
+    "ru",
+    "pt",
+    "ms",
+    "id",
+    "fil",
+    "th",
+    "sq",
+    "so",
+    "sw",
+    "bn",
+    "ug",
+    "ng",
+    "fi",
+    "cs",
+    "sl",
+    "sk",
+    "bg",
+    "hu"
+];
+
+
+function changeLanguage(language) {
+
+    if (
+        !HALAL_RISHTA_LANGUAGES.includes(language)
+    ) {
+        language = "en";
+    }
+
+
+    localStorage.setItem(
+        "halal_rishta_language",
+        language
+    );
+
+
+    document.documentElement.lang = language;
+
+
+    if (
+        language === "ar" ||
+        language === "fa"
+    ) {
+
+        document.documentElement.dir = "rtl";
+
+    } else {
+
+        document.documentElement.dir = "ltr";
+
+    }
+
+
+    const selector =
+        document.getElementById(
+            "languageSelect"
+        );
+
+
+    if (selector) {
+
+        selector.value = language;
+
+    }
+
+
+    /*
+     * If the new translation system exists
+     * inside script.js, run it automatically.
+     */
+
+    if (
+        typeof window.applyTranslations ===
+        "function"
+    ) {
+
+        window.applyTranslations(language);
+
+    }
+
+
+    window.currentLanguage = language;
+
+}
+
+
+/*
+ * Restore saved language.
+ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const savedLanguage =
+            localStorage.getItem(
+                "halal_rishta_language"
+            ) || "en";
+
+
+        changeLanguage(savedLanguage);
+
+    }
+);
+
+</script>
 
 </body>
             </html>
