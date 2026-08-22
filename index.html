@@ -344,9 +344,18 @@
         </button>
 
 
+        <!-- SWIPE RISHTAS
+             Directly opens the Swipe page.
+             This avoids depending on openSwipe(). -->
+
         <button
             type="button"
-            onclick="openSwipe()"
+            onclick="
+                showPage('swipe');
+                if (typeof loadSwipeProfile === 'function') {
+                    loadSwipeProfile();
+                }
+            "
         >
             💚
             <span>
@@ -556,6 +565,8 @@
                 </p>
 
                 <p id="swipeAbout">
+                    Complete your profile and start
+                    finding a compatible Rishta.
                 </p>
 
                 <span
@@ -1347,57 +1358,31 @@
 
         <ul class="feature-list">
 
-            <li>
-                ♾️ Unlimited Swipes
-            </li>
+            <li>♾️ Unlimited Swipes</li>
 
-            <li>
-                🔎 Religion + Sect Filters
-            </li>
+            <li>🔎 Religion + Sect Filters</li>
 
-            <li>
-                💍 Marriage Intent Badge
-            </li>
+            <li>💍 Marriage Intent Badge</li>
 
-            <li>
-                ❤️ 5 Super Likes / day
-            </li>
+            <li>❤️ 5 Super Likes / day</li>
 
-            <li>
-                👨‍👩‍👧 Wali / Guardian Option
-            </li>
+            <li>👨‍👩‍👧 Wali / Guardian Option</li>
 
-            <li>
-                🔐 Photo Privacy
-            </li>
+            <li>🔐 Photo Privacy</li>
 
-            <li>
-                ❤️ See Who Liked You
-            </li>
+            <li>❤️ See Who Liked You</li>
 
-            <li>
-                🎙️ Voice Notes
-            </li>
+            <li>🎙️ Voice Notes</li>
 
-            <li>
-                💬 Halal Icebreakers
-            </li>
+            <li>💬 Halal Icebreakers</li>
 
-            <li>
-                🚀 1 Friday Boost / month
-            </li>
+            <li>🚀 1 Friday Boost / month</li>
 
-            <li>
-                🛡️ Verification Badge
-            </li>
+            <li>🛡️ Verification Badge</li>
 
-            <li>
-                ↩️ Rewind
-            </li>
+            <li>↩️ Rewind</li>
 
-            <li>
-                🚫 No Ads
-            </li>
+            <li>🚫 No Ads</li>
 
         </ul>
 
@@ -1617,4 +1602,4 @@
 <script src="script.js"></script>
 
 </body>
-</html>
+            </html>
