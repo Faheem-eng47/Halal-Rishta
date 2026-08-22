@@ -1,7 +1,7 @@
 /* =========================================================
    HALAL RISHTA
    Complete script.js
-   Matches the current index.html
+   Matches current index.html
    ========================================================= */
 
 "use strict";
@@ -12,6 +12,7 @@
 
 const STORAGE = {
     USER: "halal_rishta_user",
+    ACCOUNT: "halal_rishta_account",
     PROFILE: "halal_rishta_profile",
     SETTINGS: "halal_rishta_settings",
     PRIVACY: "halal_rishta_privacy",
@@ -53,6 +54,10 @@ const DEFAULT_PURCHASE = {
     activatedAt: null,
     expiresAt: null
 };
+
+/* =========================================================
+   DEMO PROFILES
+   ========================================================= */
 
 const DEMO_PROFILES = [
     {
@@ -138,11 +143,23 @@ const DEMO_PROFILES = [
 ];
 
 /* =========================================================
-   HELPERS
+   CURRENT SWIPE PROFILE
+   ========================================================= */
+
+let currentSwipeProfileId = null;
+let currentChatProfileId = null;
+
+/* =========================================================
+   STORAGE HELPERS
    ========================================================= */
 
 function save(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+        console.error("Save error:", error);
+        alert("Unable to save this information on this device.");
+    }
 }
 
 function load(key, fallback = null) {
@@ -181,8 +198,15 @@ function isLoggedIn() {
     return !!getCurrentUser();
 }
 
+/* =========================================================
+   PREMIUM
+   ========================================================= */
+
 function isPremium() {
-    const purchase = load(STORAGE.PURCHASE, DEFAULT_PURCHASE);
+    const purchase = load(
+        STORAGE.PURCHASE,
+        DEFAULT_PURCHASE
+    );
 
     if (!purchase.active) {
         return false;
@@ -200,6 +224,7 @@ function isPremium() {
    ========================================================= */
 
 function showPage(pageId) {
+
     document.querySelectorAll(".page").forEach(page => {
         page.classList.remove("active");
     });
@@ -218,41 +243,62 @@ function showPage(pageId) {
         behavior: "smooth"
     });
 
-    if (pageId === "app") {
-        updateDashboard();
-    }
+    switch (pageId) {
 
-    if (pageId === "likes") {
-        renderLikes();
-    }
+        case "app":
+            updateDashboard();
+            break;
 
-    if (pageId === "matches") {
-        renderMatches();
-    }
+        case "swipe":
+            loadSwipeProfile();
+            break;
 
-    if (pageId === "chat") {
-        renderChat();
-    }
+        case "likes":
+            renderLikes();
+            break;
 
-    if (pageId === "photos") {
-        renderPhotos();
+        case "matches":
+            renderMatches();
+            break;
+
+        case "chat":
+            renderChat();
+            break;
+
+        case "photos":
+            renderPhotos();
+            break;
+
+        case "purchases":
+            openPurchases();
+            break;
+
+        case "guardian":
+            loadGuardian();
+            break;
     }
 }
 
 /* =========================================================
-   ACCOUNT
+   ACCOUNT CREATION
    ========================================================= */
 
 function createAccount() {
+
     const form = document.querySelector("#register form");
 
     if (!form) return;
 
     const inputs = form.querySelectorAll("input");
 
-    const fullName = inputs[0].value.trim();
-    const email = inputs[1].value.trim().toLowerCase();
-    const password = inputs[2].value;
+    const fullName =
+        inputs[0]?.value.trim() || "";
+
+    const email =
+        inputs[1]?.value.trim().toLowerCase() || "";
+
+    const password =
+        inputs[2]?.value || "";
 
     if (!fullName || !email || !password) {
         alert("Please complete all fields.");
@@ -264,9 +310,13 @@ function createAccount() {
         return;
     }
 
-    const existing = load("halal_rishta_account", null);
+    const existing =
+        load(STORAGE.ACCOUNT, null);
 
-    if (existing && existing.email === email) {
+    if (
+        existing &&
+        existing.email === email
+    ) {
         alert("An account with this email already exists.");
         showPage("login");
         return;
@@ -279,17 +329,15 @@ function createAccount() {
         password
     };
 
-    save("halal_rishta_account", account);
+    save(STORAGE.ACCOUNT, account);
 
-    const user = {
+    save(STORAGE.USER, {
         id: account.id,
         fullName: account.fullName,
         email: account.email
-    };
+    });
 
-    save(STORAGE.USER, user);
-
-    const profile = {
+    save(STORAGE.PROFILE, {
         id: account.id,
         fullName,
         age: "",
@@ -305,35 +353,56 @@ function createAccount() {
         religion: "islam",
         sect: "",
         seriousIntent: false
-    };
+    });
 
-    save(STORAGE.PROFILE, profile);
-    save(STORAGE.SETTINGS, DEFAULT_SETTINGS);
-    save(STORAGE.PRIVACY, DEFAULT_PRIVACY);
-    save(STORAGE.PURCHASE, DEFAULT_PURCHASE);
+    save(
+        STORAGE.SETTINGS,
+        DEFAULT_SETTINGS
+    );
+
+    save(
+        STORAGE.PRIVACY,
+        DEFAULT_PRIVACY
+    );
+
+    save(
+        STORAGE.PURCHASE,
+        DEFAULT_PURCHASE
+    );
 
     resetActivity();
 
     alert("Account created successfully.");
 
     showPage("app");
-    updateDashboard();
 }
 
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
 function loginUser() {
+
     const form = document.querySelector("#login form");
 
     if (!form) return;
 
     const inputs = form.querySelectorAll("input");
 
-    const email = inputs[0].value.trim().toLowerCase();
-    const password = inputs[1].value;
+    const email =
+        inputs[0]?.value.trim().toLowerCase() || "";
 
-    const account = load("halal_rishta_account", null);
+    const password =
+        inputs[1]?.value || "";
+
+    const account =
+        load(STORAGE.ACCOUNT, null);
 
     if (!account) {
-        alert("No account found. Please create an account first.");
+        alert(
+            "No account found. Please create an account first."
+        );
+
         showPage("register");
         return;
     }
@@ -353,6 +422,7 @@ function loginUser() {
     });
 
     if (!load(STORAGE.PROFILE)) {
+
         save(STORAGE.PROFILE, {
             id: account.id,
             fullName: account.fullName,
@@ -375,11 +445,19 @@ function loginUser() {
     alert("Login successful.");
 
     showPage("app");
-    updateDashboard();
 }
 
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
 function logoutUser() {
+
     remove(STORAGE.USER);
+
+    currentSwipeProfileId = null;
+    currentChatProfileId = null;
+
     showPage("home");
 }
 
@@ -388,6 +466,7 @@ function logoutUser() {
    ========================================================= */
 
 function updateDashboard() {
+
     const user = getCurrentUser();
 
     if (!user) {
@@ -395,7 +474,8 @@ function updateDashboard() {
         return;
     }
 
-    const emailElement = document.getElementById("dashboardEmail");
+    const emailElement =
+        document.getElementById("dashboardEmail");
 
     if (emailElement) {
         emailElement.textContent = user.email;
@@ -403,23 +483,34 @@ function updateDashboard() {
 
     const premium = isPremium();
 
-    document.querySelectorAll("[data-package-status]").forEach(element => {
-        element.textContent = premium ? "Rishta Plus" : "Free";
-    });
+    document
+        .querySelectorAll("[data-package-status]")
+        .forEach(element => {
 
-    const planName = document.getElementById("planName");
-    const planDescription = document.getElementById("planDescription");
+            element.textContent =
+                premium
+                    ? "Rishta Plus"
+                    : "Free";
+        });
+
+    const planName =
+        document.getElementById("planName");
+
+    const planDescription =
+        document.getElementById("planDescription");
 
     if (planName) {
-        planName.textContent = premium
-            ? "Rishta Plus"
-            : "Free";
+        planName.textContent =
+            premium
+                ? "Rishta Plus"
+                : "Free";
     }
 
     if (planDescription) {
-        planDescription.textContent = premium
-            ? "Unlimited daily swipes"
-            : "30 daily swipes";
+        planDescription.textContent =
+            premium
+                ? "Unlimited daily swipes"
+                : "30 daily swipes";
     }
 
     updateSwipeDisplay();
@@ -427,16 +518,21 @@ function updateDashboard() {
 }
 
 /* =========================================================
-   SWIPE SYSTEM
+   SWIPE DATA
    ========================================================= */
 
 function getSwipeData() {
-    const data = load(STORAGE.SWIPES, {
-        date: todayKey(),
-        count: 0
-    });
+
+    const data = load(
+        STORAGE.SWIPES,
+        {
+            date: todayKey(),
+            count: 0
+        }
+    );
 
     if (data.date !== todayKey()) {
+
         return {
             date: todayKey(),
             count: 0
@@ -446,19 +542,87 @@ function getSwipeData() {
     return data;
 }
 
-function updateSwipeDisplay() {
-    const element = document.getElementById("swipeCount");
+function getSuperLikeData() {
 
-    if (!element) return;
+    const data = load(
+        STORAGE.SUPERLIKES,
+        {
+            date: todayKey(),
+            count: 0
+        }
+    );
+
+    if (data.date !== todayKey()) {
+
+        return {
+            date: todayKey(),
+            count: 0
+        };
+    }
+
+    return data;
+}
+
+/* =========================================================
+   SWIPE DISPLAY
+   ========================================================= */
+
+function updateSwipeDisplay() {
 
     const data = getSwipeData();
 
-    element.textContent = isPremium()
-        ? `${data.count} / Unlimited`
-        : `${data.count} / 30`;
+    const text =
+        isPremium()
+            ? `${data.count} / Unlimited`
+            : `${data.count} / 30`;
+
+    const dashboard =
+        document.getElementById("swipeCount");
+
+    const swipePage =
+        document.getElementById("swipePageCount");
+
+    if (dashboard) {
+        dashboard.textContent = text;
+    }
+
+    if (swipePage) {
+        swipePage.textContent = text;
+    }
 }
 
+function updateSuperLikeDisplay() {
+
+    const data = getSuperLikeData();
+
+    const text =
+        isPremium()
+            ? `${data.count} / 5`
+            : `${data.count} / 0`;
+
+    const dashboard =
+        document.getElementById("superLikeCount");
+
+    const swipePage =
+        document.getElementById(
+            "swipePageSuperLikes"
+        );
+
+    if (dashboard) {
+        dashboard.textContent = text;
+    }
+
+    if (swipePage) {
+        swipePage.textContent = text;
+    }
+}
+
+/* =========================================================
+   SWIPE LIMIT
+   ========================================================= */
+
 function canSwipe() {
+
     if (isPremium()) {
         return true;
     }
@@ -466,6 +630,7 @@ function canSwipe() {
     const data = getSwipeData();
 
     if (data.count >= 30) {
+
         alert(
             "You have reached today's 30 free swipes. Upgrade to Rishta Plus for unlimited swipes."
         );
@@ -477,19 +642,33 @@ function canSwipe() {
 }
 
 function recordSwipe() {
+
     const data = getSwipeData();
 
     data.count += 1;
 
-    save(STORAGE.SWIPES, data);
+    save(
+        STORAGE.SWIPES,
+        data
+    );
 
     updateSwipeDisplay();
 }
 
+/* =========================================================
+   SWIPE PROFILES
+   ========================================================= */
+
 function getSwipeProfiles() {
-    const profile = load(STORAGE.PROFILE, {});
-    const liked = load(STORAGE.LIKES, []);
-    const passed = load(STORAGE.PASSES, []);
+
+    const profile =
+        load(STORAGE.PROFILE, {});
+
+    const liked =
+        load(STORAGE.LIKES, []);
+
+    const passed =
+        load(STORAGE.PASSES, []);
 
     const excluded = [
         profile.id,
@@ -503,155 +682,456 @@ function getSwipeProfiles() {
 }
 
 /* =========================================================
-   FIND RISHTA / SEARCH
+   LOAD SWIPE PROFILE
+   ========================================================= */
+
+function loadSwipeProfile() {
+
+    const profiles =
+        getSwipeProfiles();
+
+    const card =
+        document.getElementById("swipeCard");
+
+    const name =
+        document.getElementById("swipeName");
+
+    const details =
+        document.getElementById("swipeDetails");
+
+    const about =
+        document.getElementById("swipeAbout");
+
+    const intent =
+        document.getElementById("swipeIntent");
+
+    const photo =
+        document.getElementById("swipePhoto");
+
+    if (!name) return;
+
+    if (!profiles.length) {
+
+        currentSwipeProfileId = null;
+
+        name.textContent =
+            "No profiles available";
+
+        details.textContent =
+            "New compatible members will appear here.";
+
+        about.textContent =
+            "Try changing your search preferences or check again later.";
+
+        if (photo) {
+            photo.textContent = "👤";
+        }
+
+        if (intent) {
+            intent.style.display = "none";
+        }
+
+        if (card) {
+            card.classList.remove("has-profile");
+        }
+
+        updateSwipeDisplay();
+        updateSuperLikeDisplay();
+
+        return;
+    }
+
+    const profile =
+        profiles[0];
+
+    currentSwipeProfileId =
+        profile.id;
+
+    if (card) {
+        card.classList.add("has-profile");
+    }
+
+    name.textContent =
+        profile.fullName;
+
+    details.textContent =
+        `${profile.age} • ${profile.city}, ${profile.country} • ${profile.profession}`;
+
+    about.textContent =
+        profile.about ||
+        "Looking for a serious marriage.";
+
+    if (intent) {
+
+        intent.style.display =
+            profile.seriousIntent
+                ? "inline-block"
+                : "none";
+    }
+
+    if (photo) {
+
+        photo.innerHTML = `
+            <span style="font-size:64px;">👤</span>
+        `;
+    }
+
+    updateSwipeDisplay();
+    updateSuperLikeDisplay();
+}
+
+/* =========================================================
+   SWIPE PASS
+   ========================================================= */
+
+function swipePass() {
+
+    if (!currentSwipeProfileId) {
+        loadSwipeProfile();
+        return;
+    }
+
+    if (!canSwipe()) {
+        return;
+    }
+
+    const profileId =
+        currentSwipeProfileId;
+
+    const passes =
+        load(STORAGE.PASSES, []);
+
+    passes.push({
+        id: generateId("pass"),
+        profileId,
+        createdAt: new Date().toISOString()
+    });
+
+    save(
+        STORAGE.PASSES,
+        passes
+    );
+
+    recordSwipe();
+
+    currentSwipeProfileId = null;
+
+    loadSwipeProfile();
+}
+
+/* =========================================================
+   SWIPE LIKE
+   ========================================================= */
+
+function swipeLike() {
+
+    if (!currentSwipeProfileId) {
+        loadSwipeProfile();
+        return;
+    }
+
+    if (!canSwipe()) {
+        return;
+    }
+
+    const profileId =
+        currentSwipeProfileId;
+
+    const likes =
+        load(STORAGE.LIKES, []);
+
+    if (
+        !likes.some(
+            item => item.profileId === profileId
+        )
+    ) {
+
+        likes.push({
+            id: generateId("like"),
+            profileId,
+            createdAt: new Date().toISOString()
+        });
+
+        save(
+            STORAGE.LIKES,
+            likes
+        );
+    }
+
+    recordSwipe();
+
+    createMatchIfNeeded(profileId);
+
+    currentSwipeProfileId = null;
+
+    loadSwipeProfile();
+
+    alert("❤️ Like sent.");
+}
+
+/* =========================================================
+   SWIPE SUPER LIKE
+   ========================================================= */
+
+function swipeSuperLike() {
+
+    if (!currentSwipeProfileId) {
+        loadSwipeProfile();
+        return;
+    }
+
+    if (!isPremium()) {
+
+        alert(
+            "Super Likes are available with Rishta Plus. You can also earn Super Likes by watching a rewarded ad."
+        );
+
+        return;
+    }
+
+    const data =
+        getSuperLikeData();
+
+    if (data.count >= 5) {
+
+        alert(
+            "You have used today's 5 Super Likes."
+        );
+
+        return;
+    }
+
+    if (!canSwipe()) {
+        return;
+    }
+
+    data.count += 1;
+
+    save(
+        STORAGE.SUPERLIKES,
+        data
+    );
+
+    recordSwipe();
+
+    createMatchIfNeeded(
+        currentSwipeProfileId
+    );
+
+    currentSwipeProfileId = null;
+
+    updateSuperLikeDisplay();
+
+    loadSwipeProfile();
+
+    alert("⭐ Super Like sent.");
+}
+
+/* =========================================================
+   SEARCH
    ========================================================= */
 
 function searchProfiles() {
-    const results = document.getElementById("searchResults");
+
+    const results =
+        document.getElementById(
+            "searchResults"
+        );
 
     if (!results) return;
 
     const ageMin =
-        parseInt(document.getElementById("ageMin")?.value) || 18;
+        parseInt(
+            document.getElementById(
+                "ageMin"
+            )?.value
+        ) || 18;
 
     const ageMax =
-        parseInt(document.getElementById("ageMax")?.value) || 100;
+        parseInt(
+            document.getElementById(
+                "ageMax"
+            )?.value
+        ) || 100;
 
     const country =
-        document.getElementById("searchCountry")?.value
+        document
+            .getElementById(
+                "searchCountry"
+            )
+            ?.value
             .trim()
             .toLowerCase() || "";
 
     const city =
-        document.getElementById("searchCity")?.value
+        document
+            .getElementById(
+                "searchCity"
+            )
+            ?.value
             .trim()
             .toLowerCase() || "";
 
     const religion =
-        document.getElementById("searchReligion")?.value || "";
+        document.getElementById(
+            "searchReligion"
+        )?.value || "";
 
     const sect =
-        document.getElementById("searchSect")?.value || "";
+        document.getElementById(
+            "searchSect"
+        )?.value || "";
 
     const serious =
-        document.getElementById("seriousIntent")?.checked || false;
+        document.getElementById(
+            "seriousIntent"
+        )?.checked || false;
 
-    let profiles = getSwipeProfiles();
+    let profiles =
+        getSwipeProfiles();
 
-    profiles = profiles.filter(profile => {
+    profiles =
+        profiles.filter(profile => {
 
-        if (profile.age < ageMin || profile.age > ageMax) {
-            return false;
-        }
+            if (
+                profile.age < ageMin ||
+                profile.age > ageMax
+            ) {
+                return false;
+            }
 
-        if (
-            country &&
-            profile.country.toLowerCase() !== country
-        ) {
-            return false;
-        }
+            if (
+                country &&
+                profile.country.toLowerCase() !== country
+            ) {
+                return false;
+            }
 
-        if (
-            city &&
-            profile.city.toLowerCase() !== city
-        ) {
-            return false;
-        }
+            if (
+                city &&
+                profile.city.toLowerCase() !== city
+            ) {
+                return false;
+            }
 
-        if (
-            religion &&
-            profile.religion !== religion
-        ) {
-            return false;
-        }
+            if (
+                religion &&
+                profile.religion !== religion
+            ) {
+                return false;
+            }
 
-        if (
-            sect &&
-            profile.sect !== sect
-        ) {
-            return false;
-        }
+            if (
+                sect &&
+                profile.sect !== sect
+            ) {
+                return false;
+            }
 
-        if (
-            serious &&
-            !profile.seriousIntent
-        ) {
-            return false;
-        }
+            if (
+                serious &&
+                !profile.seriousIntent
+            ) {
+                return false;
+            }
 
-        return true;
-    });
+            return true;
+        });
 
     if (!profiles.length) {
+
         results.innerHTML = `
             <div class="card">
                 <p>No matching profiles found.</p>
             </div>
         `;
+
         return;
     }
 
-    results.innerHTML = profiles.map(profile => `
-        <div class="result-card">
+    results.innerHTML =
+        profiles.map(profile => `
 
-            <h3>${escapeHTML(profile.fullName)}</h3>
+            <div class="result-card">
 
-            <p>
-                ${profile.age} •
-                ${escapeHTML(profile.city)},
-                ${escapeHTML(profile.country)}
-            </p>
+                <h3>
+                    ${escapeHTML(profile.fullName)}
+                </h3>
 
-            <p>
-                ${escapeHTML(profile.profession || "Not specified")}
-            </p>
+                <p>
+                    ${profile.age} •
+                    ${escapeHTML(profile.city)},
+                    ${escapeHTML(profile.country)}
+                </p>
 
-            ${
-                profile.seriousIntent
-                    ? `<p>💍 Serious Marriage Intent</p>`
-                    : ""
-            }
+                <p>
+                    ${escapeHTML(
+                        profile.profession ||
+                        "Not specified"
+                    )}
+                </p>
 
-            <p>
-                ${escapeHTML(profile.about || "")}
-            </p>
+                ${
+                    profile.seriousIntent
+                        ? `
+                            <p>
+                                💍 Serious Marriage Intent
+                            </p>
+                        `
+                        : ""
+                }
 
-            <div class="swipe-actions">
+                <p>
+                    ${escapeHTML(
+                        profile.about || ""
+                    )}
+                </p>
 
-                <button
-                    type="button"
-                    class="secondary"
-                    onclick="passProfile('${profile.id}')">
-                    ❌ Pass
-                </button>
+                <div class="swipe-actions">
 
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="likeProfile('${profile.id}')">
-                    ❤️ Like
-                </button>
+                    <button
+                        type="button"
+                        class="secondary"
+                        onclick="passProfile('${profile.id}')">
+                        ❌ Pass
+                    </button>
 
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="superLikeProfile('${profile.id}')">
-                    ⭐ Super Like
-                </button>
+                    <button
+                        type="button"
+                        class="primary"
+                        onclick="likeProfile('${profile.id}')">
+                        ❤️ Like
+                    </button>
+
+                    <button
+                        type="button"
+                        class="primary"
+                        onclick="superLikeProfile('${profile.id}')">
+                        ⭐ Super Like
+                    </button>
+
+                </div>
 
             </div>
 
-        </div>
-    `).join("");
+        `).join("");
 }
 
+/* =========================================================
+   SEARCH LIKE
+   ========================================================= */
+
 function likeProfile(profileId) {
+
     if (!canSwipe()) return;
 
-    const likes = load(STORAGE.LIKES, []);
+    const likes =
+        load(STORAGE.LIKES, []);
 
     if (
-        likes.some(item => item.profileId === profileId)
+        likes.some(
+            item => item.profileId === profileId
+        )
     ) {
         return;
     }
@@ -662,15 +1142,12 @@ function likeProfile(profileId) {
         createdAt: new Date().toISOString()
     });
 
-    save(STORAGE.LIKES, likes);
+    save(
+        STORAGE.LIKES,
+        likes
+    );
 
     recordSwipe();
-
-    /*
-       Demo mutual-match logic:
-       For testing, a demo profile can become a match
-       when liked.
-    */
 
     createMatchIfNeeded(profileId);
 
@@ -679,14 +1156,23 @@ function likeProfile(profileId) {
     searchProfiles();
 }
 
+/* =========================================================
+   SEARCH PASS
+   ========================================================= */
+
 function passProfile(profileId) {
+
     if (!canSwipe()) return;
 
-    const passes = load(STORAGE.PASSES, []);
+    const passes =
+        load(STORAGE.PASSES, []);
 
     if (
-        !passes.some(item => item.profileId === profileId)
+        !passes.some(
+            item => item.profileId === profileId
+        )
     ) {
+
         passes.push({
             id: generateId("pass"),
             profileId,
@@ -694,66 +1180,51 @@ function passProfile(profileId) {
         });
     }
 
-    save(STORAGE.PASSES, passes);
+    save(
+        STORAGE.PASSES,
+        passes
+    );
 
     recordSwipe();
-
-    alert("Profile passed.");
 
     searchProfiles();
 }
 
 /* =========================================================
-   SUPER LIKES
+   SEARCH SUPER LIKE
    ========================================================= */
 
-function getSuperLikeData() {
-    const data = load(STORAGE.SUPERLIKES, {
-        date: todayKey(),
-        count: 0
-    });
-
-    if (data.date !== todayKey()) {
-        return {
-            date: todayKey(),
-            count: 0
-        };
-    }
-
-    return data;
-}
-
-function updateSuperLikeDisplay() {
-    const element =
-        document.getElementById("superLikeCount");
-
-    if (!element) return;
-
-    const data = getSuperLikeData();
-
-    element.textContent = isPremium()
-        ? `${data.count} / 5`
-        : `${data.count} / 0`;
-}
-
 function superLikeProfile(profileId) {
+
     if (!isPremium()) {
+
         alert(
-            "Super Likes are available with Rishta Plus. You can also earn 3 Super Likes by watching a rewarded ad."
+            "Super Likes are available with Rishta Plus."
         );
+
         return;
     }
 
-    const data = getSuperLikeData();
+    const data =
+        getSuperLikeData();
 
     if (data.count >= 5) {
-        alert("You have used today's 5 Super Likes.");
+
+        alert(
+            "You have used today's 5 Super Likes."
+        );
+
         return;
     }
+
+    if (!canSwipe()) return;
 
     data.count += 1;
 
-    save(STORAGE.SUPERLIKES, data);
+    save(
+        STORAGE.SUPERLIKES,
+        data
+    );
 
     recordSwipe();
 
@@ -766,14 +1237,29 @@ function superLikeProfile(profileId) {
     searchProfiles();
 }
 
+/* =========================================================
+   REWARDED AD DEMO
+   ========================================================= */
+
 function watchRewardedAd() {
+
     /*
-       Demo ad flow.
-       Real rewarded ads will be connected later
-       through the selected ad network.
+       This is only a local demo reward.
+       A real ad network must be connected before
+       production rewards are issued.
     */
 
-    const data = getSuperLikeData();
+    const data =
+        getSuperLikeData();
+
+    if (data.count >= 5) {
+
+        alert(
+            "You already have today's maximum of 5 Super Likes."
+        );
+
+        return;
+    }
 
     data.count += 3;
 
@@ -781,12 +1267,15 @@ function watchRewardedAd() {
         data.count = 5;
     }
 
-    save(STORAGE.SUPERLIKES, data);
+    save(
+        STORAGE.SUPERLIKES,
+        data
+    );
 
     updateSuperLikeDisplay();
 
     alert(
-        "🎬 Reward completed. You received Super Likes."
+        "🎬 Demo reward completed. Super Likes added."
     );
 }
 
@@ -795,7 +1284,9 @@ function watchRewardedAd() {
    ========================================================= */
 
 function createMatchIfNeeded(profileId) {
-    const matches = load(STORAGE.MATCHES, []);
+
+    const matches =
+        load(STORAGE.MATCHES, []);
 
     const alreadyMatched =
         matches.some(
@@ -820,46 +1311,64 @@ function createMatchIfNeeded(profileId) {
         createdAt: new Date().toISOString()
     });
 
-    save(STORAGE.MATCHES, matches);
+    save(
+        STORAGE.MATCHES,
+        matches
+    );
 }
 
+/* =========================================================
+   MATCHES
+   ========================================================= */
+
 function renderMatches() {
+
     const container =
-        document.getElementById("matchesList");
+        document.getElementById(
+            "matchesList"
+        );
 
     if (!container) return;
 
-    const matches = load(STORAGE.MATCHES, []);
+    const matches =
+        load(STORAGE.MATCHES, []);
 
     if (!matches.length) {
+
         container.innerHTML = `
             <p class="small">
                 No matches yet. Start finding a Rishta.
             </p>
         `;
+
         return;
     }
 
-    container.innerHTML = matches.map(match => `
-        <div class="result-card">
+    container.innerHTML =
+        matches.map(match => `
 
-            <h3>
-                💚 ${escapeHTML(match.fullName)}
-            </h3>
+            <div class="result-card">
 
-            <p>
-                You have a match.
-            </p>
+                <h3>
+                    💚 ${escapeHTML(
+                        match.fullName
+                    )}
+                </h3>
 
-            <button
-                type="button"
-                class="primary"
-                onclick="openChat('${match.profileId}')">
-                💬 Open Halal Chat
-            </button>
+                <p>
+                    You have a match.
+                </p>
 
-        </div>
-    `).join("");
+                <button
+                    type="button"
+                    class="primary"
+                    onclick="openChat('${match.profileId}')">
+                    💬 Open Halal Chat
+                </button>
+
+            </div>
+
+        `).join("");
 }
 
 /* =========================================================
@@ -867,149 +1376,211 @@ function renderMatches() {
    ========================================================= */
 
 function renderLikes() {
+
     const container =
-        document.getElementById("likesList");
+        document.getElementById(
+            "likesList"
+        );
 
     if (!container) return;
 
-    const likes = load(STORAGE.LIKES, []);
+    const likes =
+        load(STORAGE.LIKES, []);
 
     if (!likes.length) {
+
         container.innerHTML = `
             <p class="small">
                 Your likes will appear here.
             </p>
         `;
+
         return;
     }
 
-    container.innerHTML = likes.map(like => {
+    container.innerHTML =
+        likes.map(like => {
 
-        const profile =
-            DEMO_PROFILES.find(
-                person => person.id === like.profileId
-            );
+            const profile =
+                DEMO_PROFILES.find(
+                    person =>
+                        person.id === like.profileId
+                );
 
-        if (!profile) return "";
+            if (!profile) return "";
 
-        return `
-            <div class="result-card">
+            return `
+                <div class="result-card">
 
-                <h3>
-                    ❤️ ${escapeHTML(profile.fullName)}
-                </h3>
+                    <h3>
+                        ❤️ ${escapeHTML(
+                            profile.fullName
+                        )}
+                    </h3>
 
-                <p>
-                    ${profile.age} •
-                    ${escapeHTML(profile.city)},
-                    ${escapeHTML(profile.country)}
-                </p>
+                    <p>
+                        ${profile.age} •
+                        ${escapeHTML(
+                            profile.city
+                        )},
+                        ${escapeHTML(
+                            profile.country
+                        )}
+                    </p>
 
-                <button
-                    type="button"
-                    class="primary"
-                    onclick="openChat('${profile.id}')">
-                    💬 Chat
-                </button>
+                    <button
+                        type="button"
+                        class="primary"
+                        onclick="openChat('${profile.id}')">
+                        💬 Chat
+                    </button>
 
-            </div>
-        `;
-    }).join("");
+                </div>
+            `;
+        }).join("");
 }
 
 /* =========================================================
    CHAT
    ========================================================= */
 
-let currentChatProfileId = null;
-
 function openChat(profileId) {
-    const matches = load(STORAGE.MATCHES, []);
+
+    const matches =
+        load(STORAGE.MATCHES, []);
 
     const isMatch =
         matches.some(
-            match => match.profileId === profileId
+            match =>
+                match.profileId === profileId
         );
 
     if (!isMatch) {
-        alert("Chat is available after a mutual match.");
+
+        alert(
+            "Chat is available after a mutual match."
+        );
+
         return;
     }
 
-    currentChatProfileId = profileId;
+    currentChatProfileId =
+        profileId;
 
     showPage("chat");
-    renderChat();
 }
 
+/* =========================================================
+   RENDER CHAT
+   ========================================================= */
+
 function renderChat() {
+
     const container =
-        document.getElementById("chatMessages");
+        document.getElementById(
+            "chatMessages"
+        );
 
     if (!container) return;
 
     if (!currentChatProfileId) {
+
         container.innerHTML = `
             <p class="small">
                 Select a match to start chatting.
             </p>
         `;
+
         return;
     }
 
     const allMessages =
-        load(STORAGE.MESSAGES, []);
+        load(
+            STORAGE.MESSAGES,
+            []
+        );
 
     const messages =
         allMessages.filter(
             message =>
-                message.profileId === currentChatProfileId
+                message.profileId ===
+                currentChatProfileId
         );
 
     if (!messages.length) {
+
         container.innerHTML = `
             <p class="small">
                 No messages yet. Start with a respectful message.
             </p>
         `;
+
         return;
     }
 
-    container.innerHTML = messages.map(message => `
-        <div class="chat-message">
+    container.innerHTML =
+        messages.map(message => `
 
-            <strong>
-                ${message.sender === "me" ? "You" : "Match"}
-            </strong>
+            <div class="chat-message">
 
-            <p>
-                ${escapeHTML(message.text)}
-            </p>
+                <strong>
+                    ${
+                        message.sender === "me"
+                            ? "You"
+                            : "Match"
+                    }
+                </strong>
 
-        </div>
-    `).join("");
+                <p>
+                    ${escapeHTML(
+                        message.text
+                    )}
+                </p>
+
+            </div>
+
+        `).join("");
 }
 
+/* =========================================================
+   SEND MESSAGE
+   ========================================================= */
+
 function sendMessage() {
+
     if (!currentChatProfileId) {
-        alert("Please open a match first.");
+
+        alert(
+            "Please open a match first."
+        );
+
         return;
     }
 
     const input =
-        document.getElementById("chatMessage");
+        document.getElementById(
+            "chatMessage"
+        );
 
     if (!input) return;
 
-    const text = input.value.trim();
+    const text =
+        input.value.trim();
 
     if (!text) {
-        alert("Please write a message.");
+
+        alert(
+            "Please write a message."
+        );
+
         return;
     }
 
     const messages =
-        load(STORAGE.MESSAGES, []);
+        load(
+            STORAGE.MESSAGES,
+            []
+        );
 
     messages.push({
         id: generateId("message"),
@@ -1019,32 +1590,53 @@ function sendMessage() {
         createdAt: new Date().toISOString()
     });
 
-    save(STORAGE.MESSAGES, messages);
+    save(
+        STORAGE.MESSAGES,
+        messages
+    );
 
     input.value = "";
 
     renderChat();
 }
 
+/* =========================================================
+   HALAL ICEBREAKER
+   ========================================================= */
+
 function showHalalIcebreaker() {
+
     const questions = [
+
         "What qualities are most important to you in a life partner?",
+
         "What does a successful marriage mean to you?",
+
         "How important is family involvement in marriage?",
+
         "What are your expectations about communication after marriage?",
+
         "What values would you like to build your future family around?"
     ];
 
     const question =
         questions[
-            Math.floor(Math.random() * questions.length)
+            Math.floor(
+                Math.random() *
+                questions.length
+            )
         ];
 
     const input =
-        document.getElementById("chatMessage");
+        document.getElementById(
+            "chatMessage"
+        );
 
     if (input) {
-        input.value = question;
+
+        input.value =
+            question;
+
         input.focus();
     }
 }
@@ -1054,8 +1646,12 @@ function showHalalIcebreaker() {
    ========================================================= */
 
 function openProfile() {
+
     const profile =
-        load(STORAGE.PROFILE, {});
+        load(
+            STORAGE.PROFILE,
+            {}
+        );
 
     const fields = [
         "fullName",
@@ -1072,10 +1668,12 @@ function openProfile() {
     ];
 
     fields.forEach(id => {
+
         const element =
             document.getElementById(id);
 
         if (element) {
+
             element.value =
                 profile[id] ?? "";
         }
@@ -1084,9 +1682,17 @@ function openProfile() {
     showPage("profile");
 }
 
+/* =========================================================
+   UPDATE PROFILE
+   ========================================================= */
+
 function updateProfile() {
+
     const oldProfile =
-        load(STORAGE.PROFILE, {});
+        load(
+            STORAGE.PROFILE,
+            {}
+        );
 
     const profile = {
         ...oldProfile
@@ -1107,10 +1713,12 @@ function updateProfile() {
     ];
 
     fields.forEach(id => {
+
         const element =
             document.getElementById(id);
 
         if (element) {
+
             profile[id] =
                 element.value.trim();
         }
@@ -1120,23 +1728,64 @@ function updateProfile() {
         profile.age &&
         Number(profile.age) < 18
     ) {
-        alert("Users must be 18 or older.");
+
+        alert(
+            "Users must be 18 or older."
+        );
+
         return;
     }
 
-    save(STORAGE.PROFILE, profile);
+    if (!profile.fullName) {
+
+        alert(
+            "Please enter your full name."
+        );
+
+        return;
+    }
+
+    save(
+        STORAGE.PROFILE,
+        profile
+    );
 
     const user =
         getCurrentUser();
 
     if (user) {
-        user.fullName =
-            profile.fullName || user.fullName;
 
-        save(STORAGE.USER, user);
+        user.fullName =
+            profile.fullName ||
+            user.fullName;
+
+        save(
+            STORAGE.USER,
+            user
+        );
     }
 
-    alert("Profile saved successfully.");
+    const account =
+        load(
+            STORAGE.ACCOUNT,
+            null
+        );
+
+    if (account) {
+
+        account.fullName =
+            profile.fullName ||
+            account.fullName;
+
+        save(
+            STORAGE.ACCOUNT,
+            account
+        );
+    }
+
+    alert(
+        "Profile saved successfully."
+    );
 
     showPage("app");
 }
@@ -1146,53 +1795,100 @@ function updateProfile() {
    ========================================================= */
 
 function openPhotos() {
+
     showPage("photos");
+
     renderPhotos();
 }
 
 function renderPhotos() {
+
     const container =
-        document.getElementById("photosList");
+        document.getElementById(
+            "photosList"
+        );
 
     if (!container) return;
 
     const photos =
-        load(STORAGE.PHOTOS, []);
+        load(
+            STORAGE.PHOTOS,
+            []
+        );
 
     if (!photos.length) {
+
         container.innerHTML = `
             <p>
                 No photos uploaded yet.
             </p>
         `;
+
         return;
     }
 
-    container.innerHTML = photos.map(photo => `
-        <div class="photo-item">
+    container.innerHTML =
+        photos.map(photo => `
 
-            <img
-                src="${photo.data}"
-                alt="Profile photo"
-                style="max-width:100%;border-radius:12px;"
-            >
+            <div class="photo-item">
 
-            <button
-                type="button"
-                class="secondary"
-                onclick="deletePhoto('${photo.id}')">
-                Delete
-            </button>
+                <img
+                    src="${photo.data}"
+                    alt="Profile photo"
+                    style="
+                        max-width:100%;
+                        border-radius:12px;
+                    "
+                >
 
-        </div>
-    `).join("");
+                <button
+                    type="button"
+                    class="secondary"
+                    onclick="deletePhoto('${photo.id}')">
+                    Delete
+                </button>
+
+            </div>
+
+        `).join("");
 }
 
 function addPhoto(file) {
+
     if (!file) return;
 
     if (file.size > 5 * 1024 * 1024) {
-        alert("Maximum 5MB per image.");
+
+        alert(
+            "Maximum 5MB per image."
+        );
+
+        return;
+    }
+
+    if (
+        !file.type.startsWith("image/")
+    ) {
+
+        alert(
+            "Please select an image file."
+        );
+
+        return;
+    }
+
+    const photos =
+        load(
+            STORAGE.PHOTOS,
+            []
+        );
+
+    if (photos.length >= 6) {
+
+        alert(
+            "Maximum 6 photos allowed."
+        );
+
         return;
     }
 
@@ -1201,21 +1897,17 @@ function addPhoto(file) {
 
     reader.onload = function(event) {
 
-        const photos =
-            load(STORAGE.PHOTOS, []);
-
-        if (photos.length >= 6) {
-            alert("Maximum 6 photos allowed.");
-            return;
-        }
-
         photos.push({
             id: generateId("photo"),
             data: event.target.result,
-            createdAt: new Date().toISOString()
+            createdAt:
+                new Date().toISOString()
         });
 
-        save(STORAGE.PHOTOS, photos);
+        save(
+            STORAGE.PHOTOS,
+            photos
+        );
 
         renderPhotos();
     };
@@ -1224,15 +1916,23 @@ function addPhoto(file) {
 }
 
 function deletePhoto(photoId) {
+
     const photos =
-        load(STORAGE.PHOTOS, []);
+        load(
+            STORAGE.PHOTOS,
+            []
+        );
 
     const updated =
         photos.filter(
-            photo => photo.id !== photoId
+            photo =>
+                photo.id !== photoId
         );
 
-    save(STORAGE.PHOTOS, updated);
+    save(
+        STORAGE.PHOTOS,
+        updated
+    );
 
     renderPhotos();
 }
@@ -1242,21 +1942,31 @@ function deletePhoto(photoId) {
    ========================================================= */
 
 function openSettings() {
+
     const settings =
-        load(STORAGE.SETTINGS, DEFAULT_SETTINGS);
+        load(
+            STORAGE.SETTINGS,
+            DEFAULT_SETTINGS
+        );
 
     const notifications =
-        document.getElementById("notifications");
+        document.getElementById(
+            "notifications"
+        );
 
     const darkMode =
-        document.getElementById("darkMode");
+        document.getElementById(
+            "darkMode"
+        );
 
     if (notifications) {
+
         notifications.checked =
             !!settings.notifications;
     }
 
     if (darkMode) {
+
         darkMode.checked =
             !!settings.darkMode;
     }
@@ -1265,32 +1975,63 @@ function openSettings() {
 }
 
 function saveSettings() {
+
+    const oldSettings =
+        load(
+            STORAGE.SETTINGS,
+            DEFAULT_SETTINGS
+        );
+
     const settings = {
+
+        ...oldSettings,
+
         notifications:
-            document.getElementById("notifications")?.checked ?? true,
+            document.getElementById(
+                "notifications"
+            )?.checked ?? true,
 
         darkMode:
-            document.getElementById("darkMode")?.checked ?? false
+            document.getElementById(
+                "darkMode"
+            )?.checked ?? false
     };
 
-    save(STORAGE.SETTINGS, settings);
-
-    document.body.classList.toggle(
-        "dark-mode",
-        settings.darkMode
+    save(
+        STORAGE.SETTINGS,
+        settings
     );
 
-    alert("Settings saved.");
+    applySavedSettings();
+
+    alert(
+        "Settings saved."
+    );
 }
 
 function applySavedSettings() {
+
     const settings =
-        load(STORAGE.SETTINGS, DEFAULT_SETTINGS);
+        load(
+            STORAGE.SETTINGS,
+            DEFAULT_SETTINGS
+        );
 
     document.body.classList.toggle(
         "dark-mode",
         !!settings.darkMode
     );
+
+    const languageSelect =
+        document.getElementById(
+            "languageSelect"
+        );
+
+    if (languageSelect) {
+
+        languageSelect.value =
+            settings.language || "en";
+    }
 }
 
 /* =========================================================
@@ -1298,37 +2039,53 @@ function applySavedSettings() {
    ========================================================= */
 
 function openPrivacy() {
+
     const privacy =
-        load(STORAGE.PRIVACY, DEFAULT_PRIVACY);
+        load(
+            STORAGE.PRIVACY,
+            DEFAULT_PRIVACY
+        );
 
     const visibility =
-        document.getElementById("profileVisibility");
+        document.getElementById(
+            "profileVisibility"
+        );
 
     const online =
-        document.getElementById("showOnline");
+        document.getElementById(
+            "showOnline"
+        );
 
     const messages =
-        document.getElementById("allowMessages");
+        document.getElementById(
+            "allowMessages"
+        );
 
     const photoAfterMatch =
-        document.getElementById("photoAfterMatch");
+        document.getElementById(
+            "photoAfterMatch"
+        );
 
     if (visibility) {
+
         visibility.value =
             privacy.profileVisibility;
     }
 
     if (online) {
+
         online.checked =
             !!privacy.showOnline;
     }
 
     if (messages) {
+
         messages.checked =
             !!privacy.allowMessages;
     }
 
     if (photoAfterMatch) {
+
         photoAfterMatch.checked =
             !!privacy.photoAfterMatch;
     }
@@ -1337,73 +2094,106 @@ function openPrivacy() {
 }
 
 function savePrivacy() {
+
     const privacy = {
+
         profileVisibility:
-            document.getElementById("profileVisibility")?.value ||
+            document.getElementById(
+                "profileVisibility"
+            )?.value ||
             "members",
 
         showOnline:
-            document.getElementById("showOnline")?.checked ??
-            true,
+            document.getElementById(
+                "showOnline"
+            )?.checked ?? true,
 
         allowMessages:
-            document.getElementById("allowMessages")?.checked ??
-            true,
+            document.getElementById(
+                "allowMessages"
+            )?.checked ?? true,
 
         photoAfterMatch:
-            document.getElementById("photoAfterMatch")?.checked ??
-            false
+            document.getElementById(
+                "photoAfterMatch"
+            )?.checked ?? false
     };
 
-    save(STORAGE.PRIVACY, privacy);
+    save(
+        STORAGE.PRIVACY,
+        privacy
+    );
 
-    alert("Privacy settings saved.");
+    alert(
+        "Privacy settings saved."
+    );
 }
 
 /* =========================================================
-   PURCHASES / RISHTA PLUS
+   PURCHASES
    ========================================================= */
 
 function openPurchases() {
+
     const purchase =
-        load(STORAGE.PURCHASE, DEFAULT_PURCHASE);
+        load(
+            STORAGE.PURCHASE,
+            DEFAULT_PURCHASE
+        );
 
     const status =
-        document.getElementById("purchaseStatus");
+        document.getElementById(
+            "purchaseStatus"
+        );
 
     if (status) {
-        status.textContent =
-            purchase.active
-                ? "Rishta Plus is active."
-                : "No active subscription.";
+
+        if (isPremium()) {
+
+            status.textContent =
+                "Rishta Plus is active.";
+
+        } else {
+
+            status.textContent =
+                "No active subscription.";
+        }
     }
 
     showPage("purchases");
 }
 
+/* =========================================================
+   PACKAGE
+   ========================================================= */
+
 function openPackage() {
+
     showPage("package");
 }
 
 function activatePackage() {
-    /*
-       Payment provider is intentionally NOT faked here.
 
-       This button prepares the subscription state only
-       for testing. Real payment verification must happen
-       through a secure payment provider/backend.
+    /*
+       IMPORTANT:
+       This does NOT fake a payment.
+       A real payment provider/backend must verify
+       the transaction before activating Rishta Plus.
     */
 
     const message =
-        document.getElementById("paymentMessage");
+        document.getElementById(
+            "paymentMessage"
+        );
 
     if (message) {
+
         message.textContent =
-            "Payment setup is required before Rishta Plus can be activated.";
+            "Secure payment setup is required before Rishta Plus can be activated.";
     }
 
     alert(
-        "Payment setup is required. The $2 subscription will not be marked as paid until a real payment provider is connected."
+        "Secure payment is required. Rishta Plus will not be activated until a real payment provider verifies the $2/month subscription."
     );
 }
 
@@ -1411,25 +2201,71 @@ function activatePackage() {
    GUARDIAN
    ========================================================= */
 
-function saveGuardian() {
+function loadGuardian() {
+
+    const guardian =
+        load(
+            STORAGE.GUARDIAN,
+            null
+        );
+
+    if (!guardian) return;
+
     const name =
-        document.getElementById("guardianName")?.value.trim();
+        document.getElementById(
+            "guardianName"
+        );
 
     const email =
-        document.getElementById("guardianEmail")?.value.trim();
+        document.getElementById(
+            "guardianEmail"
+        );
+
+    if (name) {
+        name.value =
+            guardian.name || "";
+    }
+
+    if (email) {
+        email.value =
+            guardian.email || "";
+    }
+}
+
+function saveGuardian() {
+
+    const name =
+        document.getElementById(
+            "guardianName"
+        )?.value.trim();
+
+    const email =
+        document.getElementById(
+            "guardianEmail"
+        )?.value.trim();
 
     if (!name || !email) {
-        alert("Please enter guardian name and email.");
+
+        alert(
+            "Please enter guardian name and email."
+        );
+
         return;
     }
 
-    save(STORAGE.GUARDIAN, {
-        name,
-        email,
-        updatedAt: new Date().toISOString()
-    });
+    save(
+        STORAGE.GUARDIAN,
+        {
+            name,
+            email,
+            updatedAt:
+                new Date().toISOString()
+        }
+    );
 
-    alert("Guardian information saved.");
+    alert(
+        "Guardian information saved."
+    );
 }
 
 /* =========================================================
@@ -1437,39 +2273,98 @@ function saveGuardian() {
    ========================================================= */
 
 function openCustomIcon() {
+
     showPage("customIcon");
 }
 
 function saveCustomIcon() {
-    const input =
-        document.getElementById("customIconInput");
 
-    if (!input || !input.files.length) {
-        alert("Please select an image.");
+    const input =
+        document.getElementById(
+            "customIconInput"
+        );
+
+    if (
+        !input ||
+        !input.files.length
+    ) {
+
+        alert(
+            "Please select an image."
+        );
+
         return;
     }
 
-    const file = input.files[0];
+    const file =
+        input.files[0];
 
-    if (file.size > 5 * 1024 * 1024) {
-        alert("Maximum 5MB.");
+    if (
+        file.size >
+        5 * 1024 * 1024
+    ) {
+
+        alert(
+            "Maximum 5MB."
+        );
+
+        return;
+    }
+
+    if (
+        !file.type.startsWith("image/")
+    ) {
+
+        alert(
+            "Please select an image file."
+        );
+
         return;
     }
 
     const reader =
         new FileReader();
 
-    reader.onload = function(event) {
+    reader.onload =
+        function(event) {
 
-        save(STORAGE.CUSTOM_ICON, {
-            data: event.target.result,
-            updatedAt: new Date().toISOString()
-        });
+            save(
+                STORAGE.CUSTOM_ICON,
+                {
+                    data:
+                        event.target.result,
+                    updatedAt:
+                        new Date().toISOString()
+                }
+            );
 
-        alert("Custom icon saved.");
-    };
+            alert(
+                "Custom icon saved."
+            );
+        };
 
     reader.readAsDataURL(file);
+}
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+function saveLanguage(language) {
+
+    const settings =
+        load(
+            STORAGE.SETTINGS,
+            DEFAULT_SETTINGS
+        );
+
+    settings.language =
+        language;
+
+    save(
+        STORAGE.SETTINGS,
+        settings
+    );
 }
 
 /* =========================================================
@@ -1477,20 +2372,42 @@ function saveCustomIcon() {
    ========================================================= */
 
 function resetActivity() {
-    save(STORAGE.SWIPES, {
-        date: todayKey(),
-        count: 0
-    });
 
-    save(STORAGE.SUPERLIKES, {
-        date: todayKey(),
-        count: 0
-    });
+    save(
+        STORAGE.SWIPES,
+        {
+            date: todayKey(),
+            count: 0
+        }
+    );
 
-    save(STORAGE.LIKES, []);
-    save(STORAGE.PASSES, []);
-    save(STORAGE.MATCHES, []);
-    save(STORAGE.MESSAGES, []);
+    save(
+        STORAGE.SUPERLIKES,
+        {
+            date: todayKey(),
+            count: 0
+        }
+    );
+
+    save(
+        STORAGE.LIKES,
+        []
+    );
+
+    save(
+        STORAGE.PASSES,
+        []
+    );
+
+    save(
+        STORAGE.MATCHES,
+        []
+    );
+
+    save(
+        STORAGE.MESSAGES,
+        []
+    );
 }
 
 /* =========================================================
@@ -1498,89 +2415,127 @@ function resetActivity() {
    ========================================================= */
 
 function escapeHTML(value) {
+
     return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 }
 
 /* =========================================================
-   PHOTO INPUT EVENT
+   DOM READY
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    applySavedSettings();
+        applySavedSettings();
 
-    const photoInput =
-        document.getElementById("photoInput");
+        /* -----------------------------------------
+           PHOTO INPUT
+           ----------------------------------------- */
 
-    if (photoInput) {
-        photoInput.addEventListener(
-            "change",
-            function() {
-
-                Array.from(this.files)
-                    .forEach(file => addPhoto(file));
-
-                this.value = "";
-            }
-        );
-    }
-
-    const languageSelect =
-        document.getElementById("languageSelect");
-
-    if (languageSelect) {
-
-        const settings =
-            load(
-                STORAGE.SETTINGS,
-                DEFAULT_SETTINGS
+        const photoInput =
+            document.getElementById(
+                "photoInput"
             );
 
-        languageSelect.value =
-            settings.language || "en";
+        if (photoInput) {
 
-        languageSelect.addEventListener(
-            "change",
-            function() {
+            photoInput.addEventListener(
+                "change",
+                function() {
 
-                const current =
-                    load(
-                        STORAGE.SETTINGS,
-                        DEFAULT_SETTINGS
+                    Array.from(
+                        this.files
+                    ).forEach(
+                        file =>
+                            addPhoto(file)
                     );
 
-                current.language =
-                    this.value;
+                    this.value = "";
+                }
+            );
+        }
 
-                save(STORAGE.SETTINGS, current);
+        /* -----------------------------------------
+           LANGUAGE
+           ----------------------------------------- */
 
-                alert(
-                    "Language preference saved."
+        const languageSelect =
+            document.getElementById(
+                "languageSelect"
+            );
+
+        if (languageSelect) {
+
+            const settings =
+                load(
+                    STORAGE.SETTINGS,
+                    DEFAULT_SETTINGS
                 );
-            }
-        );
-    }
 
-    if (isLoggedIn()) {
-        updateDashboard();
+            languageSelect.value =
+                settings.language || "en";
+
+            languageSelect.addEventListener(
+                "change",
+                function() {
+
+                    saveLanguage(
+                        this.value
+                    );
+
+                    alert(
+                        "Language preference saved."
+                    );
+                }
+            );
+        }
+
+        /* -----------------------------------------
+           START APP
+           ----------------------------------------- */
+
+        if (isLoggedIn()) {
+            updateDashboard();
+        }
     }
-});
+);
 
 /* =========================================================
    GLOBAL ERROR REPORTING
    ========================================================= */
 
-window.addEventListener("error", function(event) {
-    console.error(
-        "Halal Rishta JavaScript Error:",
-        event.error || event.message
-    );
-});
+window.addEventListener(
+    "error",
+    function(event) {
+
+        console.error(
+            "Halal Rishta JavaScript Error:",
+            event.error ||
+            event.message
+        );
+    }
+);
 
 /* =========================================================
    END
