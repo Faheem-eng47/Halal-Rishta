@@ -1,431 +1,885 @@
 /* =========================================================
    HALAL RISHTA
-   Complete script.js
-   Languages + Current App Functions
+   COMPLETE MULTI-LANGUAGE TRANSLATION SYSTEM
+   Add this section at the VERY END of script.js
    ========================================================= */
 
 "use strict";
 
 /* =========================================================
-   STORAGE
+   LANGUAGE LIST
    ========================================================= */
 
-const STORAGE = {
-    USER: "halal_rishta_user",
-    ACCOUNT: "halal_rishta_account",
-    PROFILE: "halal_rishta_profile",
-    SETTINGS: "halal_rishta_settings",
-    PRIVACY: "halal_rishta_privacy",
-    PURCHASE: "halal_rishta_purchase",
-    SWIPES: "halal_rishta_swipes",
-    SUPERLIKES: "halal_rishta_superlikes",
-    LIKES: "halal_rishta_likes",
-    PASSES: "halal_rishta_passes",
-    MATCHES: "halal_rishta_matches",
-    MESSAGES: "halal_rishta_messages",
-    GUARDIAN: "halal_rishta_guardian",
-    PHOTOS: "halal_rishta_photos",
-    CUSTOM_ICON: "halal_rishta_custom_icon"
-};
+const HALAL_RISHTA_LANGUAGES = {
 
-/* =========================================================
-   LANGUAGES
-   30+ INTERNATIONAL LANGUAGES
-   ========================================================= */
-
-const LANGUAGES = [
-    {
-        code: "en",
+    en: {
         name: "English",
-        nativeName: "English"
+        dir: "ltr"
     },
-    {
-        code: "ar",
-        name: "Arabic",
-        nativeName: "العربية"
+
+    ar: {
+        name: "العربية",
+        dir: "rtl"
     },
-    {
-        code: "es",
-        name: "Spanish",
-        nativeName: "Español"
+
+    es: {
+        name: "Español",
+        dir: "ltr"
     },
-    {
-        code: "it",
-        name: "Italian",
-        nativeName: "Italiano"
+
+    it: {
+        name: "Italiano",
+        dir: "ltr"
     },
-    {
-        code: "fr",
-        name: "French",
-        nativeName: "Français"
+
+    fr: {
+        name: "Français",
+        dir: "ltr"
     },
-    {
-        code: "nl",
-        name: "Dutch",
-        nativeName: "Nederlands"
+
+    nl: {
+        name: "Nederlands",
+        dir: "ltr"
     },
-    {
-        code: "el",
-        name: "Greek",
-        nativeName: "Ελληνικά"
+
+    el: {
+        name: "Ελληνικά",
+        dir: "ltr"
     },
-    {
-        code: "tr",
-        name: "Turkish",
-        nativeName: "Türkçe"
+
+    tr: {
+        name: "Türkçe",
+        dir: "ltr"
     },
-    {
-        code: "fa",
-        name: "Persian",
-        nativeName: "فارسی"
+
+    fa: {
+        name: "فارسی",
+        dir: "rtl"
     },
-    {
-        code: "hi",
-        name: "Hindi",
-        nativeName: "हिन्दी"
+
+    hi: {
+        name: "हिन्दी",
+        dir: "ltr"
     },
-    {
-        code: "pl",
-        name: "Polish",
-        nativeName: "Polski"
+
+    pl: {
+        name: "Polski",
+        dir: "ltr"
     },
-    {
-        code: "ro",
-        name: "Romanian",
-        nativeName: "Română"
+
+    ro: {
+        name: "Română",
+        dir: "ltr"
     },
-    {
-        code: "zh",
-        name: "Chinese",
-        nativeName: "中文"
+
+    zh: {
+        name: "中文",
+        dir: "ltr"
     },
-    {
-        code: "ru",
-        name: "Russian",
-        nativeName: "Русский"
+
+    ru: {
+        name: "Русский",
+        dir: "ltr"
     },
-    {
-        code: "pt",
-        name: "Portuguese",
-        nativeName: "Português"
+
+    pt: {
+        name: "Português",
+        dir: "ltr"
     },
-    {
-        code: "ms",
-        name: "Malay",
-        nativeName: "Bahasa Melayu"
+
+    ms: {
+        name: "Melayu",
+        dir: "ltr"
     },
-    {
-        code: "id",
-        name: "Indonesian",
-        nativeName: "Bahasa Indonesia"
+
+    id: {
+        name: "Bahasa Indonesia",
+        dir: "ltr"
     },
-    {
-        code: "fil",
+
+    fil: {
         name: "Filipino",
-        nativeName: "Filipino"
+        dir: "ltr"
     },
-    {
-        code: "th",
-        name: "Thai",
-        nativeName: "ไทย"
+
+    th: {
+        name: "ไทย",
+        dir: "ltr"
     },
-    {
-        code: "sq",
-        name: "Albanian",
-        nativeName: "Shqip"
+
+    sq: {
+        name: "Shqip",
+        dir: "ltr"
     },
-    {
-        code: "so",
-        name: "Somali",
-        nativeName: "Soomaali"
+
+    so: {
+        name: "Soomaali",
+        dir: "ltr"
     },
-    {
-        code: "sw",
-        name: "Swahili",
-        nativeName: "Kiswahili"
+
+    sw: {
+        name: "Kiswahili",
+        dir: "ltr"
     },
-    {
-        code: "bn",
-        name: "Bengali",
-        nativeName: "বাংলা"
+
+    bn: {
+        name: "বাংলা",
+        dir: "ltr"
     },
-    {
-        code: "lg",
-        name: "Luganda",
-        nativeName: "Luganda"
+
+    ug: {
+        name: "English — Uganda",
+        dir: "ltr"
     },
-    {
-        code: "ha",
-        name: "Hausa",
-        nativeName: "Hausa"
+
+    ng: {
+        name: "English — Nigeria",
+        dir: "ltr"
     },
-    {
-        code: "yo",
-        name: "Yoruba",
-        nativeName: "Yorùbá"
+
+    fi: {
+        name: "Suomi",
+        dir: "ltr"
     },
-    {
-        code: "ig",
-        name: "Igbo",
-        nativeName: "Igbo"
+
+    cs: {
+        name: "Čeština",
+        dir: "ltr"
     },
-    {
-        code: "fi",
-        name: "Finnish",
-        nativeName: "Suomi"
+
+    sl: {
+        name: "Slovenščina",
+        dir: "ltr"
     },
-    {
-        code: "cs",
-        name: "Czech",
-        nativeName: "Čeština"
+
+    sk: {
+        name: "Slovenčina",
+        dir: "ltr"
     },
-    {
-        code: "sl",
-        name: "Slovenian",
-        nativeName: "Slovenščina"
+
+    bg: {
+        name: "Български",
+        dir: "ltr"
     },
-    {
-        code: "sk",
-        name: "Slovak",
-        nativeName: "Slovenčina"
-    },
-    {
-        code: "bg",
-        name: "Bulgarian",
-        nativeName: "Български"
-    },
-    {
-        code: "hu",
-        name: "Hungarian",
-        nativeName: "Magyar"
+
+    hu: {
+        name: "Magyar",
+        dir: "ltr"
     }
+
+};
+
+
+/* =========================================================
+   TRANSLATION TEXT
+   ========================================================= */
+
+const HR_TRANSLATIONS = {
+
+    en: {
+
+        "Create Account": "Create Account",
+        "Login": "Login",
+        "Back": "Back",
+        "Full Name": "Full Name",
+        "Email": "Email",
+        "Password": "Password",
+        "Already have an account? Login":
+            "Already have an account? Login",
+        "Create a new account":
+            "Create a new account",
+
+        "My Account": "My Account",
+        "Free": "Free",
+        "Your Plan": "Your Plan",
+        "Rishta Plus": "Rishta Plus",
+        "30 daily swipes": "30 daily swipes",
+        "Unlimited daily swipes": "Unlimited daily swipes",
+
+        "Upgrade to Rishta Plus":
+            "Upgrade to Rishta Plus",
+
+        "Today's Activity":
+            "Today's Activity",
+
+        "Swipes:": "Swipes:",
+        "Super Likes:": "Super Likes:",
+
+        "Watch Ad → Get 3 Super Likes":
+            "Watch Ad → Get 3 Super Likes",
+
+        "Profile": "Profile",
+        "Swipe Rishtas": "Swipe Rishtas",
+        "Photos": "Photos",
+        "Find Rishta": "Find Rishta",
+        "Who Liked Me": "Who Liked Me",
+        "My Matches": "My Matches",
+        "Settings": "Settings",
+        "Privacy": "Privacy",
+        "App Settings": "App Settings",
+        "Manage Purchases": "Manage Purchases",
+        "Custom Icon": "Custom Icon",
+        "Wali / Guardian": "Wali / Guardian",
+        "Logout": "Logout",
+
+        "Discover Rishtas":
+            "Discover Rishtas",
+
+        "Pass": "Pass",
+        "Like": "Like",
+        "Super Like": "Super Like",
+
+        "Profile": "Profile",
+        "Save Profile": "Save Profile",
+
+        "Gender": "Gender",
+        "Male": "Male",
+        "Female": "Female",
+
+        "Country": "Country",
+        "City": "City",
+        "Education": "Education",
+        "Profession": "Profession",
+
+        "Marital Status": "Marital Status",
+        "Never Married": "Never Married",
+        "Divorced": "Divorced",
+        "Widowed": "Widowed",
+
+        "Religious Level": "Religious Level",
+        "Practicing": "Practicing",
+        "Moderate": "Moderate",
+        "Prefer not to say":
+            "Prefer not to say",
+
+        "Phone": "Phone",
+        "About me": "About me",
+
+        "Find a Rishta":
+            "Find a Rishta",
+
+        "Age": "Age",
+        "Min": "Min",
+        "Max": "Max",
+        "Religion": "Religion",
+        "Any Religion": "Any Religion",
+        "Islam": "Islam",
+        "Sect / Maslak": "Sect / Maslak",
+        "Any Sect": "Any Sect",
+        "Sunni": "Sunni",
+        "Shia": "Shia",
+        "Other / Prefer not to say":
+            "Other / Prefer not to say",
+
+        "Marriage Intent: Serious":
+            "Marriage Intent: Serious",
+
+        "Search": "Search",
+
+        "Who Liked Me":
+            "Who Liked Me",
+
+        "My Matches":
+            "My Matches",
+
+        "Notifications": "Notifications",
+        "Dark Mode": "Dark Mode",
+        "Save Settings": "Save Settings",
+
+        "Profile Visibility":
+            "Profile Visibility",
+
+        "Members Only": "Members Only",
+        "Private": "Private",
+        "Public": "Public",
+
+        "Show online status":
+            "Show online status",
+
+        "Allow messages":
+            "Allow messages",
+
+        "Show photos only after matching":
+            "Show photos only after matching",
+
+        "Save Privacy Settings":
+            "Save Privacy Settings",
+
+        "Manage Purchases":
+            "Manage Purchases",
+
+        "Current plan:":
+            "Current plan:",
+
+        "No active subscription.":
+            "No active subscription.",
+
+        "View Rishta Plus":
+            "View Rishta Plus",
+
+        "$2 / month":
+            "$2 / month",
+
+        "Secure payment will be required to activate the subscription.":
+            "Secure payment will be required to activate the subscription.",
+
+        "Save Custom Icon":
+            "Save Custom Icon",
+
+        "Save Guardian":
+            "Save Guardian",
+
+        "Guardian Name":
+            "Guardian Name",
+
+        "Guardian Email":
+            "Guardian Email",
+
+        "Halal Chat":
+            "Halal Chat",
+
+        "Send Message":
+            "Send Message",
+
+        "Halal Icebreaker":
+            "Halal Icebreaker",
+
+        "Write a respectful message...":
+            "Write a respectful message..."
+
+    },
+
+
+    ar: {
+
+        "Create Account": "إنشاء حساب",
+        "Login": "تسجيل الدخول",
+        "Back": "رجوع",
+        "Full Name": "الاسم الكامل",
+        "Email": "البريد الإلكتروني",
+        "Password": "كلمة المرور",
+        "Already have an account? Login":
+            "لديك حساب بالفعل؟ تسجيل الدخول",
+        "Create a new account":
+            "إنشاء حساب جديد",
+
+        "My Account": "حسابي",
+        "Free": "مجاني",
+        "Your Plan": "خطتك",
+        "Rishta Plus": "رشتة بلس",
+        "30 daily swipes": "30 اختياراً يومياً",
+        "Unlimited daily swipes":
+            "اختيارات يومية غير محدودة",
+
+        "Upgrade to Rishta Plus":
+            "الترقية إلى رشتة بلس",
+
+        "Today's Activity":
+            "نشاط اليوم",
+
+        "Swipes:": "الاختيارات:",
+        "Super Likes:": "الإعجابات المميزة:",
+
+        "Watch Ad → Get 3 Super Likes":
+            "شاهد إعلاناً واحصل على 3 إعجابات مميزة",
+
+        "Profile": "الملف الشخصي",
+        "Swipe Rishtas": "استكشف الزيجات",
+        "Photos": "الصور",
+        "Find Rishta": "ابحث عن شريك",
+        "Who Liked Me": "من أعجب بي",
+        "My Matches": "تطابقاتي",
+        "Settings": "الإعدادات",
+        "Privacy": "الخصوصية",
+        "App Settings": "إعدادات التطبيق",
+        "Manage Purchases": "إدارة المشتريات",
+        "Custom Icon": "الأيقونة المخصصة",
+        "Wali / Guardian": "الولي / الوصي",
+        "Logout": "تسجيل الخروج",
+
+        "Discover Rishtas":
+            "اكتشف فرص الزواج",
+
+        "Pass": "تخطي",
+        "Like": "إعجاب",
+        "Super Like": "إعجاب مميز",
+
+        "Save Profile":
+            "حفظ الملف الشخصي",
+
+        "Gender": "الجنس",
+        "Male": "ذكر",
+        "Female": "أنثى",
+
+        "Country": "الدولة",
+        "City": "المدينة",
+        "Education": "التعليم",
+        "Profession": "المهنة",
+
+        "Marital Status":
+            "الحالة الاجتماعية",
+
+        "Never Married":
+            "لم يسبق له الزواج",
+
+        "Divorced": "مطلق",
+        "Widowed": "أرمل",
+
+        "Religious Level":
+            "مستوى الالتزام الديني",
+
+        "Practicing": "ملتزم",
+        "Moderate": "متوسط",
+        "Prefer not to say":
+            "أفضل عدم الإفصاح",
+
+        "Phone": "الهاتف",
+        "About me": "نبذة عني",
+
+        "Find a Rishta":
+            "البحث عن شريك زواج",
+
+        "Age": "العمر",
+        "Min": "الحد الأدنى",
+        "Max": "الحد الأقصى",
+
+        "Religion": "الدين",
+        "Any Religion": "أي دين",
+        "Islam": "الإسلام",
+
+        "Sect / Maslak":
+            "المذهب",
+
+        "Any Sect": "أي مذهب",
+        "Sunni": "سني",
+        "Shia": "شيعي",
+
+        "Other / Prefer not to say":
+            "آخر / أفضل عدم الإفصاح",
+
+        "Marriage Intent: Serious":
+            "نية الزواج: جادة",
+
+        "Search": "بحث",
+
+        "Notifications": "الإشعارات",
+        "Dark Mode": "الوضع الداكن",
+        "Save Settings":
+            "حفظ الإعدادات",
+
+        "Profile Visibility":
+            "ظهور الملف الشخصي",
+
+        "Members Only":
+            "للأعضاء فقط",
+
+        "Private": "خاص",
+        "Public": "عام",
+
+        "Show online status":
+            "إظهار حالة الاتصال",
+
+        "Allow messages":
+            "السماح بالرسائل",
+
+        "Show photos only after matching":
+            "إظهار الصور بعد التطابق فقط",
+
+        "Save Privacy Settings":
+            "حفظ إعدادات الخصوصية",
+
+        "Manage Purchases":
+            "إدارة المشتريات",
+
+        "Current plan:":
+            "الخطة الحالية:",
+
+        "No active subscription.":
+            "لا يوجد اشتراك نشط.",
+
+        "View Rishta Plus":
+            "عرض رشتة بلس",
+
+        "$2 / month":
+            "2 دولار / شهرياً",
+
+        "Custom Icon":
+            "الأيقونة المخصصة",
+
+        "Save Custom Icon":
+            "حفظ الأيقونة المخصصة",
+
+        "Guardian Name":
+            "اسم الولي / الوصي",
+
+        "Guardian Email":
+            "بريد الولي / الوصي",
+
+        "Save Guardian":
+            "حفظ بيانات الولي",
+
+        "Halal Chat":
+            "المحادثة الحلال",
+
+        "Send Message":
+            "إرسال الرسالة",
+
+        "Halal Icebreaker":
+            "سؤال تعارف حلال",
+
+        "Write a respectful message...":
+            "اكتب رسالة محترمة..."
+    },
+
+
+    es: {
+        "Create Account": "Crear cuenta",
+        "Login": "Iniciar sesión",
+        "Back": "Atrás",
+        "Full Name": "Nombre completo",
+        "Email": "Correo electrónico",
+        "Password": "Contraseña",
+        "Profile": "Perfil",
+        "Photos": "Fotos",
+        "Settings": "Configuración",
+        "Privacy": "Privacidad",
+        "App Settings": "Configuración de la aplicación",
+        "Manage Purchases": "Gestionar compras",
+        "Logout": "Cerrar sesión",
+        "Save Profile": "Guardar perfil",
+        "Find Rishta": "Buscar pareja",
+        "Who Liked Me": "Quién indicó que le gusto",
+        "My Matches": "Mis coincidencias",
+        "Search": "Buscar",
+        "Age": "Edad",
+        "Country": "País",
+        "City": "Ciudad",
+        "Education": "Educación",
+        "Profession": "Profesión",
+        "Male": "Hombre",
+        "Female": "Mujer",
+        "Pass": "Pasar",
+        "Like": "Me gusta",
+        "Super Like": "Me gusta especial",
+        "Save Settings": "Guardar configuración",
+        "Notifications": "Notificaciones",
+        "Dark Mode": "Modo oscuro",
+        "Send Message": "Enviar mensaje",
+        "Halal Chat": "Chat Halal",
+        "Back": "Atrás"
+    },
+
+
+    fr: {
+        "Create Account": "Créer un compte",
+        "Login": "Connexion",
+        "Back": "Retour",
+        "Full Name": "Nom complet",
+        "Email": "E-mail",
+        "Password": "Mot de passe",
+        "Profile": "Profil",
+        "Photos": "Photos",
+        "Settings": "Paramètres",
+        "Privacy": "Confidentialité",
+        "App Settings": "Paramètres de l'application",
+        "Manage Purchases": "Gérer les achats",
+        "Logout": "Déconnexion",
+        "Save Profile": "Enregistrer le profil",
+        "Find Rishta": "Trouver un partenaire",
+        "Who Liked Me": "Qui m'a aimé",
+        "My Matches": "Mes correspondances",
+        "Search": "Rechercher",
+        "Age": "Âge",
+        "Country": "Pays",
+        "City": "Ville",
+        "Education": "Éducation",
+        "Profession": "Profession",
+        "Male": "Homme",
+        "Female": "Femme",
+        "Pass": "Passer",
+        "Like": "J'aime",
+        "Super Like": "Super J'aime",
+        "Save Settings": "Enregistrer les paramètres",
+        "Notifications": "Notifications",
+        "Dark Mode": "Mode sombre",
+        "Send Message": "Envoyer le message",
+        "Halal Chat": "Chat Halal"
+    },
+
+
+    it: {
+        "Create Account": "Crea account",
+        "Login": "Accedi",
+        "Back": "Indietro",
+        "Full Name": "Nome completo",
+        "Email": "Email",
+        "Password": "Password",
+        "Profile": "Profilo",
+        "Photos": "Foto",
+        "Settings": "Impostazioni",
+        "Privacy": "Privacy",
+        "App Settings": "Impostazioni app",
+        "Manage Purchases": "Gestisci acquisti",
+        "Logout": "Esci",
+        "Save Profile": "Salva profilo",
+        "Find Rishta": "Trova partner",
+        "Who Liked Me": "Chi mi ha messo Mi piace",
+        "My Matches": "I miei match",
+        "Search": "Cerca",
+        "Age": "Età",
+        "Country": "Paese",
+        "City": "Città",
+        "Education": "Istruzione",
+        "Profession": "Professione",
+        "Male": "Uomo",
+        "Female": "Donna",
+        "Pass": "Passa",
+        "Like": "Mi piace",
+        "Super Like": "Super Mi piace",
+        "Save Settings": "Salva impostazioni",
+        "Notifications": "Notifiche",
+        "Dark Mode": "Modalità scura",
+        "Send Message": "Invia messaggio",
+        "Halal Chat": "Chat Halal"
+    },
+
+
+    de: {
+        "Create Account": "Konto erstellen",
+        "Login": "Anmelden",
+        "Back": "Zurück",
+        "Full Name": "Vollständiger Name",
+        "Email": "E-Mail",
+        "Password": "Passwort",
+        "Profile": "Profil",
+        "Photos": "Fotos",
+        "Settings": "Einstellungen",
+        "Privacy": "Datenschutz",
+        "App Settings": "App-Einstellungen",
+        "Manage Purchases": "Käufe verwalten",
+        "Logout": "Abmelden",
+        "Save Profile": "Profil speichern",
+        "Find Rishta": "Partner finden",
+        "Who Liked Me": "Wer mich mag",
+        "My Matches": "Meine Matches",
+        "Search": "Suchen",
+        "Age": "Alter",
+        "Country": "Land",
+        "City": "Stadt",
+        "Education": "Ausbildung",
+        "Profession": "Beruf",
+        "Male": "Männlich",
+        "Female": "Weiblich",
+        "Pass": "Überspringen",
+        "Like": "Gefällt mir",
+        "Super Like": "Super-Like",
+        "Save Settings": "Einstellungen speichern",
+        "Notifications": "Benachrichtigungen",
+        "Dark Mode": "Dunkelmodus",
+        "Send Message": "Nachricht senden",
+        "Halal Chat": "Halal-Chat"
+    },
+
+
+    tr: {
+        "Create Account": "Hesap Oluştur",
+        "Login": "Giriş Yap",
+        "Back": "Geri",
+        "Full Name": "Ad Soyad",
+        "Email": "E-posta",
+        "Password": "Şifre",
+        "Profile": "Profil",
+        "Photos": "Fotoğraflar",
+        "Settings": "Ayarlar",
+        "Privacy": "Gizlilik",
+        "App Settings": "Uygulama Ayarları",
+        "Manage Purchases": "Satın Almaları Yönet",
+        "Logout": "Çıkış Yap",
+        "Save Profile": "Profili Kaydet",
+        "Find Rishta": "Eş Bul",
+        "Who Liked Me": "Beni Beğenenler",
+        "My Matches": "Eşleşmelerim",
+        "Search": "Ara",
+        "Age": "Yaş",
+        "Country": "Ülke",
+        "City": "Şehir",
+        "Education": "Eğitim",
+        "Profession": "Meslek",
+        "Male": "Erkek",
+        "Female": "Kadın",
+        "Pass": "Geç",
+        "Like": "Beğen",
+        "Super Like": "Süper Beğeni",
+        "Save Settings": "Ayarları Kaydet",
+        "Notifications": "Bildirimler",
+        "Dark Mode": "Karanlık Mod",
+        "Send Message": "Mesaj Gönder",
+        "Halal Chat": "Helal Sohbet"
+    },
+
+
+    hi: {
+        "Create Account": "खाता बनाएँ",
+        "Login": "लॉगिन",
+        "Back": "वापस",
+        "Full Name": "पूरा नाम",
+        "Email": "ईमेल",
+        "Password": "पासवर्ड",
+        "Profile": "प्रोफ़ाइल",
+        "Photos": "फ़ोटो",
+        "Settings": "सेटिंग्स",
+        "Privacy": "गोपनीयता",
+        "App Settings": "ऐप सेटिंग्स",
+        "Manage Purchases": "खरीदारी प्रबंधित करें",
+        "Logout": "लॉगआउट",
+        "Save Profile": "प्रोफ़ाइल सेव करें",
+        "Find Rishta": "रिश्ता खोजें",
+        "Who Liked Me": "किसने मुझे पसंद किया",
+        "My Matches": "मेरे मैच",
+        "Search": "खोजें",
+        "Age": "उम्र",
+        "Country": "देश",
+        "City": "शहर",
+        "Education": "शिक्षा",
+        "Profession": "पेशा",
+        "Male": "पुरुष",
+        "Female": "महिला",
+        "Pass": "छोड़ें",
+        "Like": "पसंद",
+        "Super Like": "सुपर लाइक",
+        "Save Settings": "सेटिंग्स सेव करें",
+        "Notifications": "सूचनाएँ",
+        "Dark Mode": "डार्क मोड",
+        "Send Message": "संदेश भेजें",
+        "Halal Chat": "हलाल चैट"
+    },
+
+
+    fa: {
+        "Create Account": "ایجاد حساب",
+        "Login": "ورود",
+        "Back": "بازگشت",
+        "Full Name": "نام کامل",
+        "Email": "ایمیل",
+        "Password": "رمز عبور",
+        "Profile": "پروفایل",
+        "Photos": "عکس‌ها",
+        "Settings": "تنظیمات",
+        "Privacy": "حریم خصوصی",
+        "App Settings": "تنظیمات برنامه",
+        "Manage Purchases": "مدیریت خریدها",
+        "Logout": "خروج",
+        "Save Profile": "ذخیره پروفایل",
+        "Find Rishta": "پیدا کردن همسر",
+        "Who Liked Me": "چه کسی من را پسندیده",
+        "My Matches": "تطابق‌های من",
+        "Search": "جستجو",
+        "Age": "سن",
+        "Country": "کشور",
+        "City": "شهر",
+        "Education": "تحصیلات",
+        "Profession": "شغل",
+        "Male": "مرد",
+        "Female": "زن",
+        "Pass": "رد کردن",
+        "Like": "پسندیدن",
+        "Super Like": "پسند ویژه",
+        "Save Settings": "ذخیره تنظیمات",
+        "Notifications": "اعلان‌ها",
+        "Dark Mode": "حالت تاریک",
+        "Send Message": "ارسال پیام",
+        "Halal Chat": "گفتگوی حلال"
+    },
+
+
+    sq: {
+        "Create Account": "Krijo llogari",
+        "Login": "Hyr",
+        "Back": "Kthehu",
+        "Full Name": "Emri i plotë",
+        "Email": "Email",
+        "Password": "Fjalëkalimi",
+        "Profile": "Profili",
+        "Photos": "Fotot",
+        "Settings": "Cilësimet",
+        "Privacy": "Privatësia",
+        "App Settings": "Cilësimet e aplikacionit",
+        "Manage Purchases": "Menaxho blerjet",
+        "Logout": "Dil",
+        "Save Profile": "Ruaj profilin",
+        "Find Rishta": "Gjej partner",
+        "Who Liked Me": "Kush më pëlqeu",
+        "My Matches": "Përputhjet e mia",
+        "Search": "Kërko",
+        "Age": "Mosha",
+        "Country": "Shteti",
+        "City": "Qyteti",
+        "Education": "Arsimi",
+        "Profession": "Profesioni",
+        "Male": "Mashkull",
+        "Female": "Femër",
+        "Pass": "Kalo",
+        "Like": "Pëlqej",
+        "Super Like": "Super Pëlqim",
+        "Save Settings": "Ruaj cilësimet",
+        "Notifications": "Njoftimet",
+        "Dark Mode": "Modaliteti i errët",
+        "Send Message": "Dërgo mesazh",
+        "Halal Chat": "Bisedë Halal"
+    }
+
+};
+
+
+/* =========================================================
+   FALLBACK TRANSLATIONS
+   =========================================================
+   For languages not yet manually translated above,
+   English is safely used as fallback instead of breaking
+   the application.
+   ========================================================= */
+
+const HR_EXTRA_LANGUAGE_CODES = [
+    "nl",
+    "el",
+    "pl",
+    "ro",
+    "zh",
+    "ru",
+    "pt",
+    "ms",
+    "id",
+    "fil",
+    "th",
+    "so",
+    "sw",
+    "bn",
+    "ug",
+    "ng",
+    "fi",
+    "cs",
+    "sl",
+    "sk",
+    "bg",
+    "hu"
 ];
 
-/* =========================================================
-   DEFAULT DATA
-   ========================================================= */
+HR_EXTRA_LANGUAGE_CODES.forEach(code => {
 
-const DEFAULT_SETTINGS = {
-    notifications: true,
-    darkMode: false,
-    language: "en"
-};
-
-const DEFAULT_PRIVACY = {
-    profileVisibility: "members",
-    showOnline: true,
-    allowMessages: true,
-    photoAfterMatch: false
-};
-
-const DEFAULT_PURCHASE = {
-    active: false,
-    package: "Free",
-    price: 0,
-    currency: "USD",
-    paymentMethod: "",
-    activatedAt: null,
-    expiresAt: null
-};
-
-/* =========================================================
-   DEMO PROFILES
-   ========================================================= */
-
-const DEMO_PROFILES = [
-    {
-        id: "demo_1",
-        fullName: "Ayesha",
-        age: 27,
-        gender: "female",
-        country: "Saudi Arabia",
-        city: "Riyadh",
-        education: "Bachelor",
-        profession: "Teacher",
-        maritalStatus: "never_married",
-        religiousLevel: "practicing",
-        religion: "islam",
-        sect: "sunni",
-        seriousIntent: true,
-        about: "Looking for a respectful and serious marriage."
-    },
-    {
-        id: "demo_2",
-        fullName: "Maryam",
-        age: 25,
-        gender: "female",
-        country: "Pakistan",
-        city: "Lahore",
-        education: "Master's",
-        profession: "Designer",
-        maritalStatus: "never_married",
-        religiousLevel: "practicing",
-        religion: "islam",
-        sect: "sunni",
-        seriousIntent: true,
-        about: "Family oriented and serious about marriage."
-    },
-    {
-        id: "demo_3",
-        fullName: "Fatima",
-        age: 29,
-        gender: "female",
-        country: "UAE",
-        city: "Dubai",
-        education: "Bachelor",
-        profession: "Accountant",
-        maritalStatus: "never_married",
-        religiousLevel: "moderate",
-        religion: "islam",
-        sect: "shia",
-        seriousIntent: true,
-        about: "Interested in a respectful and genuine relationship."
-    },
-    {
-        id: "demo_4",
-        fullName: "Omar",
-        age: 30,
-        gender: "male",
-        country: "Saudi Arabia",
-        city: "Jeddah",
-        education: "Bachelor",
-        profession: "Engineer",
-        maritalStatus: "never_married",
-        religiousLevel: "practicing",
-        religion: "islam",
-        sect: "sunni",
-        seriousIntent: true,
-        about: "Serious about finding a compatible life partner."
-    },
-    {
-        id: "demo_5",
-        fullName: "Ahmed",
-        age: 32,
-        gender: "male",
-        country: "Pakistan",
-        city: "Islamabad",
-        education: "Master's",
-        profession: "Software Engineer",
-        maritalStatus: "never_married",
-        religiousLevel: "practicing",
-        religion: "islam",
-        sect: "sunni",
-        seriousIntent: true,
-        about: "Looking for a serious halal marriage."
+    if (!HR_TRANSLATIONS[code]) {
+        HR_TRANSLATIONS[code] = {
+            ...HR_TRANSLATIONS.en
+        };
     }
-];
+
+});
+
 
 /* =========================================================
-   CURRENT STATE
+   LANGUAGE SELECT SETUP
    ========================================================= */
 
-let currentSwipeProfileId = null;
-let currentChatProfileId = null;
-
-/* =========================================================
-   STORAGE HELPERS
-   ========================================================= */
-
-function save(key, value) {
-    try {
-        localStorage.setItem(
-            key,
-            JSON.stringify(value)
-        );
-    } catch (error) {
-        console.error("Save error:", error);
-        alert(
-            "Unable to save this information on this device."
-        );
-    }
-}
-
-function load(key, fallback = null) {
-    try {
-        const value =
-            localStorage.getItem(key);
-
-        return value
-            ? JSON.parse(value)
-            : fallback;
-
-    } catch (error) {
-        console.error(
-            "Storage error:",
-            error
-        );
-
-        return fallback;
-    }
-}
-
-function remove(key) {
-    localStorage.removeItem(key);
-}
-
-function generateId(prefix = "id") {
-    return (
-        prefix +
-        "_" +
-        Date.now().toString(36) +
-        "_" +
-        Math.random()
-            .toString(36)
-            .substring(2, 8)
-    );
-}
-
-function todayKey() {
-    return new Date()
-        .toISOString()
-        .slice(0, 10);
-}
-
-function getCurrentUser() {
-    return load(
-        STORAGE.USER,
-        null
-    );
-}
-
-function isLoggedIn() {
-    return !!getCurrentUser();
-}
-
-/* =========================================================
-   LANGUAGE HELPERS
-   ========================================================= */
-
-function getLanguageByCode(code) {
-
-    return LANGUAGES.find(
-        language =>
-            language.code === code
-    );
-}
-
-function getCurrentLanguage() {
-
-    const settings =
-        load(
-            STORAGE.SETTINGS,
-            DEFAULT_SETTINGS
-        );
-
-    const code =
-        settings.language || "en";
-
-    return (
-        getLanguageByCode(code) ||
-        getLanguageByCode("en")
-    );
-}
-
-/* =========================================================
-   BUILD LANGUAGE DROPDOWN
-   ========================================================= */
-
-function setupLanguageSelector() {
+function setupHalalRishtaLanguageDropdown() {
 
     const select =
         document.getElementById(
@@ -434,2716 +888,426 @@ function setupLanguageSelector() {
 
     if (!select) return;
 
-    const settings =
-        load(
-            STORAGE.SETTINGS,
-            DEFAULT_SETTINGS
-        );
+    const currentSettings =
+        typeof load === "function"
+            ? load(
+                STORAGE.SETTINGS,
+                DEFAULT_SETTINGS
+            )
+            : {
+                language: "en"
+            };
 
     const savedLanguage =
-        settings.language || "en";
+        currentSettings.language || "en";
 
     select.innerHTML = "";
 
-    LANGUAGES.forEach(language => {
+    Object.keys(
+        HALAL_RISHTA_LANGUAGES
+    ).forEach(code => {
 
         const option =
             document.createElement("option");
 
-        option.value =
-            language.code;
+        option.value = code;
 
         option.textContent =
-            language.nativeName;
-
-        option.title =
-            language.name;
-
-        if (
-            language.code ===
-            savedLanguage
-        ) {
-            option.selected = true;
-        }
+            HALAL_RISHTA_LANGUAGES[code].name;
 
         select.appendChild(option);
+
     });
 
-    select.addEventListener(
-        "change",
-        function () {
+    select.value =
+        HALAL_RISHTA_LANGUAGES[savedLanguage]
+            ? savedLanguage
+            : "en";
 
-            saveLanguage(
-                this.value
-            );
+    select.onchange = function() {
 
-            applyLanguageDirection();
+        changeHalalRishtaLanguage(
+            this.value
+        );
 
-            alert(
-                "Language preference saved."
-            );
-        }
-    );
+    };
+
 }
+
 
 /* =========================================================
    SAVE LANGUAGE
    ========================================================= */
 
-function saveLanguage(language) {
+function changeHalalRishtaLanguage(language) {
 
-    const validLanguage =
-        getLanguageByCode(language);
-
-    if (!validLanguage) {
-
-        console.warn(
-            "Unsupported language:",
-            language
-        );
-
-        return;
+    if (
+        !HALAL_RISHTA_LANGUAGES[language]
+    ) {
+        language = "en";
     }
 
     const settings =
-        load(
-            STORAGE.SETTINGS,
-            DEFAULT_SETTINGS
-        );
+        typeof load === "function"
+            ? load(
+                STORAGE.SETTINGS,
+                DEFAULT_SETTINGS
+            )
+            : {
+                ...DEFAULT_SETTINGS
+            };
 
     settings.language =
-        validLanguage.code;
+        language;
 
-    save(
-        STORAGE.SETTINGS,
-        settings
-    );
-
-    applyLanguageDirection();
-}
-
-/* =========================================================
-   LANGUAGE DIRECTION
-   ========================================================= */
-
-function applyLanguageDirection() {
-
-    const language =
-        getCurrentLanguage();
-
-    if (!language) return;
-
-    const rtlLanguages = [
-        "ar",
-        "fa"
-    ];
-
-    const isRTL =
-        rtlLanguages.includes(
-            language.code
-        );
-
-    document.documentElement.lang =
-        language.code;
-
-    document.documentElement.dir =
-        isRTL
-            ? "rtl"
-            : "ltr";
-}
-
-/* =========================================================
-   PREMIUM
-   ========================================================= */
-
-function isPremium() {
-
-    const purchase =
-        load(
-            STORAGE.PURCHASE,
-            DEFAULT_PURCHASE
-        );
-
-    if (!purchase.active) {
-        return false;
-    }
-
-    if (purchase.expiresAt) {
-
-        return (
-            new Date(
-                purchase.expiresAt
-            ) > new Date()
-        );
-    }
-
-    return true;
-}
-
-/* =========================================================
-   PAGE NAVIGATION
-   ========================================================= */
-
-function showPage(pageId) {
-
-    document
-        .querySelectorAll(".page")
-        .forEach(page => {
-
-            page.classList.remove(
-                "active"
-            );
-        });
-
-    const page =
-        document.getElementById(
-            pageId
-        );
-
-    if (!page) {
-
-        console.warn(
-            "Page not found:",
-            pageId
-        );
-
-        return;
-    }
-
-    page.classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-    switch (pageId) {
-
-        case "app":
-            updateDashboard();
-            break;
-
-        case "swipe":
-            loadSwipeProfile();
-            break;
-
-        case "likes":
-            renderLikes();
-            break;
-
-        case "matches":
-            renderMatches();
-            break;
-
-        case "chat":
-            renderChat();
-            break;
-
-        case "photos":
-            renderPhotos();
-            break;
-
-        case "purchases":
-            openPurchases();
-            break;
-
-        case "guardian":
-            loadGuardian();
-            break;
-    }
-}
-
-/* =========================================================
-   ACCOUNT CREATION
-   ========================================================= */
-
-function createAccount() {
-
-    const form =
-        document.querySelector(
-            "#register form"
-        );
-
-    if (!form) return;
-
-    const inputs =
-        form.querySelectorAll(
-            "input"
-        );
-
-    const fullName =
-        inputs[0]?.value.trim() || "";
-
-    const email =
-        inputs[1]
-            ?.value
-            .trim()
-            .toLowerCase() || "";
-
-    const password =
-        inputs[2]?.value || "";
-
-    if (
-        !fullName ||
-        !email ||
-        !password
-    ) {
-
-        alert(
-            "Please complete all fields."
-        );
-
-        return;
-    }
-
-    if (password.length < 6) {
-
-        alert(
-            "Password must be at least 6 characters."
-        );
-
-        return;
-    }
-
-    const existing =
-        load(
-            STORAGE.ACCOUNT,
-            null
-        );
-
-    if (
-        existing &&
-        existing.email === email
-    ) {
-
-        alert(
-            "An account with this email already exists."
-        );
-
-        showPage("login");
-
-        return;
-    }
-
-    const account = {
-
-        id: generateId("user"),
-
-        fullName,
-
-        email,
-
-        password
-    };
-
-    save(
-        STORAGE.ACCOUNT,
-        account
-    );
-
-    save(
-        STORAGE.USER,
-        {
-            id: account.id,
-            fullName:
-                account.fullName,
-            email:
-                account.email
-        }
-    );
-
-    save(
-        STORAGE.PROFILE,
-        {
-            id: account.id,
-            fullName,
-            age: "",
-            gender: "",
-            country: "",
-            city: "",
-            education: "",
-            profession: "",
-            maritalStatus: "",
-            religiousLevel: "",
-            phone: "",
-            about: "",
-            religion: "islam",
-            sect: "",
-            seriousIntent: false
-        }
-    );
-
-    save(
-        STORAGE.SETTINGS,
-        {
-            ...DEFAULT_SETTINGS,
-            language:
-                getCurrentLanguage()
-                    ?.code || "en"
-        }
-    );
-
-    save(
-        STORAGE.PRIVACY,
-        DEFAULT_PRIVACY
-    );
-
-    save(
-        STORAGE.PURCHASE,
-        DEFAULT_PURCHASE
-    );
-
-    resetActivity();
-
-    alert(
-        "Account created successfully."
-    );
-
-    showPage("app");
-}
-
-/* =========================================================
-   LOGIN
-   ========================================================= */
-
-function loginUser() {
-
-    const form =
-        document.querySelector(
-            "#login form"
-        );
-
-    if (!form) return;
-
-    const inputs =
-        form.querySelectorAll(
-            "input"
-        );
-
-    const email =
-        inputs[0]
-            ?.value
-            .trim()
-            .toLowerCase() || "";
-
-    const password =
-        inputs[1]?.value || "";
-
-    const account =
-        load(
-            STORAGE.ACCOUNT,
-            null
-        );
-
-    if (!account) {
-
-        alert(
-            "No account found. Please create an account first."
-        );
-
-        showPage("register");
-
-        return;
-    }
-
-    if (
-        account.email !== email ||
-        account.password !== password
-    ) {
-
-        alert(
-            "Incorrect email or password."
-        );
-
-        return;
-    }
-
-    save(
-        STORAGE.USER,
-        {
-            id: account.id,
-            fullName:
-                account.fullName,
-            email:
-                account.email
-        }
-    );
-
-    if (
-        !load(
-            STORAGE.PROFILE
-        )
-    ) {
+    if (typeof save === "function") {
 
         save(
-            STORAGE.PROFILE,
-            {
-                id: account.id,
-                fullName:
-                    account.fullName,
-                age: "",
-                gender: "",
-                country: "",
-                city: "",
-                education: "",
-                profession: "",
-                maritalStatus: "",
-                religiousLevel: "",
-                phone: "",
-                about: "",
-                religion: "islam",
-                sect: "",
-                seriousIntent: false
-            }
-        );
-    }
-
-    alert(
-        "Login successful."
-    );
-
-    showPage("app");
-}
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
-
-function logoutUser() {
-
-    remove(
-        STORAGE.USER
-    );
-
-    currentSwipeProfileId =
-        null;
-
-    currentChatProfileId =
-        null;
-
-    showPage("home");
-}
-
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
-
-function updateDashboard() {
-
-    const user =
-        getCurrentUser();
-
-    if (!user) {
-
-        showPage("login");
-
-        return;
-    }
-
-    const emailElement =
-        document.getElementById(
-            "dashboardEmail"
+            STORAGE.SETTINGS,
+            settings
         );
 
-    if (emailElement) {
+    } else {
 
-        emailElement.textContent =
-            user.email;
+        localStorage.setItem(
+            "halal_rishta_settings",
+            JSON.stringify(settings)
+        );
+
     }
 
-    const premium =
-        isPremium();
+    applyHalalRishtaTranslation(
+        language
+    );
+
+}
+
+
+/* =========================================================
+   GET CURRENT LANGUAGE
+   ========================================================= */
+
+function getHalalRishtaLanguage() {
+
+    try {
+
+        const settings =
+            JSON.parse(
+                localStorage.getItem(
+                    "halal_rishta_settings"
+                )
+            );
+
+        return (
+            settings?.language ||
+            "en"
+        );
+
+    } catch (error) {
+
+        return "en";
+
+    }
+
+}
+
+
+/* =========================================================
+   RTL / LTR
+   ========================================================= */
+
+function applyHalalRishtaDirection(
+    language
+) {
+
+    const lang =
+        HALAL_RISHTA_LANGUAGES[language];
+
+    if (!lang) return;
+
+    document.documentElement.lang =
+        language;
+
+    document.documentElement.dir =
+        lang.dir;
+
+    document.body.dir =
+        lang.dir;
+
+}
+
+
+/* =========================================================
+   TRANSLATE TEXT NODE
+   ========================================================= */
+
+function translateHalalRishtaTextNode(
+    node,
+    dictionary
+) {
+
+    const original =
+        node.nodeValue.trim();
+
+    if (!original) return;
+
+    if (
+        dictionary[original]
+    ) {
+
+        node.nodeValue =
+            node.nodeValue.replace(
+                original,
+                dictionary[original]
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   TRANSLATE PLACEHOLDERS
+   ========================================================= */
+
+function translateHalalRishtaInputs(
+    dictionary
+) {
 
     document
         .querySelectorAll(
-            "[data-package-status]"
+            "input[placeholder], textarea[placeholder]"
         )
         .forEach(element => {
 
+            const original =
+                element.getAttribute(
+                    "placeholder"
+                );
+
+            if (
+                dictionary[original]
+            ) {
+
+                element.setAttribute(
+                    "placeholder",
+                    dictionary[original]
+                );
+
+            }
+
+        });
+
+}
+
+
+/* =========================================================
+   TRANSLATE SELECT OPTIONS
+   ========================================================= */
+
+function translateHalalRishtaOptions(
+    dictionary
+) {
+
+    document
+        .querySelectorAll(
+            "option"
+        )
+        .forEach(option => {
+
+            const original =
+                option.textContent.trim();
+
+            if (
+                dictionary[original]
+            ) {
+
+                option.textContent =
+                    dictionary[original];
+
+            }
+
+        });
+
+}
+
+
+/* =========================================================
+   TRANSLATE LABELS / BUTTONS / HEADINGS
+   ========================================================= */
+
+function translateHalalRishtaElements(
+    dictionary
+) {
+
+    const elements =
+        document.querySelectorAll(
+            "h1,h2,h3,h4,h5,h6,p,button,label,li,span"
+        );
+
+    elements.forEach(element => {
+
+        if (
+            element.children.length > 0
+        ) {
+
+            return;
+
+        }
+
+        const original =
+            element.textContent.trim();
+
+        if (
+            dictionary[original]
+        ) {
+
             element.textContent =
-                premium
-                    ? "Rishta Plus"
-                    : "Free";
-        });
+                dictionary[original];
 
-    const planName =
-        document.getElementById(
-            "planName"
-        );
-
-    const planDescription =
-        document.getElementById(
-            "planDescription"
-        );
-
-    if (planName) {
-
-        planName.textContent =
-            premium
-                ? "Rishta Plus"
-                : "Free";
-    }
-
-    if (planDescription) {
-
-        planDescription.textContent =
-            premium
-                ? "Unlimited daily swipes"
-                : "30 daily swipes";
-    }
-
-    updateSwipeDisplay();
-
-    updateSuperLikeDisplay();
-}
-
-/* =========================================================
-   SWIPE DATA
-   ========================================================= */
-
-function getSwipeData() {
-
-    const data =
-        load(
-            STORAGE.SWIPES,
-            {
-                date:
-                    todayKey(),
-                count: 0
-            }
-        );
-
-    if (
-        data.date !==
-        todayKey()
-    ) {
-
-        return {
-            date:
-                todayKey(),
-            count: 0
-        };
-    }
-
-    return data;
-}
-
-function getSuperLikeData() {
-
-    const data =
-        load(
-            STORAGE.SUPERLIKES,
-            {
-                date:
-                    todayKey(),
-                count: 0
-            }
-        );
-
-    if (
-        data.date !==
-        todayKey()
-    ) {
-
-        return {
-            date:
-                todayKey(),
-            count: 0
-        };
-    }
-
-    return data;
-}
-
-/* =========================================================
-   SWIPE DISPLAY
-   ========================================================= */
-
-function updateSwipeDisplay() {
-
-    const data =
-        getSwipeData();
-
-    const text =
-        isPremium()
-            ? `${data.count} / Unlimited`
-            : `${data.count} / 30`;
-
-    const dashboard =
-        document.getElementById(
-            "swipeCount"
-        );
-
-    const swipePage =
-        document.getElementById(
-            "swipePageCount"
-        );
-
-    if (dashboard) {
-
-        dashboard.textContent =
-            text;
-    }
-
-    if (swipePage) {
-
-        swipePage.textContent =
-            text;
-    }
-}
-
-function updateSuperLikeDisplay() {
-
-    const data =
-        getSuperLikeData();
-
-    const text =
-        isPremium()
-            ? `${data.count} / 5`
-            : `${data.count} / 0`;
-
-    const dashboard =
-        document.getElementById(
-            "superLikeCount"
-        );
-
-    const swipePage =
-        document.getElementById(
-            "swipePageSuperLikes"
-        );
-
-    if (dashboard) {
-
-        dashboard.textContent =
-            text;
-    }
-
-    if (swipePage) {
-
-        swipePage.textContent =
-            text;
-    }
-}
-
-/* =========================================================
-   SWIPE LIMIT
-   ========================================================= */
-
-function canSwipe() {
-
-    if (isPremium()) {
-        return true;
-    }
-
-    const data =
-        getSwipeData();
-
-    if (data.count >= 30) {
-
-        alert(
-            "You have reached today's 30 free swipes. Upgrade to Rishta Plus for unlimited swipes."
-        );
-
-        return false;
-    }
-
-    return true;
-}
-
-function recordSwipe() {
-
-    const data =
-        getSwipeData();
-
-    data.count += 1;
-
-    save(
-        STORAGE.SWIPES,
-        data
-    );
-
-    updateSwipeDisplay();
-}
-
-/* =========================================================
-   SWIPE PROFILES
-   ========================================================= */
-
-function getSwipeProfiles() {
-
-    const profile =
-        load(
-            STORAGE.PROFILE,
-            {}
-        );
-
-    const liked =
-        load(
-            STORAGE.LIKES,
-            []
-        );
-
-    const passed =
-        load(
-            STORAGE.PASSES,
-            []
-        );
-
-    const excluded = [
-        profile.id,
-        ...liked.map(
-            item =>
-                item.profileId
-        ),
-        ...passed.map(
-            item =>
-                item.profileId
-        )
-    ];
-
-    return DEMO_PROFILES.filter(
-        person =>
-            !excluded.includes(
-                person.id
-            )
-    );
-}
-
-/* =========================================================
-   LOAD SWIPE PROFILE
-   ========================================================= */
-
-function loadSwipeProfile() {
-
-    const profiles =
-        getSwipeProfiles();
-
-    const card =
-        document.getElementById(
-            "swipeCard"
-        );
-
-    const name =
-        document.getElementById(
-            "swipeName"
-        );
-
-    const details =
-        document.getElementById(
-            "swipeDetails"
-        );
-
-    const about =
-        document.getElementById(
-            "swipeAbout"
-        );
-
-    const intent =
-        document.getElementById(
-            "swipeIntent"
-        );
-
-    const photo =
-        document.getElementById(
-            "swipePhoto"
-        );
-
-    if (!name) return;
-
-    if (!profiles.length) {
-
-        currentSwipeProfileId =
-            null;
-
-        name.textContent =
-            "No profiles available";
-
-        details.textContent =
-            "New compatible members will appear here.";
-
-        about.textContent =
-            "Try changing your search preferences or check again later.";
-
-        if (photo) {
-
-            photo.textContent =
-                "👤";
         }
 
-        if (intent) {
-
-            intent.style.display =
-                "none";
-        }
-
-        if (card) {
-
-            card.classList.remove(
-                "has-profile"
-            );
-        }
-
-        updateSwipeDisplay();
-
-        updateSuperLikeDisplay();
-
-        return;
-    }
-
-    const profile =
-        profiles[0];
-
-    currentSwipeProfileId =
-        profile.id;
-
-    if (card) {
-
-        card.classList.add(
-            "has-profile"
-        );
-    }
-
-    name.textContent =
-        profile.fullName;
-
-    details.textContent =
-        `${profile.age} • ${profile.city}, ${profile.country} • ${profile.profession}`;
-
-    about.textContent =
-        profile.about ||
-        "Looking for a serious marriage.";
-
-    if (intent) {
-
-        intent.style.display =
-            profile.seriousIntent
-                ? "inline-block"
-                : "none";
-    }
-
-    if (photo) {
-
-        photo.innerHTML =
-            `
-                <span
-                    style="font-size:64px;"
-                >
-                    👤
-                </span>
-            `;
-    }
-
-    updateSwipeDisplay();
-
-    updateSuperLikeDisplay();
-}
-
-/* =========================================================
-   SWIPE PASS
-   ========================================================= */
-
-function swipePass() {
-
-    if (!currentSwipeProfileId) {
-
-        loadSwipeProfile();
-
-        return;
-    }
-
-    if (!canSwipe()) {
-        return;
-    }
-
-    const profileId =
-        currentSwipeProfileId;
-
-    const passes =
-        load(
-            STORAGE.PASSES,
-            []
-        );
-
-    passes.push({
-
-        id:
-            generateId("pass"),
-
-        profileId,
-
-        createdAt:
-            new Date()
-                .toISOString()
     });
 
-    save(
-        STORAGE.PASSES,
-        passes
-    );
-
-    recordSwipe();
-
-    currentSwipeProfileId =
-        null;
-
-    loadSwipeProfile();
 }
 
+
 /* =========================================================
-   SWIPE LIKE
+   FULL TRANSLATION
    ========================================================= */
 
-function swipeLike() {
-
-    if (!currentSwipeProfileId) {
-
-        loadSwipeProfile();
-
-        return;
-    }
-
-    if (!canSwipe()) {
-        return;
-    }
-
-    const profileId =
-        currentSwipeProfileId;
-
-    const likes =
-        load(
-            STORAGE.LIKES,
-            []
-        );
+function applyHalalRishtaTranslation(
+    language
+) {
 
     if (
-        !likes.some(
-            item =>
-                item.profileId ===
-                profileId
-        )
+        !HALAL_RISHTA_LANGUAGES[language]
     ) {
-
-        likes.push({
-
-            id:
-                generateId("like"),
-
-            profileId,
-
-            createdAt:
-                new Date()
-                    .toISOString()
-        });
-
-        save(
-            STORAGE.LIKES,
-            likes
-        );
+        language = "en";
     }
 
-    recordSwipe();
+    const dictionary =
+        HR_TRANSLATIONS[language] ||
+        HR_TRANSLATIONS.en;
 
-    createMatchIfNeeded(
-        profileId
+    applyHalalRishtaDirection(
+        language
     );
 
-    currentSwipeProfileId =
-        null;
-
-    loadSwipeProfile();
-
-    alert(
-        "❤️ Like sent."
+    translateHalalRishtaElements(
+        dictionary
     );
+
+    translateHalalRishtaInputs(
+        dictionary
+    );
+
+    translateHalalRishtaOptions(
+        dictionary
+    );
+
+    /* -----------------------------------------
+       Store selected language
+       ----------------------------------------- */
+
+    try {
+
+        const settings =
+            JSON.parse(
+                localStorage.getItem(
+                    "halal_rishta_settings"
+                )
+            ) || {};
+
+        settings.language =
+            language;
+
+        localStorage.setItem(
+            "halal_rishta_settings",
+            JSON.stringify(settings)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Language save error:",
+            error
+        );
+
+    }
+
 }
 
-/* =========================================================
-   SWIPE SUPER LIKE
-   ========================================================= */
-
-function swipeSuperLike() {
-
-    if (!currentSwipeProfileId) {
-
-        loadSwipeProfile();
-
-        return;
-    }
-
-    if (!isPremium()) {
-
-        alert(
-            "Super Likes are available with Rishta Plus. You can also earn Super Likes by watching a rewarded ad."
-        );
-
-        return;
-    }
-
-    const data =
-        getSuperLikeData();
-
-    if (data.count >= 5) {
-
-        alert(
-            "You have used today's 5 Super Likes."
-        );
-
-        return;
-    }
-
-    if (!canSwipe()) {
-        return;
-    }
-
-    data.count += 1;
-
-    save(
-        STORAGE.SUPERLIKES,
-        data
-    );
-
-    recordSwipe();
-
-    createMatchIfNeeded(
-        currentSwipeProfileId
-    );
-
-    currentSwipeProfileId =
-        null;
-
-    updateSuperLikeDisplay();
-
-    loadSwipeProfile();
-
-    alert(
-        "⭐ Super Like sent."
-    );
-}
 
 /* =========================================================
-   SEARCH
+   TRANSLATE DYNAMIC CONTENT
    ========================================================= */
 
-function searchProfiles() {
-
-    const results =
-        document.getElementById(
-            "searchResults"
-        );
-
-    if (!results) return;
-
-    const ageMin =
-        parseInt(
-            document.getElementById(
-                "ageMin"
-            )?.value
-        ) || 18;
-
-    const ageMax =
-        parseInt(
-            document.getElementById(
-                "ageMax"
-            )?.value
-        ) || 100;
-
-    const country =
-        document
-            .getElementById(
-                "searchCountry"
-            )
-            ?.value
-            .trim()
-            .toLowerCase() || "";
-
-    const city =
-        document
-            .getElementById(
-                "searchCity"
-            )
-            ?.value
-            .trim()
-            .toLowerCase() || "";
-
-    const religion =
-        document.getElementById(
-            "searchReligion"
-        )?.value || "";
-
-    const sect =
-        document.getElementById(
-            "searchSect"
-        )?.value || "";
-
-    const serious =
-        document.getElementById(
-            "seriousIntent"
-        )?.checked || false;
-
-    let profiles =
-        getSwipeProfiles();
-
-    profiles =
-        profiles.filter(
-            profile => {
-
-                if (
-                    profile.age <
-                    ageMin ||
-                    profile.age >
-                    ageMax
-                ) {
-                    return false;
-                }
-
-                if (
-                    country &&
-                    profile.country
-                        .toLowerCase() !==
-                    country
-                ) {
-                    return false;
-                }
-
-                if (
-                    city &&
-                    profile.city
-                        .toLowerCase() !==
-                    city
-                ) {
-                    return false;
-                }
-
-                if (
-                    religion &&
-                    profile.religion !==
-                    religion
-                ) {
-                    return false;
-                }
-
-                if (
-                    sect &&
-                    profile.sect !==
-                    sect
-                ) {
-                    return false;
-                }
-
-                if (
-                    serious &&
-                    !profile.seriousIntent
-                ) {
-                    return false;
-                }
-
-                return true;
-            }
-        );
-
-    if (!profiles.length) {
-
-        results.innerHTML =
-            `
-                <div class="card">
-                    <p>
-                        No matching profiles found.
-                    </p>
-                </div>
-            `;
-
-        return;
-    }
-
-    results.innerHTML =
-        profiles
-            .map(
-                profile =>
-                    `
-                        <div class="result-card">
-
-                            <h3>
-                                ${escapeHTML(
-                                    profile.fullName
-                                )}
-                            </h3>
-
-                            <p>
-                                ${profile.age} •
-                                ${escapeHTML(
-                                    profile.city
-                                )},
-                                ${escapeHTML(
-                                    profile.country
-                                )}
-                            </p>
-
-                            <p>
-                                ${escapeHTML(
-                                    profile.profession ||
-                                    "Not specified"
-                                )}
-                            </p>
-
-                            ${
-                                profile.seriousIntent
-                                    ? `
-                                        <p>
-                                            💍 Serious Marriage Intent
-                                        </p>
-                                    `
-                                    : ""
-                            }
-
-                            <p>
-                                ${escapeHTML(
-                                    profile.about ||
-                                    ""
-                                )}
-                            </p>
-
-                            <div
-                                class="swipe-actions"
-                            >
-
-                                <button
-                                    type="button"
-                                    class="secondary"
-                                    onclick="passProfile('${profile.id}')"
-                                >
-                                    ❌ Pass
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="primary"
-                                    onclick="likeProfile('${profile.id}')"
-                                >
-                                    ❤️ Like
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="primary"
-                                    onclick="superLikeProfile('${profile.id}')"
-                                >
-                                    ⭐ Super Like
-                                </button>
-
-                            </div>
-
-                        </div>
-                    `
-            )
-            .join("");
-}
-
-/* =========================================================
-   SEARCH LIKE
-   ========================================================= */
-
-function likeProfile(profileId) {
-
-    if (!canSwipe()) return;
-
-    const likes =
-        load(
-            STORAGE.LIKES,
-            []
-        );
+function setupHalalRishtaTranslationObserver() {
 
     if (
-        likes.some(
-            item =>
-                item.profileId ===
-                profileId
-        )
+        typeof MutationObserver ===
+        "undefined"
     ) {
         return;
     }
 
-    likes.push({
-
-        id:
-            generateId("like"),
-
-        profileId,
-
-        createdAt:
-            new Date()
-                .toISOString()
-    });
-
-    save(
-        STORAGE.LIKES,
-        likes
-    );
-
-    recordSwipe();
-
-    createMatchIfNeeded(
-        profileId
-    );
-
-    alert(
-        "❤️ Like sent."
-    );
-
-    searchProfiles();
-}
-
-/* =========================================================
-   SEARCH PASS
-   ========================================================= */
-
-function passProfile(profileId) {
-
-    if (!canSwipe()) return;
-
-    const passes =
-        load(
-            STORAGE.PASSES,
-            []
-        );
-
-    if (
-        !passes.some(
-            item =>
-                item.profileId ===
-                profileId
-        )
-    ) {
-
-        passes.push({
-
-            id:
-                generateId("pass"),
-
-            profileId,
-
-            createdAt:
-                new Date()
-                    .toISOString()
-        });
-    }
-
-    save(
-        STORAGE.PASSES,
-        passes
-    );
-
-    recordSwipe();
-
-    searchProfiles();
-}
-
-/* =========================================================
-   SEARCH SUPER LIKE
-   ========================================================= */
-
-function superLikeProfile(profileId) {
-
-    if (!isPremium()) {
-
-        alert(
-            "Super Likes are available with Rishta Plus."
-        );
-
-        return;
-    }
-
-    const data =
-        getSuperLikeData();
-
-    if (data.count >= 5) {
-
-        alert(
-            "You have used today's 5 Super Likes."
-        );
-
-        return;
-    }
-
-    if (!canSwipe()) return;
-
-    data.count += 1;
-
-    save(
-        STORAGE.SUPERLIKES,
-        data
-    );
-
-    recordSwipe();
-
-    createMatchIfNeeded(
-        profileId
-    );
-
-    updateSuperLikeDisplay();
-
-    alert(
-        "⭐ Super Like sent."
-    );
-
-    searchProfiles();
-}
-
-/* =========================================================
-   REWARDED AD DEMO
-   ========================================================= */
-
-function watchRewardedAd() {
-
-    const data =
-        getSuperLikeData();
-
-    if (data.count >= 5) {
-
-        alert(
-            "You already have today's maximum of 5 Super Likes."
-        );
-
-        return;
-    }
-
-    data.count += 3;
-
-    if (data.count > 5) {
-        data.count = 5;
-    }
-
-    save(
-        STORAGE.SUPERLIKES,
-        data
-    );
-
-    updateSuperLikeDisplay();
-
-    alert(
-        "🎬 Demo reward completed. Super Likes added."
-    );
-}
-
-/* =========================================================
-   MATCH SYSTEM
-   ========================================================= */
-
-function createMatchIfNeeded(profileId) {
-
-    const matches =
-        load(
-            STORAGE.MATCHES,
-            []
-        );
-
-    const alreadyMatched =
-        matches.some(
-            match =>
-                match.profileId ===
-                profileId
-        );
-
-    if (alreadyMatched) {
-        return;
-    }
-
-    const profile =
-        DEMO_PROFILES.find(
-            person =>
-                person.id ===
-                profileId
-        );
-
-    if (!profile) return;
-
-    matches.push({
-
-        id:
-            generateId("match"),
-
-        profileId:
-            profile.id,
-
-        fullName:
-            profile.fullName,
-
-        createdAt:
-            new Date()
-                .toISOString()
-    });
-
-    save(
-        STORAGE.MATCHES,
-        matches
-    );
-}
-
-/* =========================================================
-   MATCHES
-   ========================================================= */
-
-function renderMatches() {
-
-    const container =
-        document.getElementById(
-            "matchesList"
-        );
-
-    if (!container) return;
-
-    const matches =
-        load(
-            STORAGE.MATCHES,
-            []
-        );
-
-    if (!matches.length) {
-
-        container.innerHTML =
-            `
-                <p class="small">
-                    No matches yet. Start finding a Rishta.
-                </p>
-            `;
-
-        return;
-    }
-
-    container.innerHTML =
-        matches
-            .map(
-                match =>
-                    `
-                        <div class="result-card">
-
-                            <h3>
-                                💚
-                                ${escapeHTML(
-                                    match.fullName
-                                )}
-                            </h3>
-
-                            <p>
-                                You have a match.
-                            </p>
-
-                            <button
-                                type="button"
-                                class="primary"
-                                onclick="openChat('${match.profileId}')"
-                            >
-                                💬 Open Halal Chat
-                            </button>
-
-                        </div>
-                    `
-            )
-            .join("");
-}
-
-/* =========================================================
-   LIKES
-   ========================================================= */
-
-function renderLikes() {
-
-    const container =
-        document.getElementById(
-            "likesList"
-        );
-
-    if (!container) return;
-
-    const likes =
-        load(
-            STORAGE.LIKES,
-            []
-        );
-
-    if (!likes.length) {
-
-        container.innerHTML =
-            `
-                <p class="small">
-                    Your likes will appear here.
-                </p>
-            `;
-
-        return;
-    }
-
-    container.innerHTML =
-        likes
-            .map(
-                like => {
-
-                    const profile =
-                        DEMO_PROFILES.find(
-                            person =>
-                                person.id ===
-                                like.profileId
-                        );
-
-                    if (!profile)
-                        return "";
-
-                    return `
-                        <div class="result-card">
-
-                            <h3>
-                                ❤️
-                                ${escapeHTML(
-                                    profile.fullName
-                                )}
-                            </h3>
-
-                            <p>
-                                ${profile.age} •
-                                ${escapeHTML(
-                                    profile.city
-                                )},
-                                ${escapeHTML(
-                                    profile.country
-                                )}
-                            </p>
-
-                            <button
-                                type="button"
-                                class="primary"
-                                onclick="openChat('${profile.id}')"
-                            >
-                                💬 Chat
-                            </button>
-
-                        </div>
-                    `;
-                }
-            )
-            .join("");
-}
-
-/* =========================================================
-   CHAT
-   ========================================================= */
-
-function openChat(profileId) {
-
-    const matches =
-        load(
-            STORAGE.MATCHES,
-            []
-        );
-
-    const isMatch =
-        matches.some(
-            match =>
-                match.profileId ===
-                profileId
-        );
-
-    if (!isMatch) {
-
-        alert(
-            "Chat is available after a mutual match."
-        );
-
-        return;
-    }
-
-    currentChatProfileId =
-        profileId;
-
-    showPage("chat");
-}
-
-/* =========================================================
-   RENDER CHAT
-   ========================================================= */
-
-function renderChat() {
-
-    const container =
-        document.getElementById(
-            "chatMessages"
-        );
-
-    if (!container) return;
-
-    if (!currentChatProfileId) {
-
-        container.innerHTML =
-            `
-                <p class="small">
-                    Select a match to start chatting.
-                </p>
-            `;
-
-        return;
-    }
-
-    const allMessages =
-        load(
-            STORAGE.MESSAGES,
-            []
-        );
-
-    const messages =
-        allMessages.filter(
-            message =>
-                message.profileId ===
-                currentChatProfileId
-        );
-
-    if (!messages.length) {
-
-        container.innerHTML =
-            `
-                <p class="small">
-                    No messages yet. Start with a respectful message.
-                </p>
-            `;
-
-        return;
-    }
-
-    container.innerHTML =
-        messages
-            .map(
-                message =>
-                    `
-                        <div
-                            class="chat-message"
-                        >
-
-                            <strong>
-                                ${
-                                    message.sender ===
-                                    "me"
-                                        ? "You"
-                                        : "Match"
-                                }
-                            </strong>
-
-                            <p>
-                                ${escapeHTML(
-                                    message.text
-                                )}
-                            </p>
-
-                        </div>
-                    `
-            )
-            .join("");
-}
-
-/* =========================================================
-   SEND MESSAGE
-   ========================================================= */
-
-function sendMessage() {
-
-    if (!currentChatProfileId) {
-
-        alert(
-            "Please open a match first."
-        );
-
-        return;
-    }
-
-    const input =
-        document.getElementById(
-            "chatMessage"
-        );
-
-    if (!input) return;
-
-    const text =
-        input.value.trim();
-
-    if (!text) {
-
-        alert(
-            "Please write a message."
-        );
-
-        return;
-    }
-
-    const messages =
-        load(
-            STORAGE.MESSAGES,
-            []
-        );
-
-    messages.push({
-
-        id:
-            generateId("message"),
-
-        profileId:
-            currentChatProfileId,
-
-        sender:
-            "me",
-
-        text,
-
-        createdAt:
-            new Date()
-                .toISOString()
-    });
-
-    save(
-        STORAGE.MESSAGES,
-        messages
-    );
-
-    input.value = "";
-
-    renderChat();
-}
-
-/* =========================================================
-   HALAL ICEBREAKER
-   ========================================================= */
-
-function showHalalIcebreaker() {
-
-    const questions = [
-
-        "What qualities are most important to you in a life partner?",
-
-        "What does a successful marriage mean to you?",
-
-        "How important is family involvement in marriage?",
-
-        "What are your expectations about communication after marriage?",
-
-        "What values would you like to build your future family around?"
-    ];
-
-    const question =
-        questions[
-            Math.floor(
-                Math.random() *
-                questions.length
-            )
-        ];
-
-    const input =
-        document.getElementById(
-            "chatMessage"
-        );
-
-    if (input) {
-
-        input.value =
-            question;
-
-        input.focus();
-    }
-}
-
-/* =========================================================
-   PROFILE
-   ========================================================= */
-
-function openProfile() {
-
-    const profile =
-        load(
-            STORAGE.PROFILE,
-            {}
-        );
-
-    const fields = [
-
-        "fullName",
-        "age",
-        "gender",
-        "country",
-        "city",
-        "education",
-        "profession",
-        "maritalStatus",
-        "religiousLevel",
-        "phone",
-        "about"
-    ];
-
-    fields.forEach(
-        id => {
-
-            const element =
-                document.getElementById(
-                    id
+    const observer =
+        new MutationObserver(
+            function() {
+
+                const language =
+                    getHalalRishtaLanguage();
+
+                const dictionary =
+                    HR_TRANSLATIONS[language] ||
+                    HR_TRANSLATIONS.en;
+
+                translateHalalRishtaElements(
+                    dictionary
                 );
 
-            if (element) {
-
-                element.value =
-                    profile[id] ?? "";
-            }
-        }
-    );
-
-    showPage("profile");
-}
-
-/* =========================================================
-   UPDATE PROFILE
-   ========================================================= */
-
-function updateProfile() {
-
-    const oldProfile =
-        load(
-            STORAGE.PROFILE,
-            {}
-        );
-
-    const profile = {
-        ...oldProfile
-    };
-
-    const fields = [
-
-        "fullName",
-        "age",
-        "gender",
-        "country",
-        "city",
-        "education",
-        "profession",
-        "maritalStatus",
-        "religiousLevel",
-        "phone",
-        "about"
-    ];
-
-    fields.forEach(
-        id => {
-
-            const element =
-                document.getElementById(
-                    id
+                translateHalalRishtaInputs(
+                    dictionary
                 );
 
-            if (element) {
+                translateHalalRishtaOptions(
+                    dictionary
+                );
 
-                profile[id] =
-                    element.value.trim();
             }
-        }
-    );
-
-    if (
-        profile.age &&
-        Number(profile.age) < 18
-    ) {
-
-        alert(
-            "Users must be 18 or older."
         );
 
-        return;
-    }
-
-    if (!profile.fullName) {
-
-        alert(
-            "Please enter your full name."
-        );
-
-        return;
-    }
-
-    save(
-        STORAGE.PROFILE,
-        profile
-    );
-
-    const user =
-        getCurrentUser();
-
-    if (user) {
-
-        user.fullName =
-            profile.fullName ||
-            user.fullName;
-
-        save(
-            STORAGE.USER,
-            user
-        );
-    }
-
-    const account =
-        load(
-            STORAGE.ACCOUNT,
-            null
-        );
-
-    if (account) {
-
-        account.fullName =
-            profile.fullName ||
-            account.fullName;
-
-        save(
-            STORAGE.ACCOUNT,
-            account
-        );
-    }
-
-    alert(
-        "Profile saved successfully."
-    );
-
-    showPage("app");
-}
-
-/* =========================================================
-   PHOTOS
-   ========================================================= */
-
-function openPhotos() {
-
-    showPage("photos");
-
-    renderPhotos();
-}
-
-function renderPhotos() {
-
-    const container =
-        document.getElementById(
-            "photosList"
-        );
-
-    if (!container) return;
-
-    const photos =
-        load(
-            STORAGE.PHOTOS,
-            []
-        );
-
-    if (!photos.length) {
-
-        container.innerHTML =
-            `
-                <p>
-                    No photos uploaded yet.
-                </p>
-            `;
-
-        return;
-    }
-
-    container.innerHTML =
-        photos
-            .map(
-                photo =>
-                    `
-                        <div
-                            class="photo-item"
-                        >
-
-                            <img
-                                src="${photo.data}"
-                                alt="Profile photo"
-                                style="
-                                    max-width:100%;
-                                    border-radius:12px;
-                                "
-                            >
-
-                            <button
-                                type="button"
-                                class="secondary"
-                                onclick="deletePhoto('${photo.id}')"
-                            >
-                                Delete
-                            </button>
-
-                        </div>
-                    `
-            )
-            .join("");
-}
-
-function addPhoto(file) {
-
-    if (!file) return;
-
-    if (
-        file.size >
-        5 * 1024 * 1024
-    ) {
-
-        alert(
-            "Maximum 5MB per image."
-        );
-
-        return;
-    }
-
-    if (
-        !file.type.startsWith(
-            "image/"
-        )
-    ) {
-
-        alert(
-            "Please select an image file."
-        );
-
-        return;
-    }
-
-    const photos =
-        load(
-            STORAGE.PHOTOS,
-            []
-        );
-
-    if (photos.length >= 6) {
-
-        alert(
-            "Maximum 6 photos allowed."
-        );
-
-        return;
-    }
-
-    const reader =
-        new FileReader();
-
-    reader.onload =
-        function(event) {
-
-            photos.push({
-
-                id:
-                    generateId("photo"),
-
-                data:
-                    event.target.result,
-
-                createdAt:
-                    new Date()
-                        .toISOString()
-            });
-
-            save(
-                STORAGE.PHOTOS,
-                photos
-            );
-
-            renderPhotos();
-        };
-
-    reader.readAsDataURL(file);
-}
-
-function deletePhoto(photoId) {
-
-    const photos =
-        load(
-            STORAGE.PHOTOS,
-            []
-        );
-
-    const updated =
-        photos.filter(
-            photo =>
-                photo.id !==
-                photoId
-        );
-
-    save(
-        STORAGE.PHOTOS,
-        updated
-    );
-
-    renderPhotos();
-}
-
-/* =========================================================
-   SETTINGS
-   ========================================================= */
-
-function openSettings() {
-
-    const settings =
-        load(
-            STORAGE.SETTINGS,
-            DEFAULT_SETTINGS
-        );
-
-    const notifications =
-        document.getElementById(
-            "notifications"
-        );
-
-    const darkMode =
-        document.getElementById(
-            "darkMode"
-        );
-
-    if (notifications) {
-
-        notifications.checked =
-            !!settings.notifications;
-    }
-
-    if (darkMode) {
-
-        darkMode.checked =
-            !!settings.darkMode;
-    }
-
-    showPage("settings");
-}
-
-function saveSettings() {
-
-    const oldSettings =
-        load(
-            STORAGE.SETTINGS,
-            DEFAULT_SETTINGS
-        );
-
-    const settings = {
-
-        ...oldSettings,
-
-        notifications:
-            document.getElementById(
-                "notifications"
-            )?.checked ?? true,
-
-        darkMode:
-            document.getElementById(
-                "darkMode"
-            )?.checked ?? false
-    };
-
-    save(
-        STORAGE.SETTINGS,
-        settings
-    );
-
-    applySavedSettings();
-
-    alert(
-        "Settings saved."
-    );
-}
-
-function applySavedSettings() {
-
-    const settings =
-        load(
-            STORAGE.SETTINGS,
-            DEFAULT_SETTINGS
-        );
-
-    document.body.classList.toggle(
-        "dark-mode",
-        !!settings.darkMode
-    );
-
-    setupLanguageSelector();
-
-    applyLanguageDirection();
-}
-
-/* =========================================================
-   PRIVACY
-   ========================================================= */
-
-function openPrivacy() {
-
-    const privacy =
-        load(
-            STORAGE.PRIVACY,
-            DEFAULT_PRIVACY
-        );
-
-    const visibility =
-        document.getElementById(
-            "profileVisibility"
-        );
-
-    const online =
-        document.getElementById(
-            "showOnline"
-        );
-
-    const messages =
-        document.getElementById(
-            "allowMessages"
-        );
-
-    const photoAfterMatch =
-        document.getElementById(
-            "photoAfterMatch"
-        );
-
-    if (visibility) {
-
-        visibility.value =
-            privacy.profileVisibility;
-    }
-
-    if (online) {
-
-        online.checked =
-            !!privacy.showOnline;
-    }
-
-    if (messages) {
-
-        messages.checked =
-            !!privacy.allowMessages;
-    }
-
-    if (photoAfterMatch) {
-
-        photoAfterMatch.checked =
-            !!privacy.photoAfterMatch;
-    }
-
-    showPage("privacy");
-}
-
-function savePrivacy() {
-
-    const privacy = {
-
-        profileVisibility:
-            document.getElementById(
-                "profileVisibility"
-            )?.value ||
-            "members",
-
-        showOnline:
-            document.getElementById(
-                "showOnline"
-            )?.checked ?? true,
-
-        allowMessages:
-            document.getElementById(
-                "allowMessages"
-            )?.checked ?? true,
-
-        photoAfterMatch:
-            document.getElementById(
-                "photoAfterMatch"
-            )?.checked ?? false
-    };
-
-    save(
-        STORAGE.PRIVACY,
-        privacy
-    );
-
-    alert(
-        "Privacy settings saved."
-    );
-}
-
-/* =========================================================
-   PURCHASES
-   ========================================================= */
-
-function openPurchases() {
-
-    const status =
-        document.getElementById(
-            "purchaseStatus"
-        );
-
-    if (status) {
-
-        if (isPremium()) {
-
-            status.textContent =
-                "Rishta Plus is active.";
-
-        } else {
-
-            status.textContent =
-                "No active subscription.";
-        }
-    }
-
-    showPage("purchases");
-}
-
-/* =========================================================
-   PACKAGE
-   ========================================================= */
-
-function openPackage() {
-
-    showPage("package");
-}
-
-function activatePackage() {
-
-    const message =
-        document.getElementById(
-            "paymentMessage"
-        );
-
-    if (message) {
-
-        message.textContent =
-            "Secure payment setup is required before Rishta Plus can be activated.";
-    }
-
-    alert(
-        "Secure payment is required. Rishta Plus will not be activated until a real payment provider verifies the $2/month subscription."
-    );
-}
-
-/* =========================================================
-   GUARDIAN
-   ========================================================= */
-
-function loadGuardian() {
-
-    const guardian =
-        load(
-            STORAGE.GUARDIAN,
-            null
-        );
-
-    if (!guardian) return;
-
-    const name =
-        document.getElementById(
-            "guardianName"
-        );
-
-    const email =
-        document.getElementById(
-            "guardianEmail"
-        );
-
-    if (name) {
-
-        name.value =
-            guardian.name || "";
-    }
-
-    if (email) {
-
-        email.value =
-            guardian.email || "";
-    }
-}
-
-function saveGuardian() {
-
-    const name =
-        document.getElementById(
-            "guardianName"
-        )?.value.trim();
-
-    const email =
-        document.getElementById(
-            "guardianEmail"
-        )?.value.trim();
-
-    if (!name || !email) {
-
-        alert(
-            "Please enter guardian name and email."
-        );
-
-        return;
-    }
-
-    save(
-        STORAGE.GUARDIAN,
+    observer.observe(
+        document.body,
         {
-            name,
-            email,
-            updatedAt:
-                new Date()
-                    .toISOString()
+            childList: true,
+            subtree: true
         }
     );
 
-    alert(
-        "Guardian information saved."
-    );
 }
+
 
 /* =========================================================
-   CUSTOM ICON
+   LANGUAGE INITIALIZATION
    ========================================================= */
 
-function openCustomIcon() {
+function initializeHalalRishtaLanguages() {
 
-    showPage(
-        "customIcon"
+    setupHalalRishtaLanguageDropdown();
+
+    const language =
+        getHalalRishtaLanguage();
+
+    applyHalalRishtaTranslation(
+        language
     );
+
+    setupHalalRishtaTranslationObserver();
+
 }
 
-function saveCustomIcon() {
-
-    const input =
-        document.getElementById(
-            "customIconInput"
-        );
-
-    if (
-        !input ||
-        !input.files.length
-    ) {
-
-        alert(
-            "Please select an image."
-        );
-
-        return;
-    }
-
-    const file =
-        input.files[0];
-
-    if (
-        file.size >
-        5 * 1024 * 1024
-    ) {
-
-        alert(
-            "Maximum 5MB."
-        );
-
-        return;
-    }
-
-    if (
-        !file.type.startsWith(
-            "image/"
-        )
-    ) {
-
-        alert(
-            "Please select an image file."
-        );
-
-        return;
-    }
-
-    const reader =
-        new FileReader();
-
-    reader.onload =
-        function(event) {
-
-            save(
-                STORAGE.CUSTOM_ICON,
-                {
-                    data:
-                        event.target.result,
-
-                    updatedAt:
-                        new Date()
-                            .toISOString()
-                }
-            );
-
-            alert(
-                "Custom icon saved."
-            );
-        };
-
-    reader.readAsDataURL(file);
-}
-
-/* =========================================================
-   RESET ACTIVITY
-   ========================================================= */
-
-function resetActivity() {
-
-    save(
-        STORAGE.SWIPES,
-        {
-            date:
-                todayKey(),
-            count: 0
-        }
-    );
-
-    save(
-        STORAGE.SUPERLIKES,
-        {
-            date:
-                todayKey(),
-            count: 0
-        }
-    );
-
-    save(
-        STORAGE.LIKES,
-        []
-    );
-
-    save(
-        STORAGE.PASSES,
-        []
-    );
-
-    save(
-        STORAGE.MATCHES,
-        []
-    );
-
-    save(
-        STORAGE.MESSAGES,
-        []
-    );
-}
-
-/* =========================================================
-   SECURITY / HTML ESCAPING
-   ========================================================= */
-
-function escapeHTML(value) {
-
-    return String(
-        value ?? ""
-    )
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-}
 
 /* =========================================================
    DOM READY
@@ -3151,68 +1315,40 @@ function escapeHTML(value) {
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    function() {
 
-        /* -----------------------------------------
-           SETTINGS
-           ----------------------------------------- */
+        initializeHalalRishtaLanguages();
 
-        applySavedSettings();
-
-        /* -----------------------------------------
-           PHOTO INPUT
-           ----------------------------------------- */
-
-        const photoInput =
-            document.getElementById(
-                "photoInput"
-            );
-
-        if (photoInput) {
-
-            photoInput.addEventListener(
-                "change",
-                function () {
-
-                    Array.from(
-                        this.files
-                    ).forEach(
-                        file =>
-                            addPhoto(file)
-                    );
-
-                    this.value = "";
-                }
-            );
-        }
-
-        /* -----------------------------------------
-           START APP
-           ----------------------------------------- */
-
-        if (isLoggedIn()) {
-
-            updateDashboard();
-        }
     }
 );
 
+
 /* =========================================================
-   GLOBAL ERROR REPORTING
+   PUBLIC LANGUAGE API
    ========================================================= */
 
-window.addEventListener(
-    "error",
-    function (event) {
+window.HalalRishtaLanguage = {
 
-        console.error(
-            "Halal Rishta JavaScript Error:",
-            event.error ||
-            event.message
+    set: function(language) {
+
+        changeHalalRishtaLanguage(
+            language
         );
-    }
-);
+
+    },
+
+    get: function() {
+
+        return getHalalRishtaLanguage();
+
+    },
+
+    languages:
+        HALAL_RISHTA_LANGUAGES
+
+};
+
 
 /* =========================================================
-   END
+   END — TRANSLATION SYSTEM
    ========================================================= */
