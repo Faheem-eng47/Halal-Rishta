@@ -1,135 +1,62 @@
 /* =========================================================
    HALAL RISHTA
-   MAIN JAVASCRIPT
-   Swipe + Like + Match + Chat + Profile + Settings
-   Compatible with current index.html
+   Complete script.js
+   Matches the current index.html
    ========================================================= */
 
+"use strict";
 
 /* =========================================================
    STORAGE
    ========================================================= */
 
 const STORAGE = {
-
     USER: "halal_rishta_user",
-
     PROFILE: "halal_rishta_profile",
-
-    PHOTOS: "halal_rishta_photos",
-
     SETTINGS: "halal_rishta_settings",
-
     PRIVACY: "halal_rishta_privacy",
-
     PURCHASE: "halal_rishta_purchase",
-
     SWIPES: "halal_rishta_swipes",
-
-    SUPER_LIKES: "halal_rishta_super_likes",
-
+    SUPERLIKES: "halal_rishta_superlikes",
     LIKES: "halal_rishta_likes",
-
+    PASSES: "halal_rishta_passes",
     MATCHES: "halal_rishta_matches",
-
     MESSAGES: "halal_rishta_messages",
-
-    GUARDIAN: "halal_rishta_guardian"
-
+    GUARDIAN: "halal_rishta_guardian",
+    PHOTOS: "halal_rishta_photos",
+    CUSTOM_ICON: "halal_rishta_custom_icon"
 };
-
 
 /* =========================================================
    DEFAULT DATA
    ========================================================= */
 
-const DEFAULT_PROFILE = {
-
-    fullName: "",
-
-    age: "",
-
-    gender: "",
-
-    country: "",
-
-    city: "",
-
-    education: "",
-
-    profession: "",
-
-    maritalStatus: "",
-
-    religiousLevel: "",
-
-    phone: "",
-
-    about: "",
-
-    religion: "islam",
-
-    sect: "",
-
-    seriousIntent: true
-
-};
-
-
 const DEFAULT_SETTINGS = {
-
     notifications: true,
-
     darkMode: false,
-
     language: "en"
-
 };
-
 
 const DEFAULT_PRIVACY = {
-
     profileVisibility: "members",
-
     showOnline: true,
-
     allowMessages: true,
-
     photoAfterMatch: false
-
 };
-
 
 const DEFAULT_PURCHASE = {
-
     active: false,
-
     package: "Free",
-
     price: 0,
-
     currency: "USD",
-
     paymentMethod: "",
-
-    activatedAt: "",
-
-    expiresAt: ""
-
+    activatedAt: null,
+    expiresAt: null
 };
 
-
-/* =========================================================
-   DEMO PROFILES
-   =========================================================
-   These are temporary local demo profiles.
-   Real members will later come from the database.
-   ========================================================= */
-
 const DEMO_PROFILES = [
-
     {
-        id: "demo-001",
+        id: "demo_1",
         fullName: "Ayesha",
         age: 27,
         gender: "female",
@@ -142,563 +69,995 @@ const DEMO_PROFILES = [
         religion: "islam",
         sect: "sunni",
         seriousIntent: true,
-        about: "Looking for a respectful and serious marriage relationship."
+        about: "Looking for a respectful and serious marriage."
     },
-
     {
-        id: "demo-002",
+        id: "demo_2",
         fullName: "Maryam",
         age: 25,
         gender: "female",
         country: "Pakistan",
         city: "Lahore",
-        education: "Master",
+        education: "Master's",
         profession: "Designer",
         maritalStatus: "never_married",
         religiousLevel: "practicing",
         religion: "islam",
         sect: "sunni",
         seriousIntent: true,
-        about: "Interested in a sincere and family-oriented marriage."
+        about: "Family oriented and serious about marriage."
     },
-
     {
-        id: "demo-003",
+        id: "demo_3",
         fullName: "Fatima",
         age: 29,
         gender: "female",
-        country: "United Arab Emirates",
+        country: "UAE",
         city: "Dubai",
-        education: "Master",
-        profession: "Accountant",
-        maritalStatus: "never_married",
-        religiousLevel: "practicing",
-        religion: "islam",
-        sect: "shia",
-        seriousIntent: true,
-        about: "Seeking a compatible partner with serious intentions."
-    },
-
-    {
-        id: "demo-004",
-        fullName: "Zainab",
-        age: 26,
-        gender: "female",
-        country: "United Kingdom",
-        city: "London",
         education: "Bachelor",
-        profession: "Healthcare",
+        profession: "Accountant",
         maritalStatus: "never_married",
         religiousLevel: "moderate",
         religion: "islam",
-        sect: "sunni",
+        sect: "shia",
         seriousIntent: true,
-        about: "Looking for a respectful, honest and serious partner."
+        about: "Interested in a respectful and genuine relationship."
     },
-
     {
-        id: "demo-005",
-        fullName: "Hafsa",
+        id: "demo_4",
+        fullName: "Omar",
         age: 30,
-        gender: "female",
-        country: "Canada",
-        city: "Toronto",
-        education: "Master",
+        gender: "male",
+        country: "Saudi Arabia",
+        city: "Jeddah",
+        education: "Bachelor",
         profession: "Engineer",
         maritalStatus: "never_married",
         religiousLevel: "practicing",
         religion: "islam",
-        sect: "other",
+        sect: "sunni",
         seriousIntent: true,
-        about: "Marriage is my intention and family involvement is welcome."
+        about: "Serious about finding a compatible life partner."
+    },
+    {
+        id: "demo_5",
+        fullName: "Ahmed",
+        age: 32,
+        gender: "male",
+        country: "Pakistan",
+        city: "Islamabad",
+        education: "Master's",
+        profession: "Software Engineer",
+        maritalStatus: "never_married",
+        religiousLevel: "practicing",
+        religion: "islam",
+        sect: "sunni",
+        seriousIntent: true,
+        about: "Looking for a serious halal marriage."
     }
-
 ];
 
-
 /* =========================================================
-   BASIC HELPERS
+   HELPERS
    ========================================================= */
 
-function saveData(key, value) {
-
-    localStorage.setItem(
-        key,
-        JSON.stringify(value)
-    );
-
+function save(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
 }
 
-
-function loadData(key, fallback) {
-
+function load(key, fallback = null) {
     try {
-
         const value = localStorage.getItem(key);
-
-        if (value === null) {
-            return fallback;
-        }
-
-        return JSON.parse(value);
-
+        return value ? JSON.parse(value) : fallback;
     } catch (error) {
-
         console.error("Storage error:", error);
-
         return fallback;
     }
-
 }
 
-
-function removeData(key) {
-
+function remove(key) {
     localStorage.removeItem(key);
-
 }
 
-
-function generateId() {
-
+function generateId(prefix = "id") {
     return (
+        prefix +
+        "_" +
         Date.now().toString(36) +
-        Math.random().toString(36).substring(2, 9)
+        "_" +
+        Math.random().toString(36).substring(2, 8)
     );
-
 }
 
+function todayKey() {
+    return new Date().toISOString().slice(0, 10);
+}
 
 function getCurrentUser() {
-
-    return loadData(
-        STORAGE.USER,
-        null
-    );
-
+    return load(STORAGE.USER, null);
 }
-
 
 function isLoggedIn() {
-
     return !!getCurrentUser();
-
 }
-
 
 function isPremium() {
+    const purchase = load(STORAGE.PURCHASE, DEFAULT_PURCHASE);
 
-    const purchase = loadData(
-        STORAGE.PURCHASE,
-        DEFAULT_PURCHASE
-    );
+    if (!purchase.active) {
+        return false;
+    }
 
-    return (
-        purchase &&
-        purchase.active === true
-    );
+    if (purchase.expiresAt) {
+        return new Date(purchase.expiresAt) > new Date();
+    }
 
+    return true;
 }
-
 
 /* =========================================================
    PAGE NAVIGATION
    ========================================================= */
 
 function showPage(pageId) {
-
-    const pages = document.querySelectorAll(".page");
-
-    pages.forEach(page => {
-
+    document.querySelectorAll(".page").forEach(page => {
         page.classList.remove("active");
-
     });
 
+    const page = document.getElementById(pageId);
 
-    const target = document.getElementById(pageId);
-
-    if (!target) {
-
-        console.warn(
-            "Page not found:",
-            pageId
-        );
-
+    if (!page) {
+        console.warn("Page not found:", pageId);
         return;
     }
 
-
-    target.classList.add("active");
+    page.classList.add("active");
 
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
 
-
     if (pageId === "app") {
-
         updateDashboard();
-
     }
-
-
-    if (pageId === "swipe") {
-
-        loadSwipeScreen();
-
-    }
-
 
     if (pageId === "likes") {
-
         renderLikes();
-
     }
-
 
     if (pageId === "matches") {
-
         renderMatches();
-
     }
-
 
     if (pageId === "chat") {
-
         renderChat();
-
     }
 
+    if (pageId === "photos") {
+        renderPhotos();
+    }
 }
 
-
 /* =========================================================
-   REGISTER
+   ACCOUNT
    ========================================================= */
 
 function createAccount() {
+    const form = document.querySelector("#register form");
 
-    const registerPage =
-        document.getElementById("register");
+    if (!form) return;
 
-    if (!registerPage) {
-        return;
-    }
+    const inputs = form.querySelectorAll("input");
 
-
-    const inputs =
-        registerPage.querySelectorAll("input");
-
-
-    const fullName =
-        inputs[0]?.value.trim();
-
-
-    const email =
-        inputs[1]?.value.trim().toLowerCase();
-
-
-    const password =
-        inputs[2]?.value;
-
+    const fullName = inputs[0].value.trim();
+    const email = inputs[1].value.trim().toLowerCase();
+    const password = inputs[2].value;
 
     if (!fullName || !email || !password) {
-
-        alert(
-            "Please complete all fields."
-        );
-
+        alert("Please complete all fields.");
         return;
     }
-
 
     if (password.length < 6) {
-
-        alert(
-            "Password must be at least 6 characters."
-        );
-
+        alert("Password must be at least 6 characters.");
         return;
     }
 
+    const existing = load("halal_rishta_account", null);
 
-    const existingUser =
-        loadData(
-            STORAGE.USER,
-            null
-        );
+    if (existing && existing.email === email) {
+        alert("An account with this email already exists.");
+        showPage("login");
+        return;
+    }
 
-
-    const user = {
-
-        id:
-            existingUser?.id ||
-            generateId(),
-
+    const account = {
+        id: generateId("user"),
         fullName,
-
         email,
-
-        password,
-
-        createdAt:
-            existingUser?.createdAt ||
-            new Date().toISOString()
-
+        password
     };
 
+    save("halal_rishta_account", account);
 
-    saveData(
-        STORAGE.USER,
-        user
-    );
+    const user = {
+        id: account.id,
+        fullName: account.fullName,
+        email: account.email
+    };
 
+    save(STORAGE.USER, user);
 
-    if (!loadData(STORAGE.PROFILE, null)) {
+    const profile = {
+        id: account.id,
+        fullName,
+        age: "",
+        gender: "",
+        country: "",
+        city: "",
+        education: "",
+        profession: "",
+        maritalStatus: "",
+        religiousLevel: "",
+        phone: "",
+        about: "",
+        religion: "islam",
+        sect: "",
+        seriousIntent: false
+    };
 
-        saveData(
-            STORAGE.PROFILE,
-            {
-                ...DEFAULT_PROFILE,
-                fullName
-            }
-        );
+    save(STORAGE.PROFILE, profile);
+    save(STORAGE.SETTINGS, DEFAULT_SETTINGS);
+    save(STORAGE.PRIVACY, DEFAULT_PRIVACY);
+    save(STORAGE.PURCHASE, DEFAULT_PURCHASE);
 
-    }
+    resetActivity();
 
-
-    if (!loadData(STORAGE.SETTINGS, null)) {
-
-        saveData(
-            STORAGE.SETTINGS,
-            DEFAULT_SETTINGS
-        );
-
-    }
-
-
-    if (!loadData(STORAGE.PRIVACY, null)) {
-
-        saveData(
-            STORAGE.PRIVACY,
-            DEFAULT_PRIVACY
-        );
-
-    }
-
-
-    if (!loadData(STORAGE.PURCHASE, null)) {
-
-        saveData(
-            STORAGE.PURCHASE,
-            DEFAULT_PURCHASE
-        );
-
-    }
-
-
-    alert(
-        "Account created successfully."
-    );
-
+    alert("Account created successfully.");
 
     showPage("app");
-
+    updateDashboard();
 }
-
-
-/* =========================================================
-   LOGIN
-   ========================================================= */
 
 function loginUser() {
+    const form = document.querySelector("#login form");
 
-    const loginPage =
-        document.getElementById("login");
+    if (!form) return;
 
-    if (!loginPage) {
-        return;
-    }
+    const inputs = form.querySelectorAll("input");
 
+    const email = inputs[0].value.trim().toLowerCase();
+    const password = inputs[1].value;
 
-    const inputs =
-        loginPage.querySelectorAll("input");
+    const account = load("halal_rishta_account", null);
 
-
-    const email =
-        inputs[0]?.value.trim().toLowerCase();
-
-
-    const password =
-        inputs[1]?.value;
-
-
-    const user =
-        loadData(
-            STORAGE.USER,
-            null
-        );
-
-
-    if (!user) {
-
-        alert(
-            "No account found. Please create an account first."
-        );
-
+    if (!account) {
+        alert("No account found. Please create an account first.");
         showPage("register");
-
         return;
     }
-
 
     if (
-        email !== user.email ||
-        password !== user.password
+        account.email !== email ||
+        account.password !== password
     ) {
-
-        alert(
-            "Incorrect email or password."
-        );
-
+        alert("Incorrect email or password.");
         return;
     }
 
+    save(STORAGE.USER, {
+        id: account.id,
+        fullName: account.fullName,
+        email: account.email
+    });
 
-    alert(
-        "Login successful."
-    );
+    if (!load(STORAGE.PROFILE)) {
+        save(STORAGE.PROFILE, {
+            id: account.id,
+            fullName: account.fullName,
+            age: "",
+            gender: "",
+            country: "",
+            city: "",
+            education: "",
+            profession: "",
+            maritalStatus: "",
+            religiousLevel: "",
+            phone: "",
+            about: "",
+            religion: "islam",
+            sect: "",
+            seriousIntent: false
+        });
+    }
 
+    alert("Login successful.");
 
     showPage("app");
-
+    updateDashboard();
 }
-
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
 
 function logoutUser() {
-
+    remove(STORAGE.USER);
     showPage("home");
-
 }
-
 
 /* =========================================================
    DASHBOARD
    ========================================================= */
 
 function updateDashboard() {
-
-    const user =
-        getCurrentUser();
-
+    const user = getCurrentUser();
 
     if (!user) {
-
         showPage("login");
-
         return;
     }
 
-
-    const emailElement =
-        document.getElementById(
-            "dashboardEmail"
-        );
-
+    const emailElement = document.getElementById("dashboardEmail");
 
     if (emailElement) {
-
-        emailElement.textContent =
-            user.email;
-
+        emailElement.textContent = user.email;
     }
 
+    const premium = isPremium();
 
-    const premium =
-        isPremium();
+    document.querySelectorAll("[data-package-status]").forEach(element => {
+        element.textContent = premium ? "Rishta Plus" : "Free";
+    });
 
-
-    document
-        .querySelectorAll(
-            "[data-package-status]"
-        )
-        .forEach(element => {
-
-            element.textContent =
-                premium
-                    ? "Rishta Plus"
-                    : "Free";
-
-        });
-
-
-    const planName =
-        document.getElementById(
-            "planName"
-        );
-
-
-    const planDescription =
-        document.getElementById(
-            "planDescription"
-        );
-
+    const planName = document.getElementById("planName");
+    const planDescription = document.getElementById("planDescription");
 
     if (planName) {
-
-        planName.textContent =
-            premium
-                ? "Rishta Plus"
-                : "Free";
-
+        planName.textContent = premium
+            ? "Rishta Plus"
+            : "Free";
     }
-
 
     if (planDescription) {
-
-        planDescription.textContent =
-            premium
-                ? "Unlimited swipes + premium features"
-                : "30 daily swipes";
-
+        planDescription.textContent = premium
+            ? "Unlimited daily swipes"
+            : "30 daily swipes";
     }
 
-
-    updateSwipeCounters();
-
+    updateSwipeDisplay();
+    updateSuperLikeDisplay();
 }
 
+/* =========================================================
+   SWIPE SYSTEM
+   ========================================================= */
+
+function getSwipeData() {
+    const data = load(STORAGE.SWIPES, {
+        date: todayKey(),
+        count: 0
+    });
+
+    if (data.date !== todayKey()) {
+        return {
+            date: todayKey(),
+            count: 0
+        };
+    }
+
+    return data;
+}
+
+function updateSwipeDisplay() {
+    const element = document.getElementById("swipeCount");
+
+    if (!element) return;
+
+    const data = getSwipeData();
+
+    element.textContent = isPremium()
+        ? `${data.count} / Unlimited`
+        : `${data.count} / 30`;
+}
+
+function canSwipe() {
+    if (isPremium()) {
+        return true;
+    }
+
+    const data = getSwipeData();
+
+    if (data.count >= 30) {
+        alert(
+            "You have reached today's 30 free swipes. Upgrade to Rishta Plus for unlimited swipes."
+        );
+
+        return false;
+    }
+
+    return true;
+}
+
+function recordSwipe() {
+    const data = getSwipeData();
+
+    data.count += 1;
+
+    save(STORAGE.SWIPES, data);
+
+    updateSwipeDisplay();
+}
+
+function getSwipeProfiles() {
+    const profile = load(STORAGE.PROFILE, {});
+    const liked = load(STORAGE.LIKES, []);
+    const passed = load(STORAGE.PASSES, []);
+
+    const excluded = [
+        profile.id,
+        ...liked.map(item => item.profileId),
+        ...passed.map(item => item.profileId)
+    ];
+
+    return DEMO_PROFILES.filter(
+        person => !excluded.includes(person.id)
+    );
+}
+
+/* =========================================================
+   FIND RISHTA / SEARCH
+   ========================================================= */
+
+function searchProfiles() {
+    const results = document.getElementById("searchResults");
+
+    if (!results) return;
+
+    const ageMin =
+        parseInt(document.getElementById("ageMin")?.value) || 18;
+
+    const ageMax =
+        parseInt(document.getElementById("ageMax")?.value) || 100;
+
+    const country =
+        document.getElementById("searchCountry")?.value
+            .trim()
+            .toLowerCase() || "";
+
+    const city =
+        document.getElementById("searchCity")?.value
+            .trim()
+            .toLowerCase() || "";
+
+    const religion =
+        document.getElementById("searchReligion")?.value || "";
+
+    const sect =
+        document.getElementById("searchSect")?.value || "";
+
+    const serious =
+        document.getElementById("seriousIntent")?.checked || false;
+
+    let profiles = getSwipeProfiles();
+
+    profiles = profiles.filter(profile => {
+
+        if (profile.age < ageMin || profile.age > ageMax) {
+            return false;
+        }
+
+        if (
+            country &&
+            profile.country.toLowerCase() !== country
+        ) {
+            return false;
+        }
+
+        if (
+            city &&
+            profile.city.toLowerCase() !== city
+        ) {
+            return false;
+        }
+
+        if (
+            religion &&
+            profile.religion !== religion
+        ) {
+            return false;
+        }
+
+        if (
+            sect &&
+            profile.sect !== sect
+        ) {
+            return false;
+        }
+
+        if (
+            serious &&
+            !profile.seriousIntent
+        ) {
+            return false;
+        }
+
+        return true;
+    });
+
+    if (!profiles.length) {
+        results.innerHTML = `
+            <div class="card">
+                <p>No matching profiles found.</p>
+            </div>
+        `;
+        return;
+    }
+
+    results.innerHTML = profiles.map(profile => `
+        <div class="result-card">
+
+            <h3>${escapeHTML(profile.fullName)}</h3>
+
+            <p>
+                ${profile.age} •
+                ${escapeHTML(profile.city)},
+                ${escapeHTML(profile.country)}
+            </p>
+
+            <p>
+                ${escapeHTML(profile.profession || "Not specified")}
+            </p>
+
+            ${
+                profile.seriousIntent
+                    ? `<p>💍 Serious Marriage Intent</p>`
+                    : ""
+            }
+
+            <p>
+                ${escapeHTML(profile.about || "")}
+            </p>
+
+            <div class="swipe-actions">
+
+                <button
+                    type="button"
+                    class="secondary"
+                    onclick="passProfile('${profile.id}')">
+                    ❌ Pass
+                </button>
+
+                <button
+                    type="button"
+                    class="primary"
+                    onclick="likeProfile('${profile.id}')">
+                    ❤️ Like
+                </button>
+
+                <button
+                    type="button"
+                    class="primary"
+                    onclick="superLikeProfile('${profile.id}')">
+                    ⭐ Super Like
+                </button>
+
+            </div>
+
+        </div>
+    `).join("");
+}
+
+function likeProfile(profileId) {
+    if (!canSwipe()) return;
+
+    const likes = load(STORAGE.LIKES, []);
+
+    if (
+        likes.some(item => item.profileId === profileId)
+    ) {
+        return;
+    }
+
+    likes.push({
+        id: generateId("like"),
+        profileId,
+        createdAt: new Date().toISOString()
+    });
+
+    save(STORAGE.LIKES, likes);
+
+    recordSwipe();
+
+    /*
+       Demo mutual-match logic:
+       For testing, a demo profile can become a match
+       when liked.
+    */
+
+    createMatchIfNeeded(profileId);
+
+    alert("❤️ Like sent.");
+
+    searchProfiles();
+}
+
+function passProfile(profileId) {
+    if (!canSwipe()) return;
+
+    const passes = load(STORAGE.PASSES, []);
+
+    if (
+        !passes.some(item => item.profileId === profileId)
+    ) {
+        passes.push({
+            id: generateId("pass"),
+            profileId,
+            createdAt: new Date().toISOString()
+        });
+    }
+
+    save(STORAGE.PASSES, passes);
+
+    recordSwipe();
+
+    alert("Profile passed.");
+
+    searchProfiles();
+}
+
+/* =========================================================
+   SUPER LIKES
+   ========================================================= */
+
+function getSuperLikeData() {
+    const data = load(STORAGE.SUPERLIKES, {
+        date: todayKey(),
+        count: 0
+    });
+
+    if (data.date !== todayKey()) {
+        return {
+            date: todayKey(),
+            count: 0
+        };
+    }
+
+    return data;
+}
+
+function updateSuperLikeDisplay() {
+    const element =
+        document.getElementById("superLikeCount");
+
+    if (!element) return;
+
+    const data = getSuperLikeData();
+
+    element.textContent = isPremium()
+        ? `${data.count} / 5`
+        : `${data.count} / 0`;
+}
+
+function superLikeProfile(profileId) {
+    if (!isPremium()) {
+        alert(
+            "Super Likes are available with Rishta Plus. You can also earn 3 Super Likes by watching a rewarded ad."
+        );
+        return;
+    }
+
+    const data = getSuperLikeData();
+
+    if (data.count >= 5) {
+        alert("You have used today's 5 Super Likes.");
+        return;
+    }
+
+    data.count += 1;
+
+    save(STORAGE.SUPERLIKES, data);
+
+    recordSwipe();
+
+    createMatchIfNeeded(profileId);
+
+    updateSuperLikeDisplay();
+
+    alert("⭐ Super Like sent.");
+
+    searchProfiles();
+}
+
+function watchRewardedAd() {
+    /*
+       Demo ad flow.
+       Real rewarded ads will be connected later
+       through the selected ad network.
+    */
+
+    const data = getSuperLikeData();
+
+    data.count += 3;
+
+    if (data.count > 5) {
+        data.count = 5;
+    }
+
+    save(STORAGE.SUPERLIKES, data);
+
+    updateSuperLikeDisplay();
+
+    alert(
+        "🎬 Reward completed. You received Super Likes."
+    );
+}
+
+/* =========================================================
+   MATCH SYSTEM
+   ========================================================= */
+
+function createMatchIfNeeded(profileId) {
+    const matches = load(STORAGE.MATCHES, []);
+
+    const alreadyMatched =
+        matches.some(
+            match => match.profileId === profileId
+        );
+
+    if (alreadyMatched) {
+        return;
+    }
+
+    const profile =
+        DEMO_PROFILES.find(
+            person => person.id === profileId
+        );
+
+    if (!profile) return;
+
+    matches.push({
+        id: generateId("match"),
+        profileId: profile.id,
+        fullName: profile.fullName,
+        createdAt: new Date().toISOString()
+    });
+
+    save(STORAGE.MATCHES, matches);
+}
+
+function renderMatches() {
+    const container =
+        document.getElementById("matchesList");
+
+    if (!container) return;
+
+    const matches = load(STORAGE.MATCHES, []);
+
+    if (!matches.length) {
+        container.innerHTML = `
+            <p class="small">
+                No matches yet. Start finding a Rishta.
+            </p>
+        `;
+        return;
+    }
+
+    container.innerHTML = matches.map(match => `
+        <div class="result-card">
+
+            <h3>
+                💚 ${escapeHTML(match.fullName)}
+            </h3>
+
+            <p>
+                You have a match.
+            </p>
+
+            <button
+                type="button"
+                class="primary"
+                onclick="openChat('${match.profileId}')">
+                💬 Open Halal Chat
+            </button>
+
+        </div>
+    `).join("");
+}
+
+/* =========================================================
+   LIKES
+   ========================================================= */
+
+function renderLikes() {
+    const container =
+        document.getElementById("likesList");
+
+    if (!container) return;
+
+    const likes = load(STORAGE.LIKES, []);
+
+    if (!likes.length) {
+        container.innerHTML = `
+            <p class="small">
+                Your likes will appear here.
+            </p>
+        `;
+        return;
+    }
+
+    container.innerHTML = likes.map(like => {
+
+        const profile =
+            DEMO_PROFILES.find(
+                person => person.id === like.profileId
+            );
+
+        if (!profile) return "";
+
+        return `
+            <div class="result-card">
+
+                <h3>
+                    ❤️ ${escapeHTML(profile.fullName)}
+                </h3>
+
+                <p>
+                    ${profile.age} •
+                    ${escapeHTML(profile.city)},
+                    ${escapeHTML(profile.country)}
+                </p>
+
+                <button
+                    type="button"
+                    class="primary"
+                    onclick="openChat('${profile.id}')">
+                    💬 Chat
+                </button>
+
+            </div>
+        `;
+    }).join("");
+}
+
+/* =========================================================
+   CHAT
+   ========================================================= */
+
+let currentChatProfileId = null;
+
+function openChat(profileId) {
+    const matches = load(STORAGE.MATCHES, []);
+
+    const isMatch =
+        matches.some(
+            match => match.profileId === profileId
+        );
+
+    if (!isMatch) {
+        alert("Chat is available after a mutual match.");
+        return;
+    }
+
+    currentChatProfileId = profileId;
+
+    showPage("chat");
+    renderChat();
+}
+
+function renderChat() {
+    const container =
+        document.getElementById("chatMessages");
+
+    if (!container) return;
+
+    if (!currentChatProfileId) {
+        container.innerHTML = `
+            <p class="small">
+                Select a match to start chatting.
+            </p>
+        `;
+        return;
+    }
+
+    const allMessages =
+        load(STORAGE.MESSAGES, []);
+
+    const messages =
+        allMessages.filter(
+            message =>
+                message.profileId === currentChatProfileId
+        );
+
+    if (!messages.length) {
+        container.innerHTML = `
+            <p class="small">
+                No messages yet. Start with a respectful message.
+            </p>
+        `;
+        return;
+    }
+
+    container.innerHTML = messages.map(message => `
+        <div class="chat-message">
+
+            <strong>
+                ${message.sender === "me" ? "You" : "Match"}
+            </strong>
+
+            <p>
+                ${escapeHTML(message.text)}
+            </p>
+
+        </div>
+    `).join("");
+}
+
+function sendMessage() {
+    if (!currentChatProfileId) {
+        alert("Please open a match first.");
+        return;
+    }
+
+    const input =
+        document.getElementById("chatMessage");
+
+    if (!input) return;
+
+    const text = input.value.trim();
+
+    if (!text) {
+        alert("Please write a message.");
+        return;
+    }
+
+    const messages =
+        load(STORAGE.MESSAGES, []);
+
+    messages.push({
+        id: generateId("message"),
+        profileId: currentChatProfileId,
+        sender: "me",
+        text,
+        createdAt: new Date().toISOString()
+    });
+
+    save(STORAGE.MESSAGES, messages);
+
+    input.value = "";
+
+    renderChat();
+}
+
+function showHalalIcebreaker() {
+    const questions = [
+        "What qualities are most important to you in a life partner?",
+        "What does a successful marriage mean to you?",
+        "How important is family involvement in marriage?",
+        "What are your expectations about communication after marriage?",
+        "What values would you like to build your future family around?"
+    ];
+
+    const question =
+        questions[
+            Math.floor(Math.random() * questions.length)
+        ];
+
+    const input =
+        document.getElementById("chatMessage");
+
+    if (input) {
+        input.value = question;
+        input.focus();
+    }
+}
 
 /* =========================================================
    PROFILE
    ========================================================= */
 
 function openProfile() {
-
-    fillProfileForm();
-
-    showPage("profile");
-
-}
-
-
-function fillProfileForm() {
-
     const profile =
-        loadData(
-            STORAGE.PROFILE,
-            DEFAULT_PROFILE
-        );
-
+        load(STORAGE.PROFILE, {});
 
     const fields = [
-
         "fullName",
         "age",
         "gender",
@@ -710,2115 +1069,519 @@ function fillProfileForm() {
         "religiousLevel",
         "phone",
         "about"
-
     ];
 
-
     fields.forEach(id => {
-
         const element =
             document.getElementById(id);
 
         if (element) {
-
             element.value =
-                profile[id] || "";
-
+                profile[id] ?? "";
         }
-
     });
 
+    showPage("profile");
 }
 
-
 function updateProfile() {
+    const oldProfile =
+        load(STORAGE.PROFILE, {});
 
     const profile = {
-
-        fullName:
-            document.getElementById(
-                "fullName"
-            )?.value.trim() || "",
-
-        age:
-            document.getElementById(
-                "age"
-            )?.value || "",
-
-        gender:
-            document.getElementById(
-                "gender"
-            )?.value || "",
-
-        country:
-            document.getElementById(
-                "country"
-            )?.value.trim() || "",
-
-        city:
-            document.getElementById(
-                "city"
-            )?.value.trim() || "",
-
-        education:
-            document.getElementById(
-                "education"
-            )?.value.trim() || "",
-
-        profession:
-            document.getElementById(
-                "profession"
-            )?.value.trim() || "",
-
-        maritalStatus:
-            document.getElementById(
-                "maritalStatus"
-            )?.value || "",
-
-        religiousLevel:
-            document.getElementById(
-                "religiousLevel"
-            )?.value || "",
-
-        phone:
-            document.getElementById(
-                "phone"
-            )?.value.trim() || "",
-
-        about:
-            document.getElementById(
-                "about"
-            )?.value.trim() || "",
-
-        religion: "islam",
-
-        sect: "",
-
-        seriousIntent: true
-
+        ...oldProfile
     };
 
+    const fields = [
+        "fullName",
+        "age",
+        "gender",
+        "country",
+        "city",
+        "education",
+        "profession",
+        "maritalStatus",
+        "religiousLevel",
+        "phone",
+        "about"
+    ];
 
-    saveData(
-        STORAGE.PROFILE,
-        profile
-    );
+    fields.forEach(id => {
+        const element =
+            document.getElementById(id);
 
+        if (element) {
+            profile[id] =
+                element.value.trim();
+        }
+    });
+
+    if (
+        profile.age &&
+        Number(profile.age) < 18
+    ) {
+        alert("Users must be 18 or older.");
+        return;
+    }
+
+    save(STORAGE.PROFILE, profile);
 
     const user =
         getCurrentUser();
 
-
-    if (user && profile.fullName) {
-
+    if (user) {
         user.fullName =
-            profile.fullName;
+            profile.fullName || user.fullName;
 
-        saveData(
-            STORAGE.USER,
-            user
-        );
-
+        save(STORAGE.USER, user);
     }
 
-
-    alert(
-        "Profile saved successfully."
-    );
-
+    alert("Profile saved successfully.");
 
     showPage("app");
-
 }
-
 
 /* =========================================================
    PHOTOS
    ========================================================= */
 
 function openPhotos() {
-
-    renderPhotos();
-
     showPage("photos");
-
+    renderPhotos();
 }
-
 
 function renderPhotos() {
-
     const container =
-        document.getElementById(
-            "photosList"
-        );
+        document.getElementById("photosList");
 
-
-    if (!container) {
-        return;
-    }
-
+    if (!container) return;
 
     const photos =
-        loadData(
-            STORAGE.PHOTOS,
-            []
-        );
-
+        load(STORAGE.PHOTOS, []);
 
     if (!photos.length) {
-
-        container.innerHTML =
-            "<p>No photos uploaded yet.</p>";
-
+        container.innerHTML = `
+            <p>
+                No photos uploaded yet.
+            </p>
+        `;
         return;
     }
 
+    container.innerHTML = photos.map(photo => `
+        <div class="photo-item">
 
-    container.innerHTML =
-        photos.map(
-            (photo, index) => `
+            <img
+                src="${photo.data}"
+                alt="Profile photo"
+                style="max-width:100%;border-radius:12px;"
+            >
 
-                <div class="photo-item">
+            <button
+                type="button"
+                class="secondary"
+                onclick="deletePhoto('${photo.id}')">
+                Delete
+            </button>
 
-                    <img
-                        src="${photo}"
-                        alt="Profile photo"
-                        style="
-                            max-width:100%;
-                            border-radius:12px;
-                            margin-bottom:8px;
-                        "
-                    >
-
-                    <button
-                        type="button"
-                        class="link-btn"
-                        onclick="deletePhoto(${index})"
-                    >
-                        Delete
-                    </button>
-
-                </div>
-
-            `
-        ).join("");
-
+        </div>
+    `).join("");
 }
 
+function addPhoto(file) {
+    if (!file) return;
 
-function addPhoto() {
-
-    const input =
-        document.getElementById(
-            "photoInput"
-        );
-
-
-    if (!input || !input.files.length) {
-
-        alert(
-            "Please select an image."
-        );
-
+    if (file.size > 5 * 1024 * 1024) {
+        alert("Maximum 5MB per image.");
         return;
     }
 
+    const reader =
+        new FileReader();
 
-    const files =
-        Array.from(input.files);
+    reader.onload = function(event) {
 
+        const photos =
+            load(STORAGE.PHOTOS, []);
 
-    const photos =
-        loadData(
-            STORAGE.PHOTOS,
-            []
-        );
-
-
-    files.forEach(file => {
-
-        if (file.size > 5 * 1024 * 1024) {
-
-            alert(
-                `${file.name} is larger than 5MB.`
-            );
-
+        if (photos.length >= 6) {
+            alert("Maximum 6 photos allowed.");
             return;
         }
 
+        photos.push({
+            id: generateId("photo"),
+            data: event.target.result,
+            createdAt: new Date().toISOString()
+        });
 
-        const reader =
-            new FileReader();
+        save(STORAGE.PHOTOS, photos);
 
+        renderPhotos();
+    };
 
-        reader.onload = function(event) {
-
-            photos.push(
-                event.target.result
-            );
-
-            saveData(
-                STORAGE.PHOTOS,
-                photos
-            );
-
-            renderPhotos();
-
-        };
-
-
-        reader.readAsDataURL(file);
-
-    });
-
+    reader.readAsDataURL(file);
 }
 
-
-function deletePhoto(index) {
-
+function deletePhoto(photoId) {
     const photos =
-        loadData(
-            STORAGE.PHOTOS,
-            []
+        load(STORAGE.PHOTOS, []);
+
+    const updated =
+        photos.filter(
+            photo => photo.id !== photoId
         );
 
-
-    photos.splice(
-        index,
-        1
-    );
-
-
-    saveData(
-        STORAGE.PHOTOS,
-        photos
-    );
-
+    save(STORAGE.PHOTOS, updated);
 
     renderPhotos();
-
 }
-
 
 /* =========================================================
    SETTINGS
    ========================================================= */
 
 function openSettings() {
-
-    loadSettingsForm();
-
-    showPage("settings");
-
-}
-
-
-function loadSettingsForm() {
-
     const settings =
-        loadData(
-            STORAGE.SETTINGS,
-            DEFAULT_SETTINGS
-        );
-
+        load(STORAGE.SETTINGS, DEFAULT_SETTINGS);
 
     const notifications =
-        document.getElementById(
-            "notifications"
-        );
-
+        document.getElementById("notifications");
 
     const darkMode =
-        document.getElementById(
-            "darkMode"
-        );
-
+        document.getElementById("darkMode");
 
     if (notifications) {
-
         notifications.checked =
-            settings.notifications;
-
+            !!settings.notifications;
     }
-
 
     if (darkMode) {
-
         darkMode.checked =
-            settings.darkMode;
-
+            !!settings.darkMode;
     }
 
-
-    applyDarkMode(
-        settings.darkMode
-    );
-
+    showPage("settings");
 }
-
 
 function saveSettings() {
-
     const settings = {
-
         notifications:
-            document.getElementById(
-                "notifications"
-            )?.checked || false,
+            document.getElementById("notifications")?.checked ?? true,
 
         darkMode:
-            document.getElementById(
-                "darkMode"
-            )?.checked || false,
-
-        language:
-            document.getElementById(
-                "languageSelect"
-            )?.value || "en"
-
+            document.getElementById("darkMode")?.checked ?? false
     };
 
-
-    saveData(
-        STORAGE.SETTINGS,
-        settings
-    );
-
-
-    applyDarkMode(
-        settings.darkMode
-    );
-
-
-    alert(
-        "Settings saved."
-    );
-
-}
-
-
-function applyDarkMode(enabled) {
+    save(STORAGE.SETTINGS, settings);
 
     document.body.classList.toggle(
         "dark-mode",
-        !!enabled
+        settings.darkMode
     );
 
+    alert("Settings saved.");
 }
 
+function applySavedSettings() {
+    const settings =
+        load(STORAGE.SETTINGS, DEFAULT_SETTINGS);
+
+    document.body.classList.toggle(
+        "dark-mode",
+        !!settings.darkMode
+    );
+}
 
 /* =========================================================
    PRIVACY
    ========================================================= */
 
 function openPrivacy() {
-
     const privacy =
-        loadData(
-            STORAGE.PRIVACY,
-            DEFAULT_PRIVACY
-        );
-
+        load(STORAGE.PRIVACY, DEFAULT_PRIVACY);
 
     const visibility =
-        document.getElementById(
-            "profileVisibility"
-        );
-
+        document.getElementById("profileVisibility");
 
     const online =
-        document.getElementById(
-            "showOnline"
-        );
-
+        document.getElementById("showOnline");
 
     const messages =
-        document.getElementById(
-            "allowMessages"
-        );
-
+        document.getElementById("allowMessages");
 
     const photoAfterMatch =
-        document.getElementById(
-            "photoAfterMatch"
-        );
-
+        document.getElementById("photoAfterMatch");
 
     if (visibility) {
-
         visibility.value =
             privacy.profileVisibility;
-
     }
-
 
     if (online) {
-
         online.checked =
-            privacy.showOnline;
-
+            !!privacy.showOnline;
     }
-
 
     if (messages) {
-
         messages.checked =
-            privacy.allowMessages;
-
+            !!privacy.allowMessages;
     }
-
 
     if (photoAfterMatch) {
-
         photoAfterMatch.checked =
-            privacy.photoAfterMatch;
-
+            !!privacy.photoAfterMatch;
     }
 
-
     showPage("privacy");
-
 }
-
 
 function savePrivacy() {
-
     const privacy = {
-
         profileVisibility:
-            document.getElementById(
-                "profileVisibility"
-            )?.value || "members",
+            document.getElementById("profileVisibility")?.value ||
+            "members",
 
         showOnline:
-            document.getElementById(
-                "showOnline"
-            )?.checked || false,
+            document.getElementById("showOnline")?.checked ??
+            true,
 
         allowMessages:
-            document.getElementById(
-                "allowMessages"
-            )?.checked || false,
+            document.getElementById("allowMessages")?.checked ??
+            true,
 
         photoAfterMatch:
-            document.getElementById(
-                "photoAfterMatch"
-            )?.checked || false
-
+            document.getElementById("photoAfterMatch")?.checked ??
+            false
     };
 
+    save(STORAGE.PRIVACY, privacy);
 
-    saveData(
-        STORAGE.PRIVACY,
-        privacy
-    );
-
-
-    alert(
-        "Privacy settings saved."
-    );
-
-
-    showPage("app");
-
+    alert("Privacy settings saved.");
 }
 
-
 /* =========================================================
-   PURCHASES
+   PURCHASES / RISHTA PLUS
    ========================================================= */
 
 function openPurchases() {
-
     const purchase =
-        loadData(
-            STORAGE.PURCHASE,
-            DEFAULT_PURCHASE
-        );
-
+        load(STORAGE.PURCHASE, DEFAULT_PURCHASE);
 
     const status =
-        document.getElementById(
-            "purchaseStatus"
-        );
-
+        document.getElementById("purchaseStatus");
 
     if (status) {
-
         status.textContent =
             purchase.active
                 ? "Rishta Plus is active."
                 : "No active subscription.";
-
     }
-
 
     showPage("purchases");
-
 }
-
-
-/* =========================================================
-   PACKAGE
-   ========================================================= */
 
 function openPackage() {
-
     showPage("package");
-
 }
-
 
 function activatePackage() {
+    /*
+       Payment provider is intentionally NOT faked here.
+
+       This button prepares the subscription state only
+       for testing. Real payment verification must happen
+       through a secure payment provider/backend.
+    */
 
     const message =
-        document.getElementById(
-            "paymentMessage"
-        );
-
+        document.getElementById("paymentMessage");
 
     if (message) {
-
         message.textContent =
             "Payment setup is required before Rishta Plus can be activated.";
-
     }
 
-
     alert(
-        "Payment setup is required to activate the $2/month Rishta Plus package."
+        "Payment setup is required. The $2 subscription will not be marked as paid until a real payment provider is connected."
     );
-
 }
 
+/* =========================================================
+   GUARDIAN
+   ========================================================= */
+
+function saveGuardian() {
+    const name =
+        document.getElementById("guardianName")?.value.trim();
+
+    const email =
+        document.getElementById("guardianEmail")?.value.trim();
+
+    if (!name || !email) {
+        alert("Please enter guardian name and email.");
+        return;
+    }
+
+    save(STORAGE.GUARDIAN, {
+        name,
+        email,
+        updatedAt: new Date().toISOString()
+    });
+
+    alert("Guardian information saved.");
+}
 
 /* =========================================================
    CUSTOM ICON
    ========================================================= */
 
 function openCustomIcon() {
-
     showPage("customIcon");
-
 }
 
-
 function saveCustomIcon() {
-
     const input =
-        document.getElementById(
-            "customIconInput"
-        );
-
+        document.getElementById("customIconInput");
 
     if (!input || !input.files.length) {
-
-        alert(
-            "Please select an image first."
-        );
-
+        alert("Please select an image.");
         return;
     }
 
+    const file = input.files[0];
 
-    const file =
-        input.files[0];
-
+    if (file.size > 5 * 1024 * 1024) {
+        alert("Maximum 5MB.");
+        return;
+    }
 
     const reader =
         new FileReader();
 
-
     reader.onload = function(event) {
 
-        localStorage.setItem(
-            "halal_rishta_custom_icon",
-            event.target.result
-        );
-
-
-        alert(
-            "Custom icon saved."
-        );
-
-    };
-
-
-    reader.readAsDataURL(file);
-
-}
-
-
-/* =========================================================
-   WALI / GUARDIAN
-   ========================================================= */
-
-function saveGuardian() {
-
-    const name =
-        document.getElementById(
-            "guardianName"
-        )?.value.trim();
-
-
-    const email =
-        document.getElementById(
-            "guardianEmail"
-        )?.value.trim();
-
-
-    if (!name || !email) {
-
-        alert(
-            "Please enter guardian name and email."
-        );
-
-        return;
-    }
-
-
-    saveData(
-        STORAGE.GUARDIAN,
-        {
-            name,
-            email
-        }
-    );
-
-
-    alert(
-        "Guardian information saved."
-    );
-
-
-    showPage("app");
-
-}
-
-
-/* =========================================================
-   SWIPE SYSTEM
-   ========================================================= */
-
-let currentSwipeProfile = null;
-
-
-function getSwipeData() {
-
-    const today =
-        new Date().toISOString().slice(0, 10);
-
-
-    const saved =
-        loadData(
-            STORAGE.SWIPES,
-            {
-                date: today,
-                count: 0,
-                seen: []
-            }
-        );
-
-
-    if (saved.date !== today) {
-
-        saved.date = today;
-
-        saved.count = 0;
-
-        saved.seen = [];
-
-        saveData(
-            STORAGE.SWIPES,
-            saved
-        );
-
-    }
-
-
-    return saved;
-
-}
-
-
-function getSuperLikeData() {
-
-    const today =
-        new Date().toISOString().slice(0, 10);
-
-
-    const saved =
-        loadData(
-            STORAGE.SUPER_LIKES,
-            {
-                date: today,
-                count: 0
-            }
-        );
-
-
-    if (saved.date !== today) {
-
-        saved.date = today;
-
-        saved.count = 0;
-
-        saveData(
-            STORAGE.SUPER_LIKES,
-            saved
-        );
-
-    }
-
-
-    return saved;
-
-}
-
-
-function updateSwipeCounters() {
-
-    const swipeData =
-        getSwipeData();
-
-
-    const superData =
-        getSuperLikeData();
-
-
-    const premium =
-        isPremium();
-
-
-    const swipeLimit =
-        premium
-            ? "Unlimited"
-            : "30";
-
-
-    const superLimit =
-        premium
-            ? "5"
-            : String(
-                superData.count
-            );
-
-
-    const swipeCount =
-        document.getElementById(
-            "swipeCount"
-        );
-
-
-    const swipePageCount =
-        document.getElementById(
-            "swipePageCount"
-        );
-
-
-    const superLikeCount =
-        document.getElementById(
-            "superLikeCount"
-        );
-
-
-    const swipePageSuperLikes =
-        document.getElementById(
-            "swipePageSuperLikes"
-        );
-
-
-    if (swipeCount) {
-
-        swipeCount.textContent =
-            `${swipeData.count} / ${swipeLimit}`;
-
-    }
-
-
-    if (swipePageCount) {
-
-        swipePageCount.textContent =
-            `${swipeData.count} / ${swipeLimit}`;
-
-    }
-
-
-    if (superLikeCount) {
-
-        superLikeCount.textContent =
-            premium
-                ? `${superData.count} / 5`
-                : `${superData.count} / 0`;
-
-    }
-
-
-    if (swipePageSuperLikes) {
-
-        swipePageSuperLikes.textContent =
-            premium
-                ? `${superData.count} / 5`
-                : `${superData.count} / 0`;
-
-    }
-
-}
-
-
-function openSwipe() {
-
-    showPage("swipe");
-
-}
-
-
-function getAvailableProfiles() {
-
-    const swipeData =
-        getSwipeData();
-
-
-    return DEMO_PROFILES.filter(
-        profile =>
-            !swipeData.seen.includes(
-                profile.id
-            )
-    );
-
-}
-
-
-function loadSwipeScreen() {
-
-    updateSwipeCounters();
-
-
-    const profiles =
-        getAvailableProfiles();
-
-
-    if (!profiles.length) {
-
-        currentSwipeProfile = null;
-
-        renderEmptySwipe();
-
-        return;
-    }
-
-
-    currentSwipeProfile =
-        profiles[0];
-
-
-    renderSwipeProfile(
-        currentSwipeProfile
-    );
-
-}
-
-
-function renderSwipeProfile(profile) {
-
-    const name =
-        document.getElementById(
-            "swipeName"
-        );
-
-
-    const details =
-        document.getElementById(
-            "swipeDetails"
-        );
-
-
-    const about =
-        document.getElementById(
-            "swipeAbout"
-        );
-
-
-    const intent =
-        document.getElementById(
-            "swipeIntent"
-        );
-
-
-    if (name) {
-
-        name.textContent =
-            `${profile.fullName}, ${profile.age}`;
-
-    }
-
-
-    if (details) {
-
-        details.textContent =
-            `${profile.city}, ${profile.country} • ${profile.profession}`;
-
-    }
-
-
-    if (about) {
-
-        about.textContent =
-            profile.about || "";
-
-    }
-
-
-    if (intent) {
-
-        intent.style.display =
-            profile.seriousIntent
-                ? "inline-block"
-                : "none";
-
-    }
-
-
-    const photo =
-        document.getElementById(
-            "swipePhoto"
-        );
-
-
-    if (photo) {
-
-        const photos =
-            loadData(
-                STORAGE.PHOTOS,
-                []
-            );
-
-
-        photo.innerHTML =
-            "👤";
-
-
-        if (photos.length) {
-
-            photo.innerHTML =
-                `<img
-                    src="${photos[0]}"
-                    alt="Profile"
-                    style="
-                        width:100%;
-                        height:100%;
-                        object-fit:cover;
-                        border-radius:16px;
-                    "
-                >`;
-
-        }
-
-    }
-
-}
-
-
-function renderEmptySwipe() {
-
-    const name =
-        document.getElementById(
-            "swipeName"
-        );
-
-
-    const details =
-        document.getElementById(
-            "swipeDetails"
-        );
-
-
-    const about =
-        document.getElementById(
-            "swipeAbout"
-        );
-
-
-    if (name) {
-
-        name.textContent =
-            "No more profiles";
-
-    }
-
-
-    if (details) {
-
-        details.textContent =
-            "New members will appear here.";
-
-    }
-
-
-    if (about) {
-
-        about.textContent =
-            "Check back later for more serious rishtas.";
-
-    }
-
-
-    const intent =
-        document.getElementById(
-            "swipeIntent"
-        );
-
-
-    if (intent) {
-
-        intent.style.display =
-            "none";
-
-    }
-
-}
-
-
-function canSwipe() {
-
-    if (isPremium()) {
-
-        return true;
-
-    }
-
-
-    const data =
-        getSwipeData();
-
-
-    if (data.count >= 30) {
-
-        alert(
-            "You have reached your 30 daily swipes. Upgrade to Rishta Plus for unlimited swipes."
-        );
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-function recordSwipe(profileId) {
-
-    const data =
-        getSwipeData();
-
-
-    if (!data.seen.includes(profileId)) {
-
-        data.seen.push(
-            profileId
-        );
-
-    }
-
-
-    data.count++;
-
-
-    saveData(
-        STORAGE.SWIPES,
-        data
-    );
-
-
-    updateSwipeCounters();
-
-}
-
-
-function swipePass() {
-
-    if (!currentSwipeProfile) {
-
-        loadSwipeScreen();
-
-        return;
-    }
-
-
-    if (!canSwipe()) {
-        return;
-    }
-
-
-    recordSwipe(
-        currentSwipeProfile.id
-    );
-
-
-    currentSwipeProfile = null;
-
-
-    loadSwipeScreen();
-
-}
-
-
-function swipeLike() {
-
-    if (!currentSwipeProfile) {
-
-        loadSwipeScreen();
-
-        return;
-    }
-
-
-    if (!canSwipe()) {
-        return;
-    }
-
-
-    const profile =
-        currentSwipeProfile;
-
-
-    recordSwipe(
-        profile.id
-    );
-
-
-    addLike(
-        profile
-    );
-
-
-    currentSwipeProfile = null;
-
-
-    loadSwipeScreen();
-
-}
-
-
-function swipeSuperLike() {
-
-    if (!currentSwipeProfile) {
-
-        loadSwipeScreen();
-
-        return;
-    }
-
-
-    if (!canSwipe()) {
-        return;
-    }
-
-
-    const premium =
-        isPremium();
-
-
-    const superData =
-        getSuperLikeData();
-
-
-    if (!premium) {
-
-        alert(
-            "Super Likes are available through Rishta Plus or rewarded ads."
-        );
-
-        return;
-
-    }
-
-
-    if (superData.count >= 5) {
-
-        alert(
-            "You have used all 5 Super Likes for today."
-        );
-
-        return;
-
-    }
-
-
-    superData.count++;
-
-
-    saveData(
-        STORAGE.SUPER_LIKES,
-        superData
-    );
-
-
-    recordSwipe(
-        currentSwipeProfile.id
-    );
-
-
-    addLike(
-        currentSwipeProfile,
-        true
-    );
-
-
-    currentSwipeProfile = null;
-
-
-    updateSwipeCounters();
-
-    loadSwipeScreen();
-
-}
-
-
-/* =========================================================
-   LIKES
-   ========================================================= */
-
-function addLike(
-    profile,
-    superLike = false
-) {
-
-    const likes =
-        loadData(
-            STORAGE.LIKES,
-            []
-        );
-
-
-    const user =
-        getCurrentUser();
-
-
-    const alreadyLiked =
-        likes.some(
-            like =>
-                like.profileId === profile.id
-        );
-
-
-    if (!alreadyLiked) {
-
-        likes.push({
-
-            id: generateId(),
-
-            profileId:
-                profile.id,
-
-            profile,
-
-            superLike,
-
-            createdAt:
-                new Date().toISOString()
-
+        save(STORAGE.CUSTOM_ICON, {
+            data: event.target.result,
+            updatedAt: new Date().toISOString()
         });
 
-
-        saveData(
-            STORAGE.LIKES,
-            likes
-        );
-
-    }
-
-
-    /*
-       Demo match:
-       A mutual match is simulated locally
-       so the complete UI can be tested
-       before the database is connected.
-    */
-
-    const match =
-        createDemoMatch(
-            profile
-        );
-
-
-    if (match) {
-
-        alert(
-            `💚 It's a Match with ${profile.fullName}!`
-        );
-
-    }
-
-}
-
-
-function renderLikes() {
-
-    const container =
-        document.getElementById(
-            "likesList"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    const likes =
-        loadData(
-            STORAGE.LIKES,
-            []
-        );
-
-
-    if (!likes.length) {
-
-        container.innerHTML =
-            `<p class="small">
-                Your likes will appear here.
-            </p>`;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        likes.map(
-            like => `
-
-                <div class="result-card">
-
-                    <h3>
-                        ❤️ ${like.profile.fullName}
-                    </h3>
-
-                    <p>
-                        ${like.profile.age},
-                        ${like.profile.city},
-                        ${like.profile.country}
-                    </p>
-
-                    <p>
-                        ${like.superLike
-                            ? "⭐ Super Liked"
-                            : "❤️ Liked"}
-                    </p>
-
-                </div>
-
-            `
-        ).join("");
-
-}
-
-
-/* =========================================================
-   MATCH SYSTEM
-   ========================================================= */
-
-function createDemoMatch(profile) {
-
-    const matches =
-        loadData(
-            STORAGE.MATCHES,
-            []
-        );
-
-
-    const exists =
-        matches.some(
-            match =>
-                match.profileId === profile.id
-        );
-
-
-    if (exists) {
-
-        return false;
-
-    }
-
-
-    const match = {
-
-        id: generateId(),
-
-        profileId:
-            profile.id,
-
-        profile,
-
-        createdAt:
-            new Date().toISOString(),
-
-        lastMessage: ""
-
+        alert("Custom icon saved.");
     };
 
-
-    matches.push(
-        match
-    );
-
-
-    saveData(
-        STORAGE.MATCHES,
-        matches
-    );
-
-
-    return true;
-
+    reader.readAsDataURL(file);
 }
-
-
-function renderMatches() {
-
-    const container =
-        document.getElementById(
-            "matchesList"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    const matches =
-        loadData(
-            STORAGE.MATCHES,
-            []
-        );
-
-
-    if (!matches.length) {
-
-        container.innerHTML =
-            `<p class="small">
-                Your matches will appear here.
-            </p>`;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        matches.map(
-            match => `
-
-                <div class="result-card">
-
-                    <h3>
-                        💚 ${match.profile.fullName}
-                    </h3>
-
-                    <p>
-                        ${match.profile.age},
-                        ${match.profile.city},
-                        ${match.profile.country}
-                    </p>
-
-                    <button
-                        type="button"
-                        class="primary"
-                        onclick="openChat('${match.profileId}')"
-                    >
-                        💬 Open Halal Chat
-                    </button>
-
-                </div>
-
-            `
-        ).join("");
-
-}
-
 
 /* =========================================================
-   CHAT
+   RESET ACTIVITY
    ========================================================= */
 
-let activeChatProfileId = null;
-
-
-function openChat(profileId) {
-
-    activeChatProfileId =
-        profileId;
-
-
-    showPage("chat");
-
-}
-
-
-function sendMessage() {
-
-    if (!activeChatProfileId) {
-
-        alert(
-            "Please open a chat from My Matches."
-        );
-
-        showPage("matches");
-
-        return;
-    }
-
-
-    const input =
-        document.getElementById(
-            "chatMessage"
-        );
-
-
-    const text =
-        input?.value.trim();
-
-
-    if (!text) {
-
-        alert(
-            "Please write a message."
-        );
-
-        return;
-    }
-
-
-    const messages =
-        loadData(
-            STORAGE.MESSAGES,
-            []
-        );
-
-
-    messages.push({
-
-        id: generateId(),
-
-        profileId:
-            activeChatProfileId,
-
-        sender: "me",
-
-        text,
-
-        createdAt:
-            new Date().toISOString()
-
+function resetActivity() {
+    save(STORAGE.SWIPES, {
+        date: todayKey(),
+        count: 0
     });
 
+    save(STORAGE.SUPERLIKES, {
+        date: todayKey(),
+        count: 0
+    });
 
-    saveData(
-        STORAGE.MESSAGES,
-        messages
-    );
-
-
-    input.value = "";
-
-
-    renderChat();
-
+    save(STORAGE.LIKES, []);
+    save(STORAGE.PASSES, []);
+    save(STORAGE.MATCHES, []);
+    save(STORAGE.MESSAGES, []);
 }
-
-
-function renderChat() {
-
-    const container =
-        document.getElementById(
-            "chatMessages"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    if (!activeChatProfileId) {
-
-        container.innerHTML =
-            `<p class="small">
-                Open a match to start chatting.
-            </p>`;
-
-        return;
-
-    }
-
-
-    const messages =
-        loadData(
-            STORAGE.MESSAGES,
-            []
-        ).filter(
-            message =>
-                message.profileId ===
-                activeChatProfileId
-        );
-
-
-    if (!messages.length) {
-
-        container.innerHTML =
-            `<p class="small">
-                No messages yet. Start with a respectful greeting.
-            </p>`;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        messages.map(
-            message => `
-
-                <div class="chat-message">
-
-                    <strong>
-                        You
-                    </strong>
-
-                    <p>
-                        ${escapeHtml(
-                            message.text
-                        )}
-                    </p>
-
-                </div>
-
-            `
-        ).join("");
-
-}
-
-
-function showHalalIcebreaker() {
-
-    const questions = [
-
-        "What are the most important values you want in marriage?",
-
-        "What role does family have in your marriage decision?",
-
-        "What qualities do you value most in a life partner?",
-
-        "What are your hopes for married life?",
-
-        "How would you like both families to be involved?"
-
-    ];
-
-
-    const question =
-        questions[
-            Math.floor(
-                Math.random() *
-                questions.length
-            )
-        ];
-
-
-    const input =
-        document.getElementById(
-            "chatMessage"
-        );
-
-
-    if (input) {
-
-        input.value =
-            question;
-
-        input.focus();
-
-    }
-
-}
-
-
-function escapeHtml(text) {
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-
-    div.textContent =
-        text;
-
-
-    return div.innerHTML;
-
-}
-
 
 /* =========================================================
-   SEARCH
+   SECURITY / HTML ESCAPING
    ========================================================= */
 
-function searchProfiles() {
-
-    const ageMin =
-        Number(
-            document.getElementById(
-                "ageMin"
-            )?.value || 0
-        );
-
-
-    const ageMax =
-        Number(
-            document.getElementById(
-                "ageMax"
-            )?.value || 0
-        );
-
-
-    const country =
-        document.getElementById(
-            "searchCountry"
-        )?.value.trim().toLowerCase();
-
-
-    const city =
-        document.getElementById(
-            "searchCity"
-        )?.value.trim().toLowerCase();
-
-
-    const religion =
-        document.getElementById(
-            "searchReligion"
-        )?.value;
-
-
-    const sect =
-        document.getElementById(
-            "searchSect"
-        )?.value;
-
-
-    const seriousIntent =
-        document.getElementById(
-            "seriousIntent"
-        )?.checked;
-
-
-    const results =
-        DEMO_PROFILES.filter(
-            profile => {
-
-                if (
-                    ageMin &&
-                    profile.age < ageMin
-                ) {
-                    return false;
-                }
-
-
-                if (
-                    ageMax &&
-                    profile.age > ageMax
-                ) {
-                    return false;
-                }
-
-
-                if (
-                    country &&
-                    !profile.country
-                        .toLowerCase()
-                        .includes(country)
-                ) {
-                    return false;
-                }
-
-
-                if (
-                    city &&
-                    !profile.city
-                        .toLowerCase()
-                        .includes(city)
-                ) {
-                    return false;
-                }
-
-
-                if (
-                    religion &&
-                    profile.religion !== religion
-                ) {
-                    return false;
-                }
-
-
-                if (
-                    sect &&
-                    profile.sect !== sect
-                ) {
-                    return false;
-                }
-
-
-                if (
-                    seriousIntent &&
-                    !profile.seriousIntent
-                ) {
-                    return false;
-                }
-
-
-                return true;
-
-            }
-        );
-
-
-    const container =
-        document.getElementById(
-            "searchResults"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    if (!results.length) {
-
-        container.innerHTML =
-            `<p class="small">
-                No matching profiles found.
-            </p>`;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        results.map(
-            profile => `
-
-                <div class="result-card">
-
-                    <h3>
-                        💚 ${profile.fullName},
-                        ${profile.age}
-                    </h3>
-
-                    <p>
-                        ${profile.city},
-                        ${profile.country}
-                    </p>
-
-                    <p>
-                        ${profile.profession}
-                    </p>
-
-                    <p>
-                        ${profile.about}
-                    </p>
-
-                    <button
-                        type="button"
-                        class="primary"
-                        onclick="likeSearchProfile('${profile.id}')"
-                    >
-                        ❤️ Like
-                    </button>
-
-                </div>
-
-            `
-        ).join("");
-
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
-
-
-function likeSearchProfile(profileId) {
-
-    const profile =
-        DEMO_PROFILES.find(
-            item =>
-                item.id === profileId
-        );
-
-
-    if (!profile) {
-        return;
-    }
-
-
-    if (!canSwipe()) {
-        return;
-    }
-
-
-    recordSwipe(
-        profile.id
-    );
-
-
-    addLike(
-        profile
-    );
-
-
-    alert(
-        `❤️ You liked ${profile.fullName}.`
-    );
-
-}
-
 
 /* =========================================================
-   REWARDED AD PLACEHOLDER
-   =========================================================
-   Real ad network will be connected later.
-   This test version grants 3 Super Likes.
+   PHOTO INPUT EVENT
    ========================================================= */
 
-function watchRewardedAd() {
+document.addEventListener("DOMContentLoaded", () => {
 
-    if (isPremium()) {
+    applySavedSettings();
 
-        alert(
-            "Rishta Plus members already have premium Super Likes."
-        );
+    const photoInput =
+        document.getElementById("photoInput");
 
-        return;
-
-    }
-
-
-    const superData =
-        getSuperLikeData();
-
-
-    superData.count += 3;
-
-
-    saveData(
-        STORAGE.SUPER_LIKES,
-        superData
-    );
-
-
-    updateSwipeCounters();
-
-
-    alert(
-        "🎉 Test Reward: 3 Super Likes added!"
-    );
-
-}
-
-
-/* =========================================================
-   LANGUAGE
-   ========================================================= */
-
-function setupLanguage() {
-
-    const select =
-        document.getElementById(
-            "languageSelect"
-        );
-
-
-    const settings =
-        loadData(
-            STORAGE.SETTINGS,
-            DEFAULT_SETTINGS
-        );
-
-
-    if (select) {
-
-        select.value =
-            settings.language || "en";
-
-
-        select.addEventListener(
+    if (photoInput) {
+        photoInput.addEventListener(
             "change",
             function() {
 
-                settings.language =
-                    this.value;
+                Array.from(this.files)
+                    .forEach(file => addPhoto(file));
 
-
-                saveData(
-                    STORAGE.SETTINGS,
-                    settings
-                );
-
+                this.value = "";
             }
         );
-
     }
 
-}
+    const languageSelect =
+        document.getElementById("languageSelect");
 
-
-/* =========================================================
-   INITIALIZATION
-   ========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        setupLanguage();
-
+    if (languageSelect) {
 
         const settings =
-            loadData(
+            load(
                 STORAGE.SETTINGS,
                 DEFAULT_SETTINGS
             );
 
+        languageSelect.value =
+            settings.language || "en";
 
-        applyDarkMode(
-            settings.darkMode
+        languageSelect.addEventListener(
+            "change",
+            function() {
+
+                const current =
+                    load(
+                        STORAGE.SETTINGS,
+                        DEFAULT_SETTINGS
+                    );
+
+                current.language =
+                    this.value;
+
+                save(STORAGE.SETTINGS, current);
+
+                alert(
+                    "Language preference saved."
+                );
+            }
         );
-
-
-        /*
-           Automatically connect photo input
-           to addPhoto().
-        */
-
-        const photoInput =
-            document.getElementById(
-                "photoInput"
-            );
-
-
-        if (photoInput) {
-
-            photoInput.addEventListener(
-                "change",
-                addPhoto
-            );
-
-        }
-
-
-        updateDashboard();
-
     }
-);
+
+    if (isLoggedIn()) {
+        updateDashboard();
+    }
+});
+
+/* =========================================================
+   GLOBAL ERROR REPORTING
+   ========================================================= */
+
+window.addEventListener("error", function(event) {
+    console.error(
+        "Halal Rishta JavaScript Error:",
+        event.error || event.message
+    );
+});
+
+/* =========================================================
+   END
+   ========================================================= */
