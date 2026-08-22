@@ -34,6 +34,10 @@
         💚 Halal Rishta
     </div>
 
+    <!-- =====================================================
+         LANGUAGE SELECTOR - EXACTLY 32 LANGUAGES
+         ===================================================== -->
+
     <select
         id="languageSelect"
         aria-label="Language"
@@ -62,15 +66,16 @@
         <option value="sq">Shqip</option>
         <option value="so">Soomaali</option>
         <option value="sw">Kiswahili</option>
+        <option value="ha">Hausa</option>
         <option value="bn">বাংলা</option>
-        <option value="ug">Ugandan English</option>
-        <option value="ng">Nigerian English</option>
         <option value="fi">Suomi</option>
         <option value="cs">Čeština</option>
         <option value="sl">Slovenščina</option>
         <option value="sk">Slovenčina</option>
         <option value="bg">Български</option>
         <option value="hu">Magyar</option>
+        <option value="uz">O‘zbek</option>
+        <option value="de">Deutsch</option>
 
     </select>
 
@@ -80,7 +85,9 @@
 <main>
 
 
-<!-- HOME -->
+<!-- =====================================================
+     HOME
+     ===================================================== -->
 
 <section id="home" class="page active">
 
@@ -124,7 +131,9 @@
 </section>
 
 
-<!-- REGISTER -->
+<!-- =====================================================
+     REGISTER
+     ===================================================== -->
 
 <section id="register" class="page">
 
@@ -190,7 +199,9 @@
 </section>
 
 
-<!-- LOGIN -->
+<!-- =====================================================
+     LOGIN
+     ===================================================== -->
 
 <section id="login" class="page">
 
@@ -248,7 +259,9 @@
 </section>
 
 
-<!-- APP / DASHBOARD -->
+<!-- =====================================================
+     APP / DASHBOARD
+     ===================================================== -->
 
 <section id="app" class="page">
 
@@ -455,7 +468,9 @@
 </section>
 
 
-<!-- SWIPE -->
+<!-- =====================================================
+     SWIPE
+     ===================================================== -->
 
 <section id="swipe" class="page">
 
@@ -580,7 +595,9 @@
 </section>
 
 
-<!-- PROFILE -->
+<!-- =====================================================
+     PROFILE
+     ===================================================== -->
 
 <section id="profile" class="page">
 
@@ -716,7 +733,9 @@
 </section>
 
 
-<!-- PHOTOS -->
+<!-- =====================================================
+     PHOTOS
+     ===================================================== -->
 
 <section id="photos" class="page">
 
@@ -755,7 +774,9 @@
 </section>
 
 
-<!-- SEARCH -->
+<!-- =====================================================
+     SEARCH
+     ===================================================== -->
 
 <section id="search" class="page">
 
@@ -889,7 +910,9 @@
 </section>
 
 
-<!-- LIKES -->
+<!-- =====================================================
+     LIKES
+     ===================================================== -->
 
 <section id="likes" class="page">
 
@@ -920,7 +943,9 @@
 </section>
 
 
-<!-- MATCHES -->
+<!-- =====================================================
+     MATCHES
+     ===================================================== -->
 
 <section id="matches" class="page">
 
@@ -951,7 +976,9 @@
 </section>
 
 
-<!-- SETTINGS -->
+<!-- =====================================================
+     SETTINGS
+     ===================================================== -->
 
 <section id="settings" class="page">
 
@@ -1004,7 +1031,9 @@
 </section>
 
 
-<!-- PRIVACY -->
+<!-- =====================================================
+     PRIVACY
+     ===================================================== -->
 
 <section id="privacy" class="page">
 
@@ -1088,7 +1117,9 @@
 </section>
 
 
-<!-- APP SETTINGS -->
+<!-- =====================================================
+     APP SETTINGS
+     ===================================================== -->
 
 <section id="appSettings" class="page">
 
@@ -1123,7 +1154,9 @@
 </section>
 
 
-<!-- PURCHASES -->
+<!-- =====================================================
+     PURCHASES
+     ===================================================== -->
 
 <section id="purchases" class="page">
 
@@ -1165,7 +1198,9 @@
 </section>
 
 
-<!-- RISHTA PLUS -->
+<!-- =====================================================
+     RISHTA PLUS
+     ===================================================== -->
 
 <section id="package" class="page">
 
@@ -1235,7 +1270,9 @@
 </section>
 
 
-<!-- CUSTOM ICON -->
+<!-- =====================================================
+     CUSTOM ICON
+     ===================================================== -->
 
 <section id="customIcon" class="page">
 
@@ -1277,7 +1314,9 @@
 </section>
 
 
-<!-- WALI / GUARDIAN -->
+<!-- =====================================================
+     WALI / GUARDIAN
+     ===================================================== -->
 
 <section id="guardian" class="page">
 
@@ -1325,7 +1364,9 @@
 </section>
 
 
-<!-- CHAT -->
+<!-- =====================================================
+     CHAT
+     ===================================================== -->
 
 <section id="chat" class="page">
 
@@ -1382,16 +1423,31 @@
 </main>
 
 
+<!-- =====================================================
+     MAIN SCRIPT
+     ===================================================== -->
+
 <script src="script.js"></script>
 
 
 <!-- =====================================================
-     LANGUAGE SELECTION
+     HALAL RISHTA - 32 LANGUAGE SYSTEM
      ===================================================== -->
 
 <script>
 
+"use strict";
+
+
+/*
+===========================================================
+HALAL RISHTA
+EXACTLY 32 SUPPORTED LANGUAGES
+===========================================================
+*/
+
 const HALAL_RISHTA_LANGUAGES = [
+
     "en",
     "ar",
     "es",
@@ -1414,17 +1470,69 @@ const HALAL_RISHTA_LANGUAGES = [
     "sq",
     "so",
     "sw",
+    "ha",
     "bn",
-    "ug",
-    "ng",
     "fi",
     "cs",
     "sl",
     "sk",
     "bg",
-    "hu"
+    "hu",
+    "uz",
+    "de"
+
 ];
 
+
+/*
+===========================================================
+LANGUAGE NAMES
+===========================================================
+*/
+
+const HALAL_RISHTA_LANGUAGE_NAMES = {
+
+    en: "English",
+    ar: "العربية",
+    es: "Español",
+    it: "Italiano",
+    fr: "Français",
+    nl: "Nederlands",
+    el: "Ελληνικά",
+    tr: "Türkçe",
+    fa: "فارسی",
+    hi: "हिन्दी",
+    pl: "Polski",
+    ro: "Română",
+    zh: "中文",
+    ru: "Русский",
+    pt: "Português",
+    ms: "Bahasa Melayu",
+    id: "Bahasa Indonesia",
+    fil: "Filipino",
+    th: "ไทย",
+    sq: "Shqip",
+    so: "Soomaali",
+    sw: "Kiswahili",
+    ha: "Hausa",
+    bn: "বাংলা",
+    fi: "Suomi",
+    cs: "Čeština",
+    sl: "Slovenščina",
+    sk: "Slovenčina",
+    bg: "Български",
+    hu: "Magyar",
+    uz: "O‘zbek",
+    de: "Deutsch"
+
+};
+
+
+/*
+===========================================================
+CHANGE LANGUAGE
+===========================================================
+*/
 
 function changeLanguage(language) {
 
@@ -1441,19 +1549,26 @@ function changeLanguage(language) {
     );
 
 
-    document.documentElement.lang = language;
+    document.documentElement.lang =
+        language;
 
+
+    /*
+    Arabic and Persian use RTL.
+    */
 
     if (
         language === "ar" ||
         language === "fa"
     ) {
 
-        document.documentElement.dir = "rtl";
+        document.documentElement.dir =
+            "rtl";
 
     } else {
 
-        document.documentElement.dir = "ltr";
+        document.documentElement.dir =
+            "ltr";
 
     }
 
@@ -1466,46 +1581,92 @@ function changeLanguage(language) {
 
     if (selector) {
 
-        selector.value = language;
+        selector.value =
+            language;
 
     }
 
 
+    window.currentLanguage =
+        language;
+
+
     /*
-     * If the new translation system exists
-     * inside script.js, run it automatically.
-     */
+    Connect with translation system
+    if script.js contains applyTranslations().
+    */
 
     if (
         typeof window.applyTranslations ===
         "function"
     ) {
 
-        window.applyTranslations(language);
+        try {
+
+            window.applyTranslations(
+                language
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Translation error:",
+                error
+            );
+
+        }
 
     }
-
-
-    window.currentLanguage = language;
 
 }
 
 
 /*
- * Restore saved language.
- */
+===========================================================
+GET CURRENT LANGUAGE
+===========================================================
+*/
+
+function getCurrentLanguage() {
+
+    const saved =
+        localStorage.getItem(
+            "halal_rishta_language"
+        );
+
+
+    if (
+        saved &&
+        HALAL_RISHTA_LANGUAGES.includes(saved)
+    ) {
+
+        return saved;
+
+    }
+
+
+    return "en";
+
+}
+
+
+/*
+===========================================================
+RESTORE LANGUAGE
+===========================================================
+*/
 
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-        const savedLanguage =
-            localStorage.getItem(
-                "halal_rishta_language"
-            ) || "en";
+        const language =
+            getCurrentLanguage();
 
 
-        changeLanguage(savedLanguage);
+        changeLanguage(
+            language
+        );
 
     }
 );
@@ -1513,4 +1674,4 @@ document.addEventListener(
 </script>
 
 </body>
-            </html>
+</html>
