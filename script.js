@@ -498,516 +498,772 @@ it: {
     "Notifications":"Notifiche",
     "Dark Mode":"Modalità scura",
     "$2 / month":"2 $ / mese"
+       "Password":"Nenosiri",
+    "My Account":"Akaunti Yangu",
+    "Free":"Bure",
+    "Profile":"Wasifu",
+    "Photos":"Picha",
+    "Settings":"Mipangilio",
+    "Privacy":"Faragha",
+    "Logout":"Ondoka",
+    "Pass":"Ruka",
+    "Like":"Penda",
+    "Super Like":"Penda Zaidi",
+    "Search":"Tafuta",
+    "Male":"Mwanaume",
+    "Female":"Mwanamke",
+    "Country":"Nchi",
+    "City":"Jiji",
+    "Education":"Elimu",
+    "Profession":"Kazi",
+    "Notifications":"Arifa",
+    "Dark Mode":"Hali ya Giza",
+    "$2 / month":"$2 / mwezi"
 },
 
-fr: {
-    "Create Account":"Créer un compte",
-    "Login":"Connexion",
-    "Back":"Retour",
-    "Full Name":"Nom complet",
+ha: {
+    "Create Account":"Ƙirƙiri Asusu",
+    "Login":"Shiga",
+    "Back":"Koma",
+    "Full Name":"Cikakken Suna",
+    "Email":"Imel",
+    "Password":"Kalmar sirri",
+    "My Account":"Asusuna",
+    "Free":"Kyauta",
+    "Profile":"Bayani",
+    "Photos":"Hotuna",
+    "Settings":"Saituna",
+    "Privacy":"Sirri",
+    "Logout":"Fita",
+    "Pass":"Tsallake",
+    "Like":"So",
+    "Super Like":"Babban So",
+    "Search":"Nema",
+    "Male":"Namiji",
+    "Female":"Mace",
+    "Country":"Ƙasa",
+    "City":"Birni",
+    "Education":"Ilimi",
+    "Profession":"Sana'a",
+    "Notifications":"Sanarwa",
+    "Dark Mode":"Yanayin Duhu",
+    "$2 / month":"$2 / wata"
+},
+
+bn: {
+    "Create Account":"অ্যাকাউন্ট তৈরি করুন",
+    "Login":"লগইন",
+    "Back":"ফিরে যান",
+    "Full Name":"পূর্ণ নাম",
+    "Email":"ইমেইল",
+    "Password":"পাসওয়ার্ড",
+    "My Account":"আমার অ্যাকাউন্ট",
+    "Free":"ফ্রি",
+    "Profile":"প্রোফাইল",
+    "Photos":"ছবি",
+    "Settings":"সেটিংস",
+    "Privacy":"গোপনীয়তা",
+    "Logout":"লগআউট",
+    "Pass":"এড়িয়ে যান",
+    "Like":"পছন্দ",
+    "Super Like":"সুপার লাইক",
+    "Search":"অনুসন্ধান",
+    "Male":"পুরুষ",
+    "Female":"মহিলা",
+    "Country":"দেশ",
+    "City":"শহর",
+    "Education":"শিক্ষা",
+    "Profession":"পেশা",
+    "Notifications":"বিজ্ঞপ্তি",
+    "Dark Mode":"ডার্ক মোড",
+    "$2 / month":"$2 / মাস"
+},
+
+fi: {
+    "Create Account":"Luo tili",
+    "Login":"Kirjaudu",
+    "Back":"Takaisin",
+    "Full Name":"Koko nimi",
+    "Email":"Sähköposti",
+    "Password":"Salasana",
+    "My Account":"Oma tili",
+    "Free":"Ilmainen",
+    "Profile":"Profiili",
+    "Photos":"Kuvat",
+    "Settings":"Asetukset",
+    "Privacy":"Yksityisyys",
+    "Logout":"Kirjaudu ulos",
+    "Pass":"Ohita",
+    "Like":"Tykkää",
+    "Super Like":"Super Tykkäys",
+    "Search":"Haku",
+    "Male":"Mies",
+    "Female":"Nainen",
+    "Country":"Maa",
+    "City":"Kaupunki",
+    "Education":"Koulutus",
+    "Profession":"Ammatti",
+    "Notifications":"Ilmoitukset",
+    "Dark Mode":"Tumma tila",
+    "$2 / month":"2 $ / kuukausi"
+},
+
+cs: {
+    "Create Account":"Vytvořit účet",
+    "Login":"Přihlásit se",
+    "Back":"Zpět",
+    "Full Name":"Celé jméno",
     "Email":"E-mail",
-    "Password":"Mot de passe",
-    "My Account":"Mon compte",
-    "Free":"Gratuit",
-    "Your Plan":"Votre forfait",
+    "Password":"Heslo",
+    "My Account":"Můj účet",
+    "Free":"Zdarma",
     "Profile":"Profil",
-    "Photos":"Photos",
-    "Settings":"Paramètres",
-    "Privacy":"Confidentialité",
-    "Logout":"Déconnexion",
-    "Pass":"Passer",
-    "Like":"J'aime",
+    "Photos":"Fotografie",
+    "Settings":"Nastavení",
+    "Privacy":"Soukromí",
+    "Logout":"Odhlásit se",
+    "Pass":"Přeskočit",
+    "Like":"To se mi líbí",
     "Super Like":"Super Like",
-    "Save Profile":"Enregistrer le profil",
-    "Save Settings":"Enregistrer les paramètres",
-    "Search":"Rechercher",
-    "Male":"Homme",
-    "Female":"Femme",
-    "Country":"Pays",
-    "City":"Ville",
-    "Education":"Éducation",
-    "Profession":"Profession",
-    "Phone":"Téléphone",
-    "About me":"À propos de moi",
-    "Notifications":"Notifications",
-    "Dark Mode":"Mode sombre",
-    "$2 / month":"2 $ / mois"
+    "Search":"Hledat",
+    "Male":"Muž",
+    "Female":"Žena",
+    "Country":"Země",
+    "City":"Město",
+    "Education":"Vzdělání",
+    "Profession":"Povolání",
+    "Notifications":"Oznámení",
+    "Dark Mode":"Tmavý režim",
+    "$2 / month":"2 $ / měsíc"
 },
 
-nl: {
-    "Create Account":"Account aanmaken",
-    "Login":"Inloggen",
-    "Back":"Terug",
-    "Full Name":"Volledige naam",
+sl: {
+    "Create Account":"Ustvari račun",
+    "Login":"Prijava",
+    "Back":"Nazaj",
+    "Full Name":"Polno ime",
+    "Email":"E-pošta",
+    "Password":"Geslo",
+    "My Account":"Moj račun",
+    "Free":"Brezplačno",
+    "Profile":"Profil",
+    "Photos":"Fotografije",
+    "Settings":"Nastavitve",
+    "Privacy":"Zasebnost",
+    "Logout":"Odjava",
+    "Pass":"Preskoči",
+    "Like":"Všeč mi je",
+    "Super Like":"Super všeček",
+    "Search":"Išči",
+    "Male":"Moški",
+    "Female":"Ženska",
+    "Country":"Država",
+    "City":"Mesto",
+    "Education":"Izobrazba",
+    "Profession":"Poklic",
+    "Notifications":"Obvestila",
+    "Dark Mode":"Temni način",
+    "$2 / month":"2 $ / mesec"
+},
+
+sk: {
+    "Create Account":"Vytvoriť účet",
+    "Login":"Prihlásiť sa",
+    "Back":"Späť",
+    "Full Name":"Celé meno",
     "Email":"E-mail",
-    "Password":"Wachtwoord",
-    "My Account":"Mijn account",
-    "Free":"Gratis",
-    "Your Plan":"Jouw abonnement",
-    "Profile":"Profiel",
-    "Photos":"Foto's",
-    "Settings":"Instellingen",
-    "Privacy":"Privacy",
-    "Logout":"Uitloggen",
-    "Pass":"Overslaan",
-    "Like":"Vind ik leuk",
-    "Super Like":"Super Like",
-    "Search":"Zoeken",
-    "Male":"Man",
-    "Female":"Vrouw",
-    "Country":"Land",
-    "City":"Stad",
-    "Education":"Opleiding",
-    "Profession":"Beroep",
-    "Phone":"Telefoon",
-    "Notifications":"Meldingen",
-    "Dark Mode":"Donkere modus",
-    "$2 / month":"$2 / maand"
-},
-
-el: {
-    "Create Account":"Δημιουργία λογαριασμού",
-    "Login":"Σύνδεση",
-    "Back":"Πίσω",
-    "Full Name":"Πλήρες όνομα",
-    "Email":"Email",
-    "Password":"Κωδικός πρόσβασης",
-    "My Account":"Ο λογαριασμός μου",
-    "Free":"Δωρεάν",
-    "Profile":"Προφίλ",
-    "Photos":"Φωτογραφίες",
-    "Settings":"Ρυθμίσεις",
-    "Privacy":"Απόρρητο",
-    "Logout":"Αποσύνδεση",
-    "Pass":"Παράλειψη",
-    "Like":"Μου αρέσει",
-    "Super Like":"Super Like",
-    "Search":"Αναζήτηση",
-    "Male":"Άνδρας",
-    "Female":"Γυναίκα",
-    "Country":"Χώρα",
-    "City":"Πόλη",
-    "Education":"Εκπαίδευση",
-    "Profession":"Επάγγελμα",
-    "Notifications":"Ειδοποιήσεις",
-    "Dark Mode":"Σκοτεινή λειτουργία",
-    "$2 / month":"2 $ / μήνα"
-},
-
-tr: {
-    "Create Account":"Hesap Oluştur",
-    "Login":"Giriş Yap",
-    "Back":"Geri",
-    "Full Name":"Ad Soyad",
-    "Email":"E-posta",
-    "Password":"Şifre",
-    "My Account":"Hesabım",
-    "Free":"Ücretsiz",
-    "Your Plan":"Planınız",
+    "Password":"Heslo",
+    "My Account":"Môj účet",
+    "Free":"Zdarma",
     "Profile":"Profil",
-    "Photos":"Fotoğraflar",
-    "Settings":"Ayarlar",
-    "Privacy":"Gizlilik",
-    "Logout":"Çıkış Yap",
-    "Pass":"Geç",
-    "Like":"Beğen",
-    "Super Like":"Süper Beğeni",
-    "Save Profile":"Profili Kaydet",
-    "Search":"Ara",
-    "Male":"Erkek",
-    "Female":"Kadın",
-    "Country":"Ülke",
-    "City":"Şehir",
-    "Education":"Eğitim",
-    "Profession":"Meslek",
-    "Notifications":"Bildirimler",
-    "Dark Mode":"Karanlık Mod",
-    "$2 / month":"Ayda 2 $"
-},
-
-fa: {
-    "Create Account":"ایجاد حساب",
-    "Login":"ورود",
-    "Back":"بازگشت",
-    "Full Name":"نام کامل",
-    "Email":"ایمیل",
-    "Password":"رمز عبور",
-    "My Account":"حساب من",
-    "Free":"رایگان",
-    "Profile":"پروفایل",
-    "Photos":"عکس‌ها",
-    "Settings":"تنظیمات",
-    "Privacy":"حریم خصوصی",
-    "Logout":"خروج",
-    "Pass":"رد کردن",
-    "Like":"پسندیدن",
-    "Super Like":"پسند ویژه",
-    "Search":"جستجو",
-    "Male":"مرد",
-    "Female":"زن",
-    "Country":"کشور",
-    "City":"شهر",
-    "Education":"تحصیلات",
-    "Profession":"شغل",
-    "Notifications":"اعلان‌ها",
-    "Dark Mode":"حالت تاریک",
-    "$2 / month":"۲ دلار / ماه"
-},
-
-hi: {
-    "Create Account":"खाता बनाएं",
-    "Login":"लॉगिन",
-    "Back":"वापस",
-    "Full Name":"पूरा नाम",
-    "Email":"ईमेल",
-    "Password":"पासवर्ड",
-    "My Account":"मेरा खाता",
-    "Free":"मुफ्त",
-    "Profile":"प्रोफ़ाइल",
-    "Photos":"फ़ोटो",
-    "Settings":"सेटिंग्स",
-    "Privacy":"गोपनीयता",
-    "Logout":"लॉग आउट",
-    "Pass":"पास",
-    "Like":"पसंद",
-    "Super Like":"सुपर लाइक",
-    "Search":"खोजें",
-    "Male":"पुरुष",
-    "Female":"महिला",
-    "Country":"देश",
-    "City":"शहर",
-    "Education":"शिक्षा",
-    "Profession":"पेशा",
-    "Notifications":"सूचनाएं",
-    "Dark Mode":"डार्क मोड",
-    "$2 / month":"$2 / माह"
-},
-
-pl: {
-    "Create Account":"Utwórz konto",
-    "Login":"Zaloguj się",
-    "Back":"Wstecz",
-    "Full Name":"Imię i nazwisko",
-    "Email":"E-mail",
-    "Password":"Hasło",
-    "My Account":"Moje konto",
-    "Free":"Darmowy",
-    "Profile":"Profil",
-    "Photos":"Zdjęcia",
-    "Settings":"Ustawienia",
-    "Privacy":"Prywatność",
-    "Logout":"Wyloguj",
-    "Pass":"Pomiń",
-    "Like":"Lubię to",
+    "Photos":"Fotografie",
+    "Settings":"Nastavenia",
+    "Privacy":"Súkromie",
+    "Logout":"Odhlásiť sa",
+    "Pass":"Preskočiť",
+    "Like":"Páči sa mi",
     "Super Like":"Super Like",
-    "Search":"Szukaj",
-    "Male":"Mężczyzna",
-    "Female":"Kobieta",
-    "Country":"Kraj",
-    "City":"Miasto",
-    "Education":"Wykształcenie",
-    "Profession":"Zawód",
-    "Notifications":"Powiadomienia",
-    "Dark Mode":"Tryb ciemny",
-    "$2 / month":"2 $ / miesiąc"
+    "Search":"Hľadať",
+    "Male":"Muž",
+    "Female":"Žena",
+    "Country":"Krajina",
+    "City":"Mesto",
+    "Education":"Vzdelanie",
+    "Profession":"Povolanie",
+    "Notifications":"Oznámenia",
+    "Dark Mode":"Tmavý režim",
+    "$2 / month":"2 $ / mesiac"
 },
 
-ro: {
-    "Create Account":"Creează cont",
-    "Login":"Autentificare",
-    "Back":"Înapoi",
-    "Full Name":"Nume complet",
-    "Email":"E-mail",
-    "Password":"Parolă",
-    "My Account":"Contul meu",
-    "Free":"Gratuit",
-    "Profile":"Profil",
-    "Photos":"Fotografii",
-    "Settings":"Setări",
-    "Privacy":"Confidențialitate",
-    "Logout":"Deconectare",
-    "Pass":"Treci peste",
-    "Like":"Îmi place",
-    "Super Like":"Super Like",
-    "Search":"Caută",
-    "Male":"Bărbat",
-    "Female":"Femeie",
-    "Country":"Țară",
-    "City":"Oraș",
-    "Education":"Educație",
-    "Profession":"Profesie",
-    "Notifications":"Notificări",
-    "Dark Mode":"Mod întunecat",
-    "$2 / month":"2 $ / lună"
-},
-
-zh: {
-    "Create Account":"创建账户",
-    "Login":"登录",
-    "Back":"返回",
-    "Full Name":"姓名",
-    "Email":"电子邮件",
-    "Password":"密码",
-    "My Account":"我的账户",
-    "Free":"免费",
-    "Profile":"个人资料",
-    "Photos":"照片",
-    "Settings":"设置",
-    "Privacy":"隐私",
-    "Logout":"退出登录",
-    "Pass":"跳过",
-    "Like":"喜欢",
-    "Super Like":"超级喜欢",
-    "Search":"搜索",
-    "Male":"男性",
-    "Female":"女性",
-    "Country":"国家",
-    "City":"城市",
-    "Education":"教育",
-    "Profession":"职业",
-    "Notifications":"通知",
-    "Dark Mode":"深色模式",
-    "$2 / month":"每月 2 美元"
-},
-
-ru: {
-    "Create Account":"Создать аккаунт",
-    "Login":"Войти",
+bg: {
+    "Create Account":"Създаване на акаунт",
+    "Login":"Вход",
     "Back":"Назад",
-    "Full Name":"Полное имя",
-    "Email":"Электронная почта",
-    "Password":"Пароль",
-    "My Account":"Мой аккаунт",
-    "Free":"Бесплатно",
-    "Profile":"Профиль",
-    "Photos":"Фотографии",
+    "Full Name":"Пълно име",
+    "Email":"Имейл",
+    "Password":"Парола",
+    "My Account":"Моят акаунт",
+    "Free":"Безплатно",
+    "Profile":"Профил",
+    "Photos":"Снимки",
     "Settings":"Настройки",
-    "Privacy":"Конфиденциальность",
-    "Logout":"Выйти",
-    "Pass":"Пропустить",
-    "Like":"Нравится",
-    "Super Like":"Суперлайк",
-    "Search":"Поиск",
-    "Male":"Мужчина",
-    "Female":"Женщина",
-    "Country":"Страна",
-    "City":"Город",
+    "Privacy":"Поверителност",
+    "Logout":"Изход",
+    "Pass":"Пропусни",
+    "Like":"Харесвам",
+    "Super Like":"Супер харесване",
+    "Search":"Търсене",
+    "Male":"Мъж",
+    "Female":"Жена",
+    "Country":"Държава",
+    "City":"Град",
     "Education":"Образование",
-    "Profession":"Профессия",
-    "Notifications":"Уведомления",
-    "Dark Mode":"Тёмный режим",
-    "$2 / month":"2 $ / месяц"
+    "Profession":"Професия",
+    "Notifications":"Известия",
+    "Dark Mode":"Тъмен режим",
+    "$2 / month":"2 $ / месец"
 },
 
-pt: {
-    "Create Account":"Criar conta",
-    "Login":"Entrar",
-    "Back":"Voltar",
-    "Full Name":"Nome completo",
+hu: {
+    "Create Account":"Fiók létrehozása",
+    "Login":"Bejelentkezés",
+    "Back":"Vissza",
+    "Full Name":"Teljes név",
     "Email":"E-mail",
-    "Password":"Senha",
-    "My Account":"Minha conta",
-    "Free":"Grátis",
-    "Profile":"Perfil",
+    "Password":"Jelszó",
+    "My Account":"Fiókom",
+    "Free":"Ingyenes",
+    "Profile":"Profil",
+    "Photos":"Fotók",
+    "Settings":"Beállítások",
+    "Privacy":"Adatvédelem",
+    "Logout":"Kijelentkezés",
+    "Pass":"Kihagyás",
+    "Like":"Tetszik",
+    "Super Like":"Szuper kedvelés",
+    "Search":"Keresés",
+    "Male":"Férfi",
+    "Female":"Nő",
+    "Country":"Ország",
+    "City":"Város",
+    "Education":"Oktatás",
+    "Profession":"Foglalkozás",
+    "Notifications":"Értesítések",
+    "Dark Mode":"Sötét mód",
+    "$2 / month":"2 $ / hónap"
+},
+
+uz: {
+    "Create Account":"Hisob yaratish",
+    "Login":"Kirish",
+    "Back":"Orqaga",
+    "Full Name":"To‘liq ism",
+    "Email":"Elektron pochta",
+    "Password":"Parol",
+    "My Account":"Mening hisobim",
+    "Free":"Bepul",
+    "Profile":"Profil",
+    "Photos":"Rasmlar",
+    "Settings":"Sozlamalar",
+    "Privacy":"Maxfiylik",
+    "Logout":"Chiqish",
+    "Pass":"O‘tkazib yuborish",
+    "Like":"Yoqdi",
+    "Super Like":"Super yoqdi",
+    "Search":"Qidirish",
+    "Male":"Erkak",
+    "Female":"Ayol",
+    "Country":"Mamlakat",
+    "City":"Shahar",
+    "Education":"Ta’lim",
+    "Profession":"Kasb",
+    "Notifications":"Bildirishnomalar",
+    "Dark Mode":"Qorong‘i rejim",
+    "$2 / month":"$2 / oy"
+},
+
+de: {
+    "Create Account":"Konto erstellen",
+    "Login":"Anmelden",
+    "Back":"Zurück",
+    "Full Name":"Vollständiger Name",
+    "Email":"E-Mail",
+    "Password":"Passwort",
+    "My Account":"Mein Konto",
+    "Free":"Kostenlos",
+    "Profile":"Profil",
     "Photos":"Fotos",
-    "Settings":"Configurações",
-    "Privacy":"Privacidade",
-    "Logout":"Sair",
-    "Pass":"Passar",
-    "Like":"Curtir",
+    "Settings":"Einstellungen",
+    "Privacy":"Datenschutz",
+    "Logout":"Abmelden",
+    "Pass":"Überspringen",
+    "Like":"Gefällt mir",
     "Super Like":"Super Like",
-    "Search":"Pesquisar",
-    "Male":"Homem",
-    "Female":"Mulher",
-    "Country":"País",
-    "City":"Cidade",
-    "Education":"Educação",
-    "Profession":"Profissão",
-    "Notifications":"Notificações",
-    "Dark Mode":"Modo escuro",
-    "$2 / month":"2 $ / mês"
-},
+    "Search":"Suchen",
+    "Male":"Männlich",
+    "Female":"Weiblich",
+    "Country":"Land",
+    "City":"Stadt",
+    "Education":"Bildung",
+    "Profession":"Beruf",
+    "Notifications":"Benachrichtigungen",
+    "Dark Mode":"Dunkelmodus",
+    "$2 / month":"2 $ / Monat"
+}
 
-ms: {
-    "Create Account":"Cipta Akaun",
-    "Login":"Log Masuk",
-    "Back":"Kembali",
-    "Full Name":"Nama Penuh",
-    "Email":"E-mel",
-    "Password":"Kata Laluan",
-    "My Account":"Akaun Saya",
-    "Free":"Percuma",
-    "Profile":"Profil",
-    "Photos":"Foto",
-    "Settings":"Tetapan",
-    "Privacy":"Privasi",
-    "Logout":"Log Keluar",
-    "Pass":"Langkau",
-    "Like":"Suka",
-    "Super Like":"Super Like",
-    "Search":"Cari",
-    "Male":"Lelaki",
-    "Female":"Perempuan",
-    "Country":"Negara",
-    "City":"Bandar",
-    "Education":"Pendidikan",
-    "Profession":"Pekerjaan",
-    "Notifications":"Pemberitahuan",
-    "Dark Mode":"Mod Gelap",
-    "$2 / month":"$2 / bulan"
-},
+};
 
-id: {
-    "Create Account":"Buat Akun",
-    "Login":"Masuk",
-    "Back":"Kembali",
-    "Full Name":"Nama Lengkap",
-    "Email":"Email",
-    "Password":"Kata Sandi",
-    "My Account":"Akun Saya",
-    "Free":"Gratis",
-    "Profile":"Profil",
-    "Photos":"Foto",
-    "Settings":"Pengaturan",
-    "Privacy":"Privasi",
-    "Logout":"Keluar",
-    "Pass":"Lewati",
-    "Like":"Suka",
-    "Super Like":"Super Like",
-    "Search":"Cari",
-    "Male":"Pria",
-    "Female":"Wanita",
-    "Country":"Negara",
-    "City":"Kota",
-    "Education":"Pendidikan",
-    "Profession":"Profesi",
-    "Notifications":"Notifikasi",
-    "Dark Mode":"Mode Gelap",
-    "$2 / month":"$2 / bulan"
-},
+/* =========================================================
+   TRANSLATION FUNCTIONS
+   ========================================================= */
 
-fil: {
-    "Create Account":"Gumawa ng Account",
-    "Login":"Mag-login",
-    "Back":"Bumalik",
-    "Full Name":"Buong Pangalan",
-    "Email":"Email",
-    "Password":"Password",
-    "My Account":"Aking Account",
-    "Free":"Libre",
-    "Profile":"Profile",
-    "Photos":"Mga Larawan",
-    "Settings":"Mga Setting",
-    "Privacy":"Privacy",
-    "Logout":"Mag-logout",
-    "Pass":"Laktawan",
-    "Like":"Like",
-    "Super Like":"Super Like",
-    "Search":"Maghanap",
-    "Male":"Lalaki",
-    "Female":"Babae",
-    "Country":"Bansa",
-    "City":"Lungsod",
-    "Education":"Edukasyon",
-    "Profession":"Propesyon",
-    "Notifications":"Mga Notification",
-    "Dark Mode":"Dark Mode",
-    "$2 / month":"$2 / buwan"
-},
+function getLanguage() {
+    const saved = localStorage.getItem(STORAGE.LANGUAGE);
 
-th: {
-    "Create Account":"สร้างบัญชี",
-    "Login":"เข้าสู่ระบบ",
-    "Back":"ย้อนกลับ",
-    "Full Name":"ชื่อเต็ม",
-    "Email":"อีเมล",
-    "Password":"รหัสผ่าน",
-    "My Account":"บัญชีของฉัน",
-    "Free":"ฟรี",
-    "Profile":"โปรไฟล์",
-    "Photos":"รูปภาพ",
-    "Settings":"การตั้งค่า",
-    "Privacy":"ความเป็นส่วนตัว",
-    "Logout":"ออกจากระบบ",
-    "Pass":"ข้าม",
-    "Like":"ถูกใจ",
-    "Super Like":"ถูกใจพิเศษ",
-    "Search":"ค้นหา",
-    "Male":"ชาย",
-    "Female":"หญิง",
-    "Country":"ประเทศ",
-    "City":"เมือง",
-    "Education":"การศึกษา",
-    "Profession":"อาชีพ",
-    "Notifications":"การแจ้งเตือน",
-    "Dark Mode":"โหมดมืด",
-    "$2 / month":"$2 / เดือน"
-},
+    if (
+        saved &&
+        HALAL_RISHTA_LANGUAGES.includes(saved)
+    ) {
+        return saved;
+    }
 
-sq: {
-    "Create Account":"Krijo llogari",
-    "Login":"Hyr",
-    "Back":"Mbrapa",
-    "Full Name":"Emri i plotë",
-    "Email":"Email",
-    "Password":"Fjalëkalimi",
-    "My Account":"Llogaria ime",
-    "Free":"Falas",
-    "Profile":"Profili",
-    "Photos":"Fotot",
-    "Settings":"Cilësimet",
-    "Privacy":"Privatësia",
-    "Logout":"Dil",
-    "Pass":"Kalo",
-    "Like":"Pëlqej",
-    "Super Like":"Super Pëlqim",
-    "Search":"Kërko",
-    "Male":"Mashkull",
-    "Female":"Femër",
-    "Country":"Shteti",
-    "City":"Qyteti",
-    "Education":"Arsimi",
-    "Profession":"Profesioni",
-    "Notifications":"Njoftimet",
-    "Dark Mode":"Modaliteti i errët",
-    "$2 / month":"2 $ / muaj"
-},
+    return "en";
+}
 
-so: {
-    "Create Account":"Samee Akoon",
-    "Login":"Gal",
-    "Back":"Dib u noqo",
-    "Full Name":"Magaca oo buuxa",
-    "Email":"Iimayl",
-    "Password":"Furaha sirta",
-    "My Account":"Akoonkayga",
-    "Free":"Bilaash",
-    "Profile":"Xogta",
-    "Photos":"Sawirro",
-    "Settings":"Dejinta",
-    "Privacy":"Asturnaanta",
-    "Logout":"Ka bax",
-    "Pass":"Gudub",
-    "Like":"Jeclahay",
-    "Super Like":"Jeceyl gaar ah",
-    "Search":"Raadi",
-    "Male":"Lab",
-    "Female":"Dheddig",
-    "Country":"Dalka",
-    "City":"Magaalada",
-    "Education":"Waxbarasho",
-    "Profession":"Xirfad",
-    "Notifications":"Ogeysiisyada",
-    "Dark Mode":"Habka mugdiga",
-    "$2 / month":"$2 / bishii"
-},
+function t(text) {
+    const language = getLanguage();
 
-sw: {
-    "Create Account":"Fungua Akaunti",
-    "Login":"Ingia",
-    "Back":"Rudi",
-    "Full Name":"Jina Kamili",
-    "Email":"Barua pepe",
+    if (
+        TRANSLATIONS[language] &&
+        TRANSLATIONS[language][text]
+    ) {
+        return TRANSLATIONS[language][text];
+    }
+
+    if (
+        TRANSLATIONS.en &&
+        TRANSLATIONS.en[text]
+    ) {
+        return TRANSLATIONS.en[text];
+    }
+
+    return text;
+}
+
+function applyTranslations() {
+    const language = getLanguage();
+
+    document.documentElement.lang = language;
+
+    if (
+        language === "ar" ||
+        language === "fa"
+    ) {
+        document.documentElement.dir = "rtl";
+    } else {
+        document.documentElement.dir = "ltr";
+    }
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.getAttribute("data-i18n");
+
+        if (key) {
+            element.textContent = t(key);
+        }
+    });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+        const key = element.getAttribute("data-i18n-placeholder");
+
+        if (key) {
+            element.placeholder = t(key);
+        }
+    });
+
+    document.querySelectorAll("[data-i18n-title]").forEach(element => {
+        const key = element.getAttribute("data-i18n-title");
+
+        if (key) {
+            element.title = t(key);
+        }
+    });
+}
+
+function changeLanguage(language) {
+
+    if (
+        !HALAL_RISHTA_LANGUAGES.includes(language)
+    ) {
+        language = "en";
+    }
+
+    localStorage.setItem(
+        STORAGE.LANGUAGE,
+        language
+    );
+
+    const settings =
+        load(
+            STORAGE.SETTINGS,
+            DEFAULT_SETTINGS
+        );
+
+    settings.language = language;
+
+    save(
+        STORAGE.SETTINGS,
+        settings
+    );
+
+    applyTranslations();
+
+    const select =
+        document.getElementById("languageSelect");
+
+    if (select) {
+        select.value = language;
+    }
+}
+
+/* =========================================================
+   INITIALIZE LANGUAGE SELECT
+   ========================================================= */
+
+function initializeLanguageSelect() {
+
+    const select =
+        document.getElementById("languageSelect");
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML = "";
+
+    HALAL_RISHTA_LANGUAGES.forEach(language => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = language;
+
+        option.textContent =
+            LANGUAGE_NAMES[language] ||
+            language;
+
+        select.appendChild(option);
+    });
+
+    select.value = getLanguage();
+
+    select.addEventListener(
+        "change",
+        function() {
+            changeLanguage(this.value);
+        }
+    );
+}
+
+/* =========================================================
+   ACCOUNT HELPERS
+   ========================================================= */
+
+function getProfile() {
+
+    return load(
+        STORAGE.PROFILE,
+        {}
+    );
+}
+
+function saveProfileData(profile) {
+
+    save(
+        STORAGE.PROFILE,
+        profile
+    );
+}
+
+function getPhotos() {
+
+    return load(
+        STORAGE.PHOTOS,
+        []
+    );
+}
+
+function savePhotos(photos) {
+
+    save(
+        STORAGE.PHOTOS,
+        photos
+    );
+}
+
+/* =========================================================
+   PAGE HELPERS
+   ========================================================= */
+
+function showPage(pageId) {
+
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    const target =
+        document.getElementById(pageId);
+
+    if (!target) {
+        console.warn(
+            "Page not found:",
+            pageId
+        );
+        return;
+    }
+
+    target.classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+/* =========================================================
+   LOGIN / REGISTER UI
+   ========================================================= */
+
+function openLogin() {
+    showPage("login");
+}
+
+function openRegister() {
+    showPage("register");
+}
+
+function logoutUser() {
+
+    localStorage.removeItem(
+        STORAGE.USER
+    );
+
+    showPage("home");
+}
+
+function loginUser() {
+
+    const email =
+        document.getElementById("loginEmail");
+
+    const password =
+        document.getElementById("loginPassword");
+
+    if (!email || !password) {
+        alert(
+            t("Login form is not available.")
+        );
+        return;
+    }
+
+    const emailValue =
+        email.value.trim().toLowerCase();
+
+    const passwordValue =
+        password.value;
+
+    if (!emailValue) {
+        alert(
+            t("Please enter your email.")
+        );
+        email.focus();
+        return;
+    }
+
+    if (!passwordValue) {
+        alert(
+            t("Please enter your password.")
+        );
+        password.focus();
+        return;
+    }
+
+    const account =
+        load(
+            STORAGE.ACCOUNT,
+            null
+        );
+
+    if (!account) {
+
+        alert(
+            t(
+                "No account found. Please create an account first."
+            )
+        );
+
+        showPage("register");
+        return;
+    }
+
+    if (
+        account.email !== emailValue ||
+        account.password !== passwordValue
+    ) {
+
+        alert(
+            t(
+                "Incorrect email or password."
+            )
+        );
+
+        return;
+    }
+
+    save(
+        STORAGE.USER,
+        {
+            email: account.email,
+            fullName: account.fullName
+        }
+    );
+
+    showPage("app");
+
+    refreshDashboard();
+}
+
+/* =========================================================
+   REGISTER
+   ========================================================= */
+
+function createAccount() {
+
+    const fullName =
+        document.getElementById("registerName");
+
+    const email =
+        document.getElementById("registerEmail");
+
+    const password =
+        document.getElementById("registerPassword");
+
+    if (
+        !fullName ||
+        !email ||
+        !password
+    ) {
+        alert(
+            t(
+                "Registration form is not available."
+            )
+        );
+        return;
+    }
+
+    const nameValue =
+        fullName.value.trim();
+
+    const emailValue =
+        email.value.trim().toLowerCase();
+
+    const passwordValue =
+        password.value;
+
+    if (!nameValue) {
+        alert(
+            t("Please enter your full name.")
+        );
+        fullName.focus();
+        return;
+    }
+
+    if (
+        !emailValue ||
+        !emailValue.includes("@")
+    ) {
+        alert(
+            t("Please enter a valid email.")
+        );
+        email.focus();
+        return;
+    }
+
+    if (
+        passwordValue.length < 6
+    ) {
+        alert(
+            t(
+                "Password must be at least 6 characters."
+            )
+        );
+        password.focus();
+        return;
+    }
+
+    const account = {
+        fullName: nameValue,
+        email: emailValue,
+        password: passwordValue,
+        createdAt:
+            new Date().toISOString()
+    };
+
+    save(
+        STORAGE.ACCOUNT,
+        account
+    );
+
+    save(
+        STORAGE.USER,
+        {
+            email: emailValue,
+            fullName: nameValue
+        }
+    );
+
+    save(
+        STORAGE.PROFILE,
+        {
+            fullName: nameValue
+        }
+    );
+
+    save(
+        STORAGE.SETTINGS,
+        {
+            ...DEFAULT_SETTINGS
+        }
+    );
+
+    save(
+        STORAGE.PRIVACY,
+        {
+            ...DEFAULT_PRIVACY
+        }
+    );
+
+    save(
+        STORAGE.PURCHASE,
+        {
+            ...DEFAULT_PURCHASE
+        }
+    );
+
+    save(
+        STORAGE.PHOTOS,
+        []
+    );
+
+    alert(
+        t(
+            "Account created successfully."
+        )
+    );
+
+    showPage("app");
+
+    refreshDashboard();
+}
     "Password":"Nenosiri",
     "My Account":"Akaunti Yangu",
     "Free":"Bure",
@@ -1508,11 +1764,6 @@ function changeLanguage(language) {
 
     applyTranslations(language);
 }
-
-/* =========================================================
-   PREMIUM
-   ========================================================= */
-
 function isPremium() {
 
     const purchase =
@@ -2008,8 +2259,7 @@ function updateSuperLikeDisplay() {
    ========================================================= */
 
 function canSwipe() {
-
-    if (isPremium()) {
+       if (isPremium()) {
         return true;
     }
 
@@ -2508,7 +2758,7 @@ function searchProfiles() {
                     ${escapeHTML(
                         profile.fullName
                     )}
-                </h3>
+                                    </h3>
 
                 <p>
                     ${profile.age} •
@@ -3009,506 +3259,8 @@ function renderChat() {
         document.getElementById(
             "chatMessages"
         );
-
-    if (!container) return;
-
-    if (!currentChatProfileId) {
-
-        container.innerHTML = `
-            <p class="small">
-                ${escapeHTML(
-                    t(
-                        "Select a match to start chatting."
-                    )
-                )}
-            </p>
-        `;
-
-        return;
-    }
-
-    const allMessages =
-        load(
-            STORAGE.MESSAGES,
-            []
-        );
-
-    const messages =
-        allMessages.filter(
-            message =>
-                message.profileId ===
-                currentChatProfileId
-        );
-
-    if (!messages.length) {
-
-        container.innerHTML = `
-            <p class="small">
-                ${escapeHTML(
-                    t(
-                        "No messages yet. Start with a respectful message."
-                    )
-                )}
-            </p>
-        `;
-
-        return;
-    }
-
-    container.innerHTML =
-        messages.map(
-            message => `
-
-            <div class="chat-message">
-
-                <strong>
-                    ${
-                        message.sender === "me"
-                            ? escapeHTML(
-                                t("You")
-                              )
-                            : escapeHTML(
-                                t("Match")
-                              )
-                    }
-                </strong>
-
-                <p>
-                    ${escapeHTML(
-                        message.text
-                    )}
-                </p>
-
-            </div>
-
-        `
-        ).join("");
-}
-
-/* =========================================================
-   SEND MESSAGE
-   ========================================================= */
-
-function sendMessage() {
-
-    if (!currentChatProfileId) {
-
-        alert(
-            t(
-                "Please open a match first."
-            )
-        );
-
-        return;
-    }
-
-    const input =
-        document.getElementById(
-            "chatMessage"
-        );
-
-    if (!input) return;
-
-    const text =
-        input.value.trim();
-
-    if (!text) {
-
-        alert(
-            t(
-                "Please write a message."
-            )
-        );
-
-        return;
-    }
-
-    const messages =
-        load(
-            STORAGE.MESSAGES,
-            []
-        );
-
-    messages.push({
-        id: generateId("message"),
-        profileId:
-            currentChatProfileId,
-        sender: "me",
-        text,
-        createdAt:
-            new Date().toISOString()
-    });
-
-    save(
-        STORAGE.MESSAGES,
-        messages
-    );
-
-    input.value = "";
-
-    renderChat();
-}
-
-/* =========================================================
-   HALAL ICEBREAKER
-   ========================================================= */
-
-function showHalalIcebreaker() {
-
-    const questions = [
-
-        "What qualities are most important to you in a life partner?",
-
-        "What does a successful marriage mean to you?",
-
-        "How important is family involvement in marriage?",
-
-        "What are your expectations about communication after marriage?",
-
-        "What values would you like to build your future family around?"
-    ];
-
-    const question =
-        questions[
-            Math.floor(
-                Math.random() *
-                questions.length
-            )
-        ];
-
-    const input =
-        document.getElementById(
-            "chatMessage"
-        );
-
-    if (input) {
-
-        input.value =
-            question;
-
-        input.focus();
-    }
-}
-
-/* =========================================================
-   PROFILE
-   ========================================================= */
-
-function openProfile() {
-
-    const profile =
-        load(
-            STORAGE.PROFILE,
-            {}
-        );
-
-    const fields = [
-        "fullName",
-        "age",
-        "gender",
-        "country",
-        "city",
-        "education",
-        "profession",
-        "maritalStatus",
-        "religiousLevel",
-        "phone",
-        "about"
-    ];
-
-    fields.forEach(
-        id => {
-
-            const element =
-                document.getElementById(id);
-
-            if (element) {
-
-                element.value =
-                    profile[id] ?? "";
-            }
-        }
-    );
-
-    showPage("profile");
-}
-
-/* =========================================================
-   UPDATE PROFILE
-   ========================================================= */
-
-function updateProfile() {
-
-    const oldProfile =
-        load(
-            STORAGE.PROFILE,
-            {}
-        );
-
-    const profile = {
-        ...oldProfile
-    };
-
-    const fields = [
-        "fullName",
-        "age",
-        "gender",
-        "country",
-        "city",
-        "education",
-        "profession",
-        "maritalStatus",
-        "religiousLevel",
-        "phone",
-        "about"
-    ];
-
-    fields.forEach(
-        id => {
-
-            const element =
-                document.getElementById(id);
-
-            if (element) {
-
-                profile[id] =
-                    element.value.trim();
-            }
-        }
-    );
-
-    if (
-        profile.age &&
-        Number(profile.age) < 18
-    ) {
-
-        alert(
-            t(
-                "Users must be 18 or older."
-            )
-        );
-
-        return;
-    }
-
-    if (!profile.fullName) {
-
-        alert(
-            t(
-                "Please enter your full name."
-            )
-        );
-
-        return;
-    }
-
-    save(
-        STORAGE.PROFILE,
-        profile
-    );
-
-    const user =
-        getCurrentUser();
-
-    if (user) {
-
-        user.fullName =
-            profile.fullName ||
-            user.fullName;
-
-        save(
-            STORAGE.USER,
-            user
-        );
-    }
-
-    const account =
-        load(
-            STORAGE.ACCOUNT,
-            null
-        );
-
-    if (account) {
-
-        account.fullName =
-            profile.fullName ||
-            account.fullName;
-
-        save(
-            STORAGE.ACCOUNT,
-            account
-        );
-    }
-
-    alert(
-        t(
-            "Profile saved successfully."
-        )
-    );
-
-    showPage("app");
-}
-
-/* =========================================================
-   PHOTOS
-   ========================================================= */
-
-function openPhotos() {
-
-    showPage("photos");
-
-    renderPhotos();
-}
-
-function renderPhotos() {
-
-    const container =
-        document.getElementById(
-            "photosList"
-        );
-
-    if (!container) return;
-
-    const photos =
-        load(
-            STORAGE.PHOTOS,
-            []
-        );
-
-    if (!photos.length) {
-
-        container.innerHTML = `
-            <p>
-                ${escapeHTML(
-                    t(
-                        "No photos uploaded yet."
-                    )
-                )}
-            </p>
-        `;
-
-        return;
-    }
-
-    container.innerHTML =
-        photos.map(
-            photo => `
-
-            <div class="photo-item">
-
-                <img
-                    src="${photo.data}"
-                    alt="Profile photo"
-                    style="
-                        max-width:100%;
-                        border-radius:12px;
-                    "
-                >
-
-                <button
-                    type="button"
-                    class="secondary"
-                    onclick="deletePhoto('${photo.id}')">
-                    ${escapeHTML(
-                        t("Delete")
-                    )}
-                </button>
-
-            </div>
-
-        `
-        ).join("");
-}
-
-function addPhoto(file) {
-
-    if (!file) return;
-
-    if (
-        file.size >
-        5 * 1024 * 1024
-    ) {
-
-        alert(
-            t(
-                "Maximum 5MB per image."
-            )
-        );
-
-        return;
-    }
-
-    if (
-        !file.type.startsWith("image/")
-    ) {
-
-        alert(
-            t(
-                "Please select an image file."
-            )
-        );
-
-        return;
-    }
-
-    const photos =
-        load(
-            STORAGE.PHOTOS,
-            []
-        );
-
-    if (photos.length >= 6) {
-
-        alert(
-            t(
-                "Maximum 6 photos allowed."
-            )
-        );
-
-        return;
-    }
-
-    const reader =
-        new FileReader();
-
-    reader.onload =
-        function(event) {
-
-            photos.push({
-                id:
-                    generateId("photo"),
-                data:
-                    event.target.result,
-                createdAt:
-                    new Date().toISOString()
-            });
-
-            save(
-                STORAGE.PHOTOS,
-                photos
-            );
-
-            renderPhotos();
-        };
-
-    reader.readAsDataURL(file);
-}
-
-function deletePhoto(photoId) {
-
-    const photos =
-        load(
-            STORAGE.PHOTOS,
-            []
-        );
-
-    const updated =
-        photos.filter(
-            photo =>
-                photo.id !==
-                photoId
-        );
-
+           );
+    
     save(
         STORAGE.PHOTOS,
         updated
@@ -3517,6 +3269,667 @@ function deletePhoto(photoId) {
     renderPhotos();
 }
 
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+function openSettings() {
+
+    const settings =
+        load(
+            STORAGE.SETTINGS,
+            DEFAULT_SETTINGS
+        );
+
+    const notifications =
+        document.getElementById(
+            "notifications"
+        );
+
+    const darkMode =
+        document.getElementById(
+            "darkMode"
+        );
+
+    const language =
+        document.getElementById(
+            "languageSelect"
+        );
+
+    if (notifications) {
+        notifications.checked =
+            !!settings.notifications;
+    }
+
+    if (darkMode) {
+        darkMode.checked =
+            !!settings.darkMode;
+    }
+
+    if (language) {
+        language.value =
+            settings.language ||
+            getCurrentLanguage();
+    }
+
+    showPage("settings");
+}
+
+function saveSettings() {
+
+    const settings =
+        load(
+            STORAGE.SETTINGS,
+            DEFAULT_SETTINGS
+        );
+
+    const notifications =
+        document.getElementById(
+            "notifications"
+        );
+
+    const darkMode =
+        document.getElementById(
+            "darkMode"
+        );
+
+    const language =
+        document.getElementById(
+            "languageSelect"
+        );
+
+    if (notifications) {
+        settings.notifications =
+            notifications.checked;
+    }
+
+    if (darkMode) {
+        settings.darkMode =
+            darkMode.checked;
+    }
+
+    if (language) {
+        settings.language =
+            language.value;
+    }
+
+    save(
+        STORAGE.SETTINGS,
+        settings
+    );
+
+    applyDarkMode(
+        settings.darkMode
+    );
+
+    if (settings.language) {
+        changeLanguage(
+            settings.language
+        );
+    }
+
+    alert(
+        t(
+            "Settings saved successfully."
+        )
+    );
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+function applyDarkMode(enabled) {
+
+    document.body.classList.toggle(
+        "dark-mode",
+        !!enabled
+    );
+}
+
+/* =========================================================
+   PRIVACY
+   ========================================================= */
+
+function openPrivacy() {
+
+    const privacy =
+        load(
+            STORAGE.PRIVACY,
+            DEFAULT_PRIVACY
+        );
+
+    const visibility =
+        document.getElementById(
+            "profileVisibility"
+        );
+
+    const online =
+        document.getElementById(
+            "showOnline"
+        );
+
+    const messages =
+        document.getElementById(
+            "allowMessages"
+        );
+
+    if (visibility) {
+        visibility.value =
+            privacy.profileVisibility ||
+            "members";
+    }
+
+    if (online) {
+        online.checked =
+            !!privacy.showOnline;
+    }
+
+    if (messages) {
+        messages.checked =
+            !!privacy.allowMessages;
+    }
+
+    showPage("privacy");
+}
+
+function savePrivacy() {
+
+    const privacy =
+        load(
+            STORAGE.PRIVACY,
+            DEFAULT_PRIVACY
+        );
+
+    const visibility =
+        document.getElementById(
+            "profileVisibility"
+        );
+
+    const online =
+        document.getElementById(
+            "showOnline"
+        );
+
+    const messages =
+        document.getElementById(
+            "allowMessages"
+        );
+
+    if (visibility) {
+        privacy.profileVisibility =
+            visibility.value;
+    }
+
+    if (online) {
+        privacy.showOnline =
+            online.checked;
+    }
+
+    if (messages) {
+        privacy.allowMessages =
+            messages.checked;
+    }
+
+    save(
+        STORAGE.PRIVACY,
+        privacy
+    );
+
+    alert(
+        t(
+            "Privacy settings saved successfully."
+        )
+    );
+}
+
+/* =========================================================
+   PURCHASES
+   ========================================================= */
+
+function openPurchases() {
+
+    const purchase =
+        load(
+            STORAGE.PURCHASE,
+            DEFAULT_PURCHASE
+        );
+
+    const status =
+        document.getElementById(
+            "purchaseStatus"
+        );
+
+    const packageName =
+        document.getElementById(
+            "purchasePackage"
+        );
+
+    const expiry =
+        document.getElementById(
+            "purchaseExpiry"
+        );
+
+    if (status) {
+
+        status.textContent =
+            purchase.active
+                ? t("Active")
+                : t("Not Active");
+    }
+
+    if (packageName) {
+
+        packageName.textContent =
+            purchase.package ||
+            t("Free");
+    }
+
+    if (expiry) {
+
+        expiry.textContent =
+            purchase.expiresAt
+                ? formatDate(
+                    purchase.expiresAt
+                )
+                : "-";
+    }
+
+    showPage("purchases");
+}
+
+/* =========================================================
+   ACTIVATE RISHTA PLUS
+   ========================================================= */
+
+function activatePackage() {
+
+    const existing =
+        load(
+            STORAGE.PURCHASE,
+            DEFAULT_PURCHASE
+        );
+
+    const now =
+        new Date();
+
+    const expires =
+        new Date(now);
+
+    expires.setMonth(
+        expires.getMonth() + 1
+    );
+
+    const purchase = {
+
+        active: true,
+
+        package:
+            "Rishta Plus",
+
+        price: 2,
+
+        currency:
+            "USD",
+
+        paymentMethod:
+            "Pending",
+
+        activatedAt:
+            now.toISOString(),
+
+        expiresAt:
+            expires.toISOString()
+    };
+
+    save(
+        STORAGE.PURCHASE,
+        purchase
+    );
+
+    alert(
+        t(
+            "Rishta Plus package activated for $2/month."
+        )
+    );
+
+    openPurchases();
+}
+
+/* =========================================================
+   PAYMENT METHOD
+   ========================================================= */
+
+function selectPaymentMethod(method) {
+
+    const purchase =
+        load(
+            STORAGE.PURCHASE,
+            DEFAULT_PURCHASE
+        );
+
+    purchase.paymentMethod =
+        method;
+
+    save(
+        STORAGE.PURCHASE,
+        purchase
+    );
+
+    alert(
+        t(
+            "Payment method selected."
+        )
+    );
+}
+
+/* =========================================================
+   GUARDIAN
+   ========================================================= */
+
+function openGuardian() {
+
+    loadGuardian();
+
+    showPage("guardian");
+}
+
+function loadGuardian() {
+
+    const guardian =
+        load(
+            STORAGE.GUARDIAN,
+            {
+                name: "",
+                email: "",
+                phone: "",
+                relationship: ""
+            }
+        );
+
+    const fields = {
+        guardianName:
+            guardian.name,
+
+        guardianEmail:
+            guardian.email,
+
+        guardianPhone:
+            guardian.phone,
+
+        guardianRelationship:
+            guardian.relationship
+    };
+
+    Object.keys(fields).forEach(
+        id => {
+
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+                element.value =
+                    fields[id] || "";
+            }
+        }
+    );
+}
+
+function saveGuardian() {
+
+    const guardian = {
+
+        name:
+            document.getElementById(
+                "guardianName"
+            )?.value.trim() || "",
+
+        email:
+            document.getElementById(
+                "guardianEmail"
+            )?.value.trim() || "",
+
+        phone:
+            document.getElementById(
+                "guardianPhone"
+            )?.value.trim() || "",
+
+        relationship:
+            document.getElementById(
+                "guardianRelationship"
+            )?.value.trim() || ""
+    };
+
+    save(
+        STORAGE.GUARDIAN,
+        guardian
+    );
+
+    alert(
+        t(
+            "Guardian details saved successfully."
+        )
+    );
+}
+
+/* =========================================================
+   DASHBOARD REFRESH
+   ========================================================= */
+
+function refreshDashboard() {
+
+    updateDashboard();
+
+    renderLikes();
+
+    renderMatches();
+
+    updateSwipeDisplay();
+
+    updateSuperLikeDisplay();
+}
+
+/* =========================================================
+   APP INITIALIZATION
+   ========================================================= */
+
+function initializeApp() {
+
+    const settings =
+        load(
+            STORAGE.SETTINGS,
+            DEFAULT_SETTINGS
+        );
+
+    const language =
+        settings.language ||
+        getCurrentLanguage();
+
+    localStorage.setItem(
+        STORAGE.LANGUAGE,
+        language
+    );
+
+    initializeLanguageSelect();
+
+    applyTranslations(language);
+
+    applyDarkMode(
+        !!settings.darkMode
+    );
+
+    const user =
+        getCurrentUser();
+
+    if (user) {
+
+        updateDashboard();
+
+    } else {
+
+        showPage("home");
+    }
+
+    /*
+     * Login button
+     */
+
+    document
+        .querySelectorAll(
+            "[data-action='login']"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                openLogin
+            );
+        });
+
+    /*
+     * Register button
+     */
+
+    document
+        .querySelectorAll(
+            "[data-action='register']"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                openRegister
+            );
+        });
+
+    /*
+     * Logout button
+     */
+
+    document
+        .querySelectorAll(
+            "[data-action='logout']"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                logoutUser
+            );
+        });
+
+    /*
+     * Login form
+     */
+
+    const loginForm =
+        document.querySelector(
+            "#login form"
+        );
+
+    if (loginForm) {
+
+        loginForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+                loginUser();
+            }
+        );
+    }
+
+    /*
+     * Register form
+     */
+
+    const registerForm =
+        document.querySelector(
+            "#register form"
+        );
+
+    if (registerForm) {
+
+        registerForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+                createAccount();
+            }
+        );
+    }
+
+    /*
+     * Language selector
+     */
+
+    const languageSelect =
+        document.getElementById(
+            "languageSelect"
+        );
+
+    if (languageSelect) {
+
+        languageSelect.addEventListener(
+            "change",
+            function() {
+
+                changeLanguage(
+                    this.value
+                );
+            }
+        );
+    }
+
+    /*
+     * Photo input
+     */
+
+    const photoInput =
+        document.getElementById(
+            "photoInput"
+        );
+
+    if (photoInput) {
+
+        photoInput.addEventListener(
+            "change",
+            function() {
+
+                if (this.files?.[0]) {
+
+                    addPhoto(
+                        this.files[0]
+                    );
+
+                    this.value = "";
+                }
+            }
+        );
+    }
+}
+
+/* =========================================================
+   START APP
+   ========================================================= */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeApp
+    );
+
+} else {
+
+    initializeApp();
+   }
 /* =========================================================
    SETTINGS
    ========================================================= */
@@ -3797,11 +4210,13 @@ function loadGuardian() {
         );
 
     if (name) {
+
         name.value =
             guardian.name || "";
     }
 
     if (email) {
+
         email.value =
             guardian.email || "";
     }
@@ -3918,6 +4333,7 @@ function saveCustomIcon() {
                 {
                     data:
                         event.target.result,
+
                     updatedAt:
                         new Date().toISOString()
                 }
@@ -3944,6 +4360,7 @@ function saveLanguage(language) {
             language
         )
     ) {
+
         language = "en";
     }
 
@@ -4011,7 +4428,6 @@ function resetActivity() {
         []
     );
 }
-
 /* =========================================================
    SECURITY / HTML ESCAPING
    ========================================================= */
@@ -4086,6 +4502,7 @@ function setupLanguageSelector() {
 
     selector.onchange =
         function() {
+
             changeLanguage(
                 this.value
             );
@@ -4146,9 +4563,11 @@ document.addEventListener(
 
         setTimeout(
             () => {
+
                 applyTranslations(
                     getCurrentLanguage()
                 );
+
             },
             50
         );
