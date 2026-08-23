@@ -29,10 +29,6 @@
 
     <style>
 
-        /* =====================================================
-           HALAL RISHTA - PROFILE VIEW
-           ===================================================== */
-
         .profile-view-card {
             overflow: hidden;
             padding: 0 !important;
@@ -180,7 +176,7 @@
 
 
     <!-- =====================================================
-         EXACTLY 32 LANGUAGES
+         EXACTLY 8 LANGUAGES
          ===================================================== -->
 
     <select
@@ -190,37 +186,20 @@
     >
 
         <option value="en">English</option>
+
         <option value="ar">العربية</option>
+
         <option value="es">Español</option>
-        <option value="it">Italiano</option>
+
         <option value="fr">Français</option>
-        <option value="nl">Nederlands</option>
-        <option value="el">Ελληνικά</option>
-        <option value="tr">Türkçe</option>
-        <option value="fa">فارسی</option>
-        <option value="hi">हिन्दी</option>
-        <option value="pl">Polski</option>
-        <option value="ro">Română</option>
-        <option value="zh">中文</option>
-        <option value="ru">Русский</option>
-        <option value="pt">Português</option>
-        <option value="ms">Bahasa Melayu</option>
-        <option value="id">Bahasa Indonesia</option>
-        <option value="fil">Filipino</option>
-        <option value="th">ไทย</option>
+
         <option value="sq">Shqip</option>
-        <option value="so">Soomaali</option>
-        <option value="sw">Kiswahili</option>
-        <option value="ha">Hausa</option>
+
+        <option value="bs">Bosanski</option>
+
+        <option value="ru">Русский</option>
+
         <option value="bn">বাংলা</option>
-        <option value="fi">Suomi</option>
-        <option value="cs">Čeština</option>
-        <option value="sl">Slovenščina</option>
-        <option value="sk">Slovenčina</option>
-        <option value="bg">Български</option>
-        <option value="hu">Magyar</option>
-        <option value="uz">O‘zbek</option>
-        <option value="de">Deutsch</option>
 
     </select>
 
@@ -289,10 +268,12 @@
         </h2>
 
         <form
+            id="registerForm"
             onsubmit="event.preventDefault(); createAccount();"
         >
 
             <input
+                id="registerName"
                 type="text"
                 placeholder="Full Name"
                 autocomplete="name"
@@ -300,6 +281,7 @@
             >
 
             <input
+                id="registerEmail"
                 type="email"
                 placeholder="Email"
                 autocomplete="email"
@@ -307,6 +289,7 @@
             >
 
             <input
+                id="registerPassword"
                 type="password"
                 placeholder="Password"
                 autocomplete="new-password"
@@ -357,10 +340,12 @@
         </h2>
 
         <form
+            id="loginForm"
             onsubmit="event.preventDefault(); loginUser();"
         >
 
             <input
+                id="loginEmail"
                 type="email"
                 placeholder="Email"
                 autocomplete="email"
@@ -368,6 +353,7 @@
             >
 
             <input
+                id="loginPassword"
                 type="password"
                 placeholder="Password"
                 autocomplete="current-password"
@@ -434,8 +420,6 @@
 
     </div>
 
-
-    <!-- VIEW MY PROFILE BUTTON -->
 
     <div class="plan-card">
 
@@ -955,7 +939,7 @@
 
 
 <!-- =====================================================
-     NEW: PUBLIC PROFILE VIEW
+     PUBLIC PROFILE VIEW
      ===================================================== -->
 
 <section
@@ -965,8 +949,6 @@
 
     <div class="card profile-view-card">
 
-
-        <!-- MAIN PROFILE PHOTO -->
 
         <div
             id="profileViewPhoto"
@@ -983,8 +965,6 @@
         <div class="profile-view-content">
 
 
-            <!-- NAME -->
-
             <h1
                 id="profileViewName"
                 class="profile-view-name"
@@ -992,8 +972,6 @@
                 Your Name
             </h1>
 
-
-            <!-- LOCATION -->
 
             <p
                 id="profileViewLocation"
@@ -1003,14 +981,10 @@
             </p>
 
 
-            <!-- INTENT -->
-
             <div class="profile-view-intent">
                 💍 Serious Marriage Intent
             </div>
 
-
-            <!-- ABOUT -->
 
             <div class="profile-view-section">
 
@@ -1028,8 +1002,6 @@
 
             </div>
 
-
-            <!-- BASIC INFORMATION -->
 
             <div class="profile-view-section">
 
@@ -1141,8 +1113,6 @@
             </div>
 
 
-            <!-- PHOTOS -->
-
             <div
                 id="profileViewGallerySection"
                 class="profile-view-section"
@@ -1159,8 +1129,6 @@
 
             </div>
 
-
-            <!-- ACTIONS -->
 
             <div class="profile-view-actions">
 
@@ -1746,17 +1714,29 @@
         <ul class="feature-list">
 
             <li>♾️ Unlimited Swipes</li>
+
             <li>🔎 Religion + Sect Filters</li>
+
             <li>💍 Marriage Intent Badge</li>
+
             <li>❤️ 5 Super Likes / day</li>
+
             <li>👨‍👩‍👧 Wali / Guardian Option</li>
+
             <li>🔐 Photo Privacy</li>
+
             <li>❤️ See Who Liked You</li>
+
             <li>🎙️ Voice Notes</li>
+
             <li>💬 Halal Icebreakers</li>
+
             <li>🚀 1 Friday Boost / month</li>
+
             <li>🛡️ Verification Badge</li>
+
             <li>↩️ Rewind</li>
+
             <li>🚫 No Ads</li>
 
         </ul>
@@ -1962,27 +1942,20 @@
 
 
 <!-- =====================================================
-     EXISTING MAIN SCRIPT
+     MAIN SCRIPT
      ===================================================== -->
 
 <script src="script.js"></script>
 
 
 <!-- =====================================================
-     PROFILE VIEW SYSTEM
-     DOES NOT REPLACE script.js
+     PROFILE VIEW + 8 LANGUAGE SYSTEM
      ===================================================== -->
 
 <script>
 
 "use strict";
 
-
-/*
-===========================================================
-OPEN MY PROFILE
-===========================================================
-*/
 
 function viewMyProfile() {
 
@@ -2022,7 +1995,11 @@ function viewMyProfile() {
             document
                 .querySelectorAll(".page")
                 .forEach(function(page) {
-                    page.classList.remove("active");
+
+                    page.classList.remove(
+                        "active"
+                    );
+
                 });
 
 
@@ -2033,7 +2010,11 @@ function viewMyProfile() {
 
 
             if (page) {
-                page.classList.add("active");
+
+                page.classList.add(
+                    "active"
+                );
+
             }
 
         }
@@ -2056,12 +2037,6 @@ function viewMyProfile() {
 
 }
 
-
-/*
-===========================================================
-RENDER PROFILE
-===========================================================
-*/
 
 function renderMyProfileView(
     profile,
@@ -2135,10 +2110,12 @@ function renderMyProfileView(
 
 
     if (nameElement) {
+
         nameElement.textContent =
             age !== "—"
                 ? name + ", " + age
                 : name;
+
     }
 
 
@@ -2149,8 +2126,10 @@ function renderMyProfileView(
 
 
     if (locationElement) {
+
         locationElement.textContent =
             location;
+
     }
 
 
@@ -2161,8 +2140,10 @@ function renderMyProfileView(
 
 
     if (aboutElement) {
+
         aboutElement.textContent =
             about;
+
     }
 
 
@@ -2214,12 +2195,6 @@ function renderMyProfileView(
 }
 
 
-/*
-===========================================================
-SET TEXT SAFELY
-===========================================================
-*/
-
 function setProfileViewText(
     id,
     value
@@ -2239,18 +2214,14 @@ function setProfileViewText(
 }
 
 
-/*
-===========================================================
-FORMAT PROFILE VALUES
-===========================================================
-*/
-
 function formatProfileValue(
     value
 ) {
 
     if (!value) {
+
         return "—";
+
     }
 
 
@@ -2287,12 +2258,6 @@ function formatProfileValue(
 }
 
 
-/*
-===========================================================
-MAIN PHOTO
-===========================================================
-*/
-
 function renderProfileMainPhoto(
     photos
 ) {
@@ -2304,7 +2269,9 @@ function renderProfileMainPhoto(
 
 
     if (!container) {
+
         return;
+
     }
 
 
@@ -2373,12 +2340,6 @@ function renderProfileMainPhoto(
 }
 
 
-/*
-===========================================================
-PROFILE GALLERY
-===========================================================
-*/
-
 function renderProfileGallery(
     photos
 ) {
@@ -2396,7 +2357,9 @@ function renderProfileGallery(
 
 
     if (!gallery) {
+
         return;
+
     }
 
 
@@ -2409,8 +2372,10 @@ function renderProfileGallery(
     ) {
 
         if (section) {
+
             section.style.display =
                 "none";
+
         }
 
         return;
@@ -2419,8 +2384,10 @@ function renderProfileGallery(
 
 
     if (section) {
+
         section.style.display =
             "block";
+
     }
 
 
@@ -2434,7 +2401,9 @@ function renderProfileGallery(
 
 
             if (!source) {
+
                 return;
+
             }
 
 
@@ -2462,18 +2431,14 @@ function renderProfileGallery(
 }
 
 
-/*
-===========================================================
-GET PHOTO SOURCE
-===========================================================
-*/
-
 function getPhotoSource(
     photo
 ) {
 
     if (!photo) {
+
         return null;
+
     }
 
 
@@ -2508,46 +2473,20 @@ function getPhotoSource(
 }
 
 
-/*
-===========================================================
-EXACTLY 32 LANGUAGES
-===========================================================
-*/
+/* =====================================================
+   EXACTLY 8 LANGUAGES
+   ===================================================== */
 
 const HALAL_RISHTA_LANGUAGES = [
 
     "en",
     "ar",
     "es",
-    "it",
     "fr",
-    "nl",
-    "el",
-    "tr",
-    "fa",
-    "hi",
-    "pl",
-    "ro",
-    "zh",
-    "ru",
-    "pt",
-    "ms",
-    "id",
-    "fil",
-    "th",
     "sq",
-    "so",
-    "sw",
-    "ha",
-    "bn",
-    "fi",
-    "cs",
-    "sl",
-    "sk",
-    "bg",
-    "hu",
-    "uz",
-    "de"
+    "bs",
+    "ru",
+    "bn"
 
 ];
 
@@ -2555,54 +2494,32 @@ const HALAL_RISHTA_LANGUAGES = [
 const HALAL_RISHTA_LANGUAGE_NAMES = {
 
     en: "English",
+
     ar: "العربية",
+
     es: "Español",
-    it: "Italiano",
+
     fr: "Français",
-    nl: "Nederlands",
-    el: "Ελληνικά",
-    tr: "Türkçe",
-    fa: "فارسی",
-    hi: "हिन्दी",
-    pl: "Polski",
-    ro: "Română",
-    zh: "中文",
-    ru: "Русский",
-    pt: "Português",
-    ms: "Bahasa Melayu",
-    id: "Bahasa Indonesia",
-    fil: "Filipino",
-    th: "ไทย",
+
     sq: "Shqip",
-    so: "Soomaali",
-    sw: "Kiswahili",
-    ha: "Hausa",
-    bn: "বাংলা",
-    fi: "Suomi",
-    cs: "Čeština",
-    sl: "Slovenščina",
-    sk: "Slovenčina",
-    bg: "Български",
-    hu: "Magyar",
-    uz: "O‘zbek",
-    de: "Deutsch"
+
+    bs: "Bosanski",
+
+    ru: "Русский",
+
+    bn: "বাংলা"
 
 };
 
-
-/*
-===========================================================
-CHANGE LANGUAGE
-===========================================================
-*/
 
 function changeLanguage(
     language
 ) {
 
     if (
-        !HALAL_RISHTA_LANGUAGES
-            .includes(language)
+        !HALAL_RISHTA_LANGUAGES.includes(
+            language
+        )
     ) {
 
         language =
@@ -2621,10 +2538,7 @@ function changeLanguage(
         language;
 
 
-    if (
-        language === "ar" ||
-        language === "fa"
-    ) {
+    if (language === "ar") {
 
         document.documentElement.dir =
             "rtl";
@@ -2680,12 +2594,6 @@ function changeLanguage(
 }
 
 
-/*
-===========================================================
-GET CURRENT LANGUAGE
-===========================================================
-*/
-
 function getCurrentLanguage() {
 
     const saved =
@@ -2696,8 +2604,9 @@ function getCurrentLanguage() {
 
     if (
         saved &&
-        HALAL_RISHTA_LANGUAGES
-            .includes(saved)
+        HALAL_RISHTA_LANGUAGES.includes(
+            saved
+        )
     ) {
 
         return saved;
@@ -2709,12 +2618,6 @@ function getCurrentLanguage() {
 
 }
 
-
-/*
-===========================================================
-RESTORE LANGUAGE
-===========================================================
-*/
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -2732,12 +2635,6 @@ document.addEventListener(
 );
 
 
-/*
-===========================================================
-REFRESH PROFILE VIEW WHEN PAGE OPENS
-===========================================================
-*/
-
 document.addEventListener(
     "DOMContentLoaded",
     function() {
@@ -2749,7 +2646,9 @@ document.addEventListener(
 
 
         if (!profileView) {
+
             return;
+
         }
 
 
@@ -2758,8 +2657,9 @@ document.addEventListener(
                 function() {
 
                     if (
-                        profileView.classList
-                            .contains("active")
+                        profileView.classList.contains(
+                            "active"
+                        )
                     ) {
 
                         try {
@@ -2818,4 +2718,4 @@ document.addEventListener(
 
 </body>
 
-            </html>
+                </html>
