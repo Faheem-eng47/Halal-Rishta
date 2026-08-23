@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -24,9 +26,151 @@
         rel="stylesheet"
         href="style.css"
     >
+
+    <style>
+
+        /* =====================================================
+           HALAL RISHTA - PROFILE VIEW
+           ===================================================== */
+
+        .profile-view-card {
+            overflow: hidden;
+            padding: 0 !important;
+        }
+
+        .profile-view-photo {
+            width: 100%;
+            height: 390px;
+            background: #e9f3ef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-view-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .profile-view-placeholder {
+            font-size: 90px;
+            opacity: 0.7;
+        }
+
+        .profile-view-content {
+            padding: 24px;
+        }
+
+        .profile-view-name {
+            margin: 0 0 6px 0;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .profile-view-location {
+            margin: 0 0 16px 0;
+            font-size: 16px;
+            opacity: 0.75;
+        }
+
+        .profile-view-intent {
+            display: inline-block;
+            padding: 9px 14px;
+            border-radius: 999px;
+            background: #e4f5ed;
+            color: #176b45;
+            font-weight: 700;
+            margin-bottom: 22px;
+        }
+
+        .profile-view-section {
+            margin-top: 24px;
+        }
+
+        .profile-view-section h3 {
+            margin-bottom: 12px;
+        }
+
+        .profile-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .profile-info-item {
+            padding: 14px;
+            border-radius: 14px;
+            background: #f5f8f7;
+        }
+
+        .profile-info-label {
+            display: block;
+            font-size: 12px;
+            opacity: 0.65;
+            margin-bottom: 5px;
+        }
+
+        .profile-info-value {
+            display: block;
+            font-weight: 700;
+        }
+
+        .profile-about {
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        .profile-view-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .profile-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .profile-gallery img {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .view-profile-button {
+            margin-top: 12px;
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-view-photo {
+                height: 360px;
+            }
+
+            .profile-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-view-name {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
+
 <body>
+
 
 <header class="topbar">
 
@@ -34,8 +178,9 @@
         💚 Halal Rishta
     </div>
 
+
     <!-- =====================================================
-         LANGUAGE SELECTOR - EXACTLY 32 LANGUAGES
+         EXACTLY 32 LANGUAGES
          ===================================================== -->
 
     <select
@@ -290,6 +435,30 @@
     </div>
 
 
+    <!-- VIEW MY PROFILE BUTTON -->
+
+    <div class="plan-card">
+
+        <h3>
+            Your Profile
+        </h3>
+
+        <p>
+            View your profile exactly as other members
+            can see it.
+        </p>
+
+        <button
+            type="button"
+            class="primary"
+            onclick="viewMyProfile()"
+        >
+            👤 View My Profile
+        </button>
+
+    </div>
+
+
     <div class="plan-card">
 
         <h3>
@@ -351,10 +520,14 @@
 
     <div class="menu-grid">
 
-        <button type="button" onclick="openProfile()">
+        <button
+            type="button"
+            onclick="openProfile()"
+        >
             👤
             <span>Profile</span>
         </button>
+
 
         <button
             type="button"
@@ -369,10 +542,15 @@
             <span>Swipe Rishtas</span>
         </button>
 
-        <button type="button" onclick="openPhotos()">
+
+        <button
+            type="button"
+            onclick="openPhotos()"
+        >
             📸
             <span>Photos</span>
         </button>
+
 
         <button
             type="button"
@@ -382,6 +560,7 @@
             <span>Find Rishta</span>
         </button>
 
+
         <button
             type="button"
             onclick="showPage('likes')"
@@ -389,6 +568,7 @@
             ❤️
             <span>Who Liked Me</span>
         </button>
+
 
         <button
             type="button"
@@ -398,6 +578,7 @@
             <span>My Matches</span>
         </button>
 
+
         <button
             type="button"
             onclick="openSettings()"
@@ -405,6 +586,7 @@
             ⚙️
             <span>Settings</span>
         </button>
+
 
         <button
             type="button"
@@ -414,6 +596,7 @@
             <span>Privacy</span>
         </button>
 
+
         <button
             type="button"
             onclick="showPage('appSettings')"
@@ -421,6 +604,7 @@
             📱
             <span>App Settings</span>
         </button>
+
 
         <button
             type="button"
@@ -430,6 +614,7 @@
             <span>Manage Purchases</span>
         </button>
 
+
         <button
             type="button"
             onclick="openPackage()"
@@ -438,6 +623,7 @@
             <span>Rishta Plus</span>
         </button>
 
+
         <button
             type="button"
             onclick="openCustomIcon()"
@@ -445,6 +631,7 @@
             🎨
             <span>Custom Icon</span>
         </button>
+
 
         <button
             type="button"
@@ -484,6 +671,7 @@
             Find serious marriage profiles and make your choice.
         </p>
 
+
         <div class="usage-card">
 
             <p>
@@ -515,6 +703,7 @@
                 👤
             </div>
 
+
             <div class="swipe-info">
 
                 <h2 id="swipeName">
@@ -540,6 +729,15 @@
             </div>
 
         </div>
+
+
+        <button
+            type="button"
+            class="primary view-profile-button"
+            onclick="viewMyProfile()"
+        >
+            👤 View Full Profile
+        </button>
 
 
         <div class="swipe-actions">
@@ -582,6 +780,7 @@
             🎬 Watch Ad → Get 3 Super Likes
         </button>
 
+
         <button
             type="button"
             class="link-btn"
@@ -596,7 +795,7 @@
 
 
 <!-- =====================================================
-     PROFILE
+     PROFILE EDIT
      ===================================================== -->
 
 <section id="profile" class="page">
@@ -607,11 +806,13 @@
             👤 Profile
         </h2>
 
+
         <input
             id="fullName"
             type="text"
             placeholder="Full Name"
         >
+
 
         <input
             id="age"
@@ -619,6 +820,7 @@
             min="18"
             placeholder="Age"
         >
+
 
         <select id="gender">
 
@@ -636,11 +838,13 @@
 
         </select>
 
+
         <input
             id="country"
             type="text"
             placeholder="Country"
         >
+
 
         <input
             id="city"
@@ -648,17 +852,20 @@
             placeholder="City"
         >
 
+
         <input
             id="education"
             type="text"
             placeholder="Education"
         >
 
+
         <input
             id="profession"
             type="text"
             placeholder="Profession"
         >
+
 
         <select id="maritalStatus">
 
@@ -680,6 +887,7 @@
 
         </select>
 
+
         <select id="religiousLevel">
 
             <option value="">
@@ -700,17 +908,20 @@
 
         </select>
 
+
         <input
             id="phone"
             type="tel"
             placeholder="Phone"
         >
 
+
         <textarea
             id="about"
             rows="5"
             placeholder="About me"
         ></textarea>
+
 
         <button
             type="button"
@@ -720,6 +931,16 @@
             Save Profile
         </button>
 
+
+        <button
+            type="button"
+            class="primary"
+            onclick="viewMyProfile()"
+        >
+            👤 Preview My Profile
+        </button>
+
+
         <button
             type="button"
             class="link-btn"
@@ -727,6 +948,251 @@
         >
             Back
         </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NEW: PUBLIC PROFILE VIEW
+     ===================================================== -->
+
+<section
+    id="profileView"
+    class="page"
+>
+
+    <div class="card profile-view-card">
+
+
+        <!-- MAIN PROFILE PHOTO -->
+
+        <div
+            id="profileViewPhoto"
+            class="profile-view-photo"
+        >
+
+            <div class="profile-view-placeholder">
+                👤
+            </div>
+
+        </div>
+
+
+        <div class="profile-view-content">
+
+
+            <!-- NAME -->
+
+            <h1
+                id="profileViewName"
+                class="profile-view-name"
+            >
+                Your Name
+            </h1>
+
+
+            <!-- LOCATION -->
+
+            <p
+                id="profileViewLocation"
+                class="profile-view-location"
+            >
+                Country • City
+            </p>
+
+
+            <!-- INTENT -->
+
+            <div class="profile-view-intent">
+                💍 Serious Marriage Intent
+            </div>
+
+
+            <!-- ABOUT -->
+
+            <div class="profile-view-section">
+
+                <h3>
+                    About
+                </h3>
+
+                <p
+                    id="profileViewAbout"
+                    class="profile-about"
+                >
+                    Complete your profile to tell other
+                    members about yourself.
+                </p>
+
+            </div>
+
+
+            <!-- BASIC INFORMATION -->
+
+            <div class="profile-view-section">
+
+                <h3>
+                    About Me
+                </h3>
+
+
+                <div class="profile-info-grid">
+
+
+                    <div class="profile-info-item">
+
+                        <span class="profile-info-label">
+                            Age
+                        </span>
+
+                        <span
+                            id="profileViewAge"
+                            class="profile-info-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-info-item">
+
+                        <span class="profile-info-label">
+                            Gender
+                        </span>
+
+                        <span
+                            id="profileViewGender"
+                            class="profile-info-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-info-item">
+
+                        <span class="profile-info-label">
+                            Education
+                        </span>
+
+                        <span
+                            id="profileViewEducation"
+                            class="profile-info-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-info-item">
+
+                        <span class="profile-info-label">
+                            Profession
+                        </span>
+
+                        <span
+                            id="profileViewProfession"
+                            class="profile-info-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-info-item">
+
+                        <span class="profile-info-label">
+                            Marital Status
+                        </span>
+
+                        <span
+                            id="profileViewMaritalStatus"
+                            class="profile-info-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-info-item">
+
+                        <span class="profile-info-label">
+                            Religious Level
+                        </span>
+
+                        <span
+                            id="profileViewReligiousLevel"
+                            class="profile-info-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PHOTOS -->
+
+            <div
+                id="profileViewGallerySection"
+                class="profile-view-section"
+            >
+
+                <h3>
+                    Photos
+                </h3>
+
+                <div
+                    id="profileViewGallery"
+                    class="profile-gallery"
+                ></div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="profile-view-actions">
+
+                <button
+                    type="button"
+                    class="primary"
+                    onclick="openProfile()"
+                >
+                    ✏️ Edit My Profile
+                </button>
+
+
+                <button
+                    type="button"
+                    class="secondary"
+                    onclick="openPhotos()"
+                >
+                    📸 Manage Photos
+                </button>
+
+
+                <button
+                    type="button"
+                    class="link-btn"
+                    onclick="showPage('app')"
+                >
+                    Back to My Account
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -745,10 +1211,12 @@
             📸 Photos
         </h2>
 
+
         <div
             id="photosList"
             class="photos-list"
         ></div>
+
 
         <input
             id="photoInput"
@@ -757,9 +1225,20 @@
             multiple
         >
 
+
         <p class="small">
             Maximum 5MB per image.
         </p>
+
+
+        <button
+            type="button"
+            class="link-btn"
+            onclick="showPage('profileView')"
+        >
+            👤 View Profile
+        </button>
+
 
         <button
             type="button"
@@ -786,14 +1265,17 @@
             🔎 Find a Rishta
         </h2>
 
+
         <p class="small">
             Basic filters are available to Free members.
             Premium members receive advanced filters.
         </p>
 
+
         <label>
             Age
         </label>
+
 
         <div class="two-column">
 
@@ -813,9 +1295,11 @@
 
         </div>
 
+
         <label>
             Country
         </label>
+
 
         <input
             id="searchCountry"
@@ -823,9 +1307,11 @@
             placeholder="Country"
         >
 
+
         <label>
             City
         </label>
+
 
         <input
             id="searchCity"
@@ -833,9 +1319,11 @@
             placeholder="City"
         >
 
+
         <label>
             Religion
         </label>
+
 
         <select id="searchReligion">
 
@@ -849,9 +1337,11 @@
 
         </select>
 
+
         <label>
             Sect / Maslak
         </label>
+
 
         <select id="searchSect">
 
@@ -873,6 +1363,7 @@
 
         </select>
 
+
         <label>
 
             <input
@@ -884,6 +1375,7 @@
 
         </label>
 
+
         <button
             type="button"
             class="primary"
@@ -892,10 +1384,12 @@
             Search
         </button>
 
+
         <div
             id="searchResults"
             class="results"
         ></div>
+
 
         <button
             type="button"
@@ -922,6 +1416,7 @@
             ❤️ Who Liked Me
         </h2>
 
+
         <div id="likesList">
 
             <p class="small">
@@ -929,6 +1424,7 @@
             </p>
 
         </div>
+
 
         <button
             type="button"
@@ -955,6 +1451,7 @@
             💚 My Matches
         </h2>
 
+
         <div id="matchesList">
 
             <p class="small">
@@ -962,6 +1459,7 @@
             </p>
 
         </div>
+
 
         <button
             type="button"
@@ -988,6 +1486,7 @@
             ⚙️ Settings
         </h2>
 
+
         <label>
 
             <input
@@ -998,6 +1497,7 @@
             Notifications
 
         </label>
+
 
         <label>
 
@@ -1010,6 +1510,7 @@
 
         </label>
 
+
         <button
             type="button"
             class="primary"
@@ -1017,6 +1518,7 @@
         >
             Save Settings
         </button>
+
 
         <button
             type="button"
@@ -1043,9 +1545,11 @@
             🔒 Privacy
         </h2>
 
+
         <label>
             Profile Visibility
         </label>
+
 
         <select id="profileVisibility">
 
@@ -1063,6 +1567,7 @@
 
         </select>
 
+
         <label>
 
             <input
@@ -1073,6 +1578,7 @@
             Show online status
 
         </label>
+
 
         <label>
 
@@ -1085,6 +1591,7 @@
 
         </label>
 
+
         <label>
 
             <input
@@ -1096,6 +1603,7 @@
 
         </label>
 
+
         <button
             type="button"
             class="primary"
@@ -1103,6 +1611,7 @@
         >
             Save Privacy Settings
         </button>
+
 
         <button
             type="button"
@@ -1129,9 +1638,11 @@
             📱 App Settings
         </h2>
 
+
         <p>
             Manage your application preferences.
         </p>
+
 
         <button
             type="button"
@@ -1140,6 +1651,7 @@
         >
             Open Settings
         </button>
+
 
         <button
             type="button"
@@ -1166,6 +1678,7 @@
             💳 Manage Purchases
         </h2>
 
+
         <p>
             Current plan:
             <strong data-package-status>
@@ -1173,9 +1686,11 @@
             </strong>
         </p>
 
+
         <p id="purchaseStatus">
             No active subscription.
         </p>
+
 
         <button
             type="button"
@@ -1184,6 +1699,7 @@
         >
             View Rishta Plus
         </button>
+
 
         <button
             type="button"
@@ -1210,18 +1726,22 @@
             ⭐
         </div>
 
+
         <h2>
             Rishta Plus
         </h2>
+
 
         <h3>
             $2 / month
         </h3>
 
+
         <p>
             A premium experience for serious
             marriage intentions.
         </p>
+
 
         <ul class="feature-list">
 
@@ -1241,6 +1761,7 @@
 
         </ul>
 
+
         <button
             type="button"
             class="primary premium-button"
@@ -1249,6 +1770,7 @@
             Continue with Rishta Plus — $2/month
         </button>
 
+
         <p
             id="paymentMessage"
             class="small"
@@ -1256,6 +1778,7 @@
             Secure payment will be required
             to activate the subscription.
         </p>
+
 
         <button
             type="button"
@@ -1282,16 +1805,19 @@
             🎨 Custom Icon
         </h2>
 
+
         <p>
             Select an image for your custom
             application icon.
         </p>
+
 
         <input
             id="customIconInput"
             type="file"
             accept="image/*"
         >
+
 
         <button
             type="button"
@@ -1300,6 +1826,7 @@
         >
             Save Custom Icon
         </button>
+
 
         <button
             type="button"
@@ -1326,10 +1853,12 @@
             👨‍👩‍👧 Wali / Guardian
         </h2>
 
+
         <p class="small">
             Share your profile with a trusted
             family member or guardian.
         </p>
+
 
         <input
             id="guardianName"
@@ -1337,11 +1866,13 @@
             placeholder="Guardian Name"
         >
 
+
         <input
             id="guardianEmail"
             type="email"
             placeholder="Guardian Email"
         >
+
 
         <button
             type="button"
@@ -1350,6 +1881,7 @@
         >
             Save Guardian
         </button>
+
 
         <button
             type="button"
@@ -1376,20 +1908,24 @@
             💬 Halal Chat
         </h2>
 
+
         <p class="small">
             Chat becomes available after a mutual match.
         </p>
+
 
         <div
             id="chatMessages"
             class="chat-messages"
         ></div>
 
+
         <textarea
             id="chatMessage"
             rows="3"
             placeholder="Write a respectful message..."
         ></textarea>
+
 
         <button
             type="button"
@@ -1399,6 +1935,7 @@
             Send Message
         </button>
 
+
         <button
             type="button"
             class="secondary"
@@ -1406,6 +1943,7 @@
         >
             💡 Halal Icebreaker
         </button>
+
 
         <button
             type="button"
@@ -1424,14 +1962,15 @@
 
 
 <!-- =====================================================
-     MAIN SCRIPT
+     EXISTING MAIN SCRIPT
      ===================================================== -->
 
 <script src="script.js"></script>
 
 
 <!-- =====================================================
-     HALAL RISHTA - 32 LANGUAGE SYSTEM
+     PROFILE VIEW SYSTEM
+     DOES NOT REPLACE script.js
      ===================================================== -->
 
 <script>
@@ -1441,8 +1980,537 @@
 
 /*
 ===========================================================
-HALAL RISHTA
-EXACTLY 32 SUPPORTED LANGUAGES
+OPEN MY PROFILE
+===========================================================
+*/
+
+function viewMyProfile() {
+
+    try {
+
+        const profileData =
+            JSON.parse(
+                localStorage.getItem(
+                    "halal_rishta_profile"
+                )
+            ) || {};
+
+
+        const photosData =
+            JSON.parse(
+                localStorage.getItem(
+                    "halal_rishta_photos"
+                )
+            ) || [];
+
+
+        renderMyProfileView(
+            profileData,
+            photosData
+        );
+
+
+        if (
+            typeof showPage ===
+            "function"
+        ) {
+
+            showPage("profileView");
+
+        } else {
+
+            document
+                .querySelectorAll(".page")
+                .forEach(function(page) {
+                    page.classList.remove("active");
+                });
+
+
+            const page =
+                document.getElementById(
+                    "profileView"
+                );
+
+
+            if (page) {
+                page.classList.add("active");
+            }
+
+        }
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Profile view error:",
+            error
+        );
+
+    }
+
+}
+
+
+/*
+===========================================================
+RENDER PROFILE
+===========================================================
+*/
+
+function renderMyProfileView(
+    profile,
+    photos
+) {
+
+    const name =
+        profile.fullName ||
+        "Your Name";
+
+
+    const age =
+        profile.age ||
+        "—";
+
+
+    const gender =
+        formatProfileValue(
+            profile.gender
+        );
+
+
+    const country =
+        profile.country ||
+        "";
+
+
+    const city =
+        profile.city ||
+        "";
+
+
+    const education =
+        profile.education ||
+        "—";
+
+
+    const profession =
+        profile.profession ||
+        "—";
+
+
+    const maritalStatus =
+        formatProfileValue(
+            profile.maritalStatus
+        );
+
+
+    const religiousLevel =
+        formatProfileValue(
+            profile.religiousLevel
+        );
+
+
+    const about =
+        profile.about ||
+        "Complete your profile to tell other members about yourself.";
+
+
+    const location =
+        [country, city]
+            .filter(Boolean)
+            .join(" • ") ||
+        "Location not added";
+
+
+    const nameElement =
+        document.getElementById(
+            "profileViewName"
+        );
+
+
+    if (nameElement) {
+        nameElement.textContent =
+            age !== "—"
+                ? name + ", " + age
+                : name;
+    }
+
+
+    const locationElement =
+        document.getElementById(
+            "profileViewLocation"
+        );
+
+
+    if (locationElement) {
+        locationElement.textContent =
+            location;
+    }
+
+
+    const aboutElement =
+        document.getElementById(
+            "profileViewAbout"
+        );
+
+
+    if (aboutElement) {
+        aboutElement.textContent =
+            about;
+    }
+
+
+    setProfileViewText(
+        "profileViewAge",
+        age
+    );
+
+
+    setProfileViewText(
+        "profileViewGender",
+        gender
+    );
+
+
+    setProfileViewText(
+        "profileViewEducation",
+        education
+    );
+
+
+    setProfileViewText(
+        "profileViewProfession",
+        profession
+    );
+
+
+    setProfileViewText(
+        "profileViewMaritalStatus",
+        maritalStatus
+    );
+
+
+    setProfileViewText(
+        "profileViewReligiousLevel",
+        religiousLevel
+    );
+
+
+    renderProfileMainPhoto(
+        photos
+    );
+
+
+    renderProfileGallery(
+        photos
+    );
+
+}
+
+
+/*
+===========================================================
+SET TEXT SAFELY
+===========================================================
+*/
+
+function setProfileViewText(
+    id,
+    value
+) {
+
+    const element =
+        document.getElementById(id);
+
+
+    if (element) {
+
+        element.textContent =
+            value || "—";
+
+    }
+
+}
+
+
+/*
+===========================================================
+FORMAT PROFILE VALUES
+===========================================================
+*/
+
+function formatProfileValue(
+    value
+) {
+
+    if (!value) {
+        return "—";
+    }
+
+
+    const values = {
+
+        male: "Male",
+
+        female: "Female",
+
+        never_married:
+            "Never Married",
+
+        divorced:
+            "Divorced",
+
+        widowed:
+            "Widowed",
+
+        practicing:
+            "Practicing",
+
+        moderate:
+            "Moderate",
+
+        prefer_not_to_say:
+            "Prefer not to say"
+
+    };
+
+
+    return values[value] ||
+        String(value);
+
+}
+
+
+/*
+===========================================================
+MAIN PHOTO
+===========================================================
+*/
+
+function renderProfileMainPhoto(
+    photos
+) {
+
+    const container =
+        document.getElementById(
+            "profileViewPhoto"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    let firstPhoto = null;
+
+
+    if (
+        Array.isArray(photos) &&
+        photos.length > 0
+    ) {
+
+        firstPhoto =
+            getPhotoSource(
+                photos[0]
+            );
+
+    }
+
+
+    if (firstPhoto) {
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+
+        image.src =
+            firstPhoto;
+
+
+        image.alt =
+            "Profile Photo";
+
+
+        container.appendChild(
+            image
+        );
+
+
+    } else {
+
+        const placeholder =
+            document.createElement(
+                "div"
+            );
+
+
+        placeholder.className =
+            "profile-view-placeholder";
+
+
+        placeholder.textContent =
+            "👤";
+
+
+        container.appendChild(
+            placeholder
+        );
+
+    }
+
+}
+
+
+/*
+===========================================================
+PROFILE GALLERY
+===========================================================
+*/
+
+function renderProfileGallery(
+    photos
+) {
+
+    const gallery =
+        document.getElementById(
+            "profileViewGallery"
+        );
+
+
+    const section =
+        document.getElementById(
+            "profileViewGallerySection"
+        );
+
+
+    if (!gallery) {
+        return;
+    }
+
+
+    gallery.innerHTML = "";
+
+
+    if (
+        !Array.isArray(photos) ||
+        photos.length === 0
+    ) {
+
+        if (section) {
+            section.style.display =
+                "none";
+        }
+
+        return;
+
+    }
+
+
+    if (section) {
+        section.style.display =
+            "block";
+    }
+
+
+    photos.forEach(
+        function(photo) {
+
+            const source =
+                getPhotoSource(
+                    photo
+                );
+
+
+            if (!source) {
+                return;
+            }
+
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.src =
+                source;
+
+
+            image.alt =
+                "Profile Photo";
+
+
+            gallery.appendChild(
+                image
+            );
+
+        }
+    );
+
+}
+
+
+/*
+===========================================================
+GET PHOTO SOURCE
+===========================================================
+*/
+
+function getPhotoSource(
+    photo
+) {
+
+    if (!photo) {
+        return null;
+    }
+
+
+    if (
+        typeof photo ===
+        "string"
+    ) {
+
+        return photo;
+
+    }
+
+
+    if (
+        typeof photo ===
+        "object"
+    ) {
+
+        return (
+            photo.data ||
+            photo.url ||
+            photo.src ||
+            photo.image ||
+            null
+        );
+
+    }
+
+
+    return null;
+
+}
+
+
+/*
+===========================================================
+EXACTLY 32 LANGUAGES
 ===========================================================
 */
 
@@ -1483,12 +2551,6 @@ const HALAL_RISHTA_LANGUAGES = [
 
 ];
 
-
-/*
-===========================================================
-LANGUAGE NAMES
-===========================================================
-*/
 
 const HALAL_RISHTA_LANGUAGE_NAMES = {
 
@@ -1534,12 +2596,18 @@ CHANGE LANGUAGE
 ===========================================================
 */
 
-function changeLanguage(language) {
+function changeLanguage(
+    language
+) {
 
     if (
-        !HALAL_RISHTA_LANGUAGES.includes(language)
+        !HALAL_RISHTA_LANGUAGES
+            .includes(language)
     ) {
-        language = "en";
+
+        language =
+            "en";
+
     }
 
 
@@ -1552,10 +2620,6 @@ function changeLanguage(language) {
     document.documentElement.lang =
         language;
 
-
-    /*
-    Arabic and Persian use RTL.
-    */
 
     if (
         language === "ar" ||
@@ -1590,11 +2654,6 @@ function changeLanguage(language) {
     window.currentLanguage =
         language;
 
-
-    /*
-    Connect with translation system
-    if script.js contains applyTranslations().
-    */
 
     if (
         typeof window.applyTranslations ===
@@ -1637,7 +2696,8 @@ function getCurrentLanguage() {
 
     if (
         saved &&
-        HALAL_RISHTA_LANGUAGES.includes(saved)
+        HALAL_RISHTA_LANGUAGES
+            .includes(saved)
     ) {
 
         return saved;
@@ -1658,7 +2718,7 @@ RESTORE LANGUAGE
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    function() {
 
         const language =
             getCurrentLanguage();
@@ -1671,7 +2731,91 @@ document.addEventListener(
     }
 );
 
+
+/*
+===========================================================
+REFRESH PROFILE VIEW WHEN PAGE OPENS
+===========================================================
+*/
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const profileView =
+            document.getElementById(
+                "profileView"
+            );
+
+
+        if (!profileView) {
+            return;
+        }
+
+
+        const observer =
+            new MutationObserver(
+                function() {
+
+                    if (
+                        profileView.classList
+                            .contains("active")
+                    ) {
+
+                        try {
+
+                            const profile =
+                                JSON.parse(
+                                    localStorage.getItem(
+                                        "halal_rishta_profile"
+                                    )
+                                ) || {};
+
+
+                            const photos =
+                                JSON.parse(
+                                    localStorage.getItem(
+                                        "halal_rishta_photos"
+                                    )
+                                ) || [];
+
+
+                            renderMyProfileView(
+                                profile,
+                                photos
+                            );
+
+                        } catch (error) {
+
+                            console.error(
+                                "Profile refresh error:",
+                                error
+                            );
+
+                        }
+
+                    }
+
+                }
+            );
+
+
+        observer.observe(
+            profileView,
+            {
+                attributes: true,
+                attributeFilter: [
+                    "class"
+                ]
+            }
+        );
+
+    }
+);
+
 </script>
 
+
 </body>
-</html>
+
+            </html>
